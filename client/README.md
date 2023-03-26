@@ -1,46 +1,38 @@
-# Getting Started with Create React App
+[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/adam-kostuch/chattie/client)
+[![Lifecycle:Stable](https://img.shields.io/badge/Lifecycle-Stable-97ca00)](https://github.com/adam-kostuch/chattie/client)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Chattie - Client
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Chattie - Client](#chattie---client)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+    - [Design](#design)
+  - [Installation](#installation)
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This part of the monorepo is set to be created for the client part of the **_chattie_** system. In order to keep the code clean and persistent all across the files we use and standardize the following technology stack:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React
+- Typescript
+- MUI
 
-### `npm test`
+### Design
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To showcase our design and the vision for the project see the [Figma design](https://www.figma.com/file/xMPt6sZ3wIuIXV4rqemr5X/chA.tI.?node-id=0-1&t=CgxjEQeDEXphozbG-0) created by [@kinga-kus](https://github.com/kinga-kus):
 
-### `npm run build`
+![figma-welcome](../docs/assets/figma-welcome.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+In order to install and run chattie client locally you need to run the following or follow the installation guide from the base path:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+$ cd client && npm install
+```
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+$ npm run start
+```
