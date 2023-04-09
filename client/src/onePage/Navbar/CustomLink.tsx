@@ -1,10 +1,10 @@
-import { Button, styled } from '@mui/material'
-import React, { FC } from 'react'
+import { Button, styled } from '@mui/material';
+import React, { FC } from 'react';
 
 interface ICustomLink {
-  color: string
-  lineColor: string
-  linkText: string
+  color: string;
+  lineColor: string;
+  linkText: string;
 }
 
 const CustomLink: FC<ICustomLink> = ({ color, lineColor, linkText }) => {
@@ -27,9 +27,9 @@ const CustomLink: FC<ICustomLink> = ({ color, lineColor, linkText }) => {
       marginTop: theme.spacing(3),
       width: '90%',
     },
-  }))
+  }));
 
-  return <CustomLinkWrapper>{linkText}</CustomLinkWrapper>
-}
+  return <CustomLinkWrapper>{linkText}</CustomLinkWrapper>;
+};
 
-export default CustomLink
+export default CustomLink;

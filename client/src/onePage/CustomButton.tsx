@@ -1,13 +1,17 @@
-import { Button, styled } from '@mui/material'
-import React, { FC } from 'react'
+import { Button, styled } from '@mui/material';
+import React, { FC } from 'react';
 
 interface ICustomButton {
-  backgroundColor: string
-  color: string
-  buttonText: string
+  backgroundColor: string;
+  color: string;
+  buttonText: string;
 }
 
-const CustomButton: FC<ICustomButton> = ({ backgroundColor, color, buttonText }) => {
+const CustomButton: FC<ICustomButton> = ({
+  backgroundColor,
+  color,
+  buttonText,
+}) => {
   const CustomButtonWrapper = styled(Button)(({ theme }) => ({
     backgroundColor: backgroundColor,
     maxWidth: '100px',
@@ -29,9 +33,9 @@ const CustomButton: FC<ICustomButton> = ({ backgroundColor, color, buttonText })
       marginTop: theme.spacing(3),
       width: '90%',
     },
-  }))
+  }));
 
-  return <CustomButtonWrapper>{buttonText}</CustomButtonWrapper>
-}
+  return <CustomButtonWrapper>{buttonText}</CustomButtonWrapper>;
+};
 
-export default CustomButton
+export default CustomButton;

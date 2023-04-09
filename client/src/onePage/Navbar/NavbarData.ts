@@ -2,18 +2,18 @@ const MenuData = [
   {
     title: 'Home',
     path: '/',
-    cName: 'nav-links',
+    cName: 'home',
   },
   {
     title: 'About Us',
-    path: '/',
-    cName: 'nav-links',
+    path: '/about-us',
+    cName: 'about-us',
   },
   {
     title: 'Reviews',
-    path: '/',
-    cName: 'nav-links',
+    path: '/people-reviews',
+    cName: 'reviews',
   },
-]
+];
 
-export default MenuData
+export default MenuData;

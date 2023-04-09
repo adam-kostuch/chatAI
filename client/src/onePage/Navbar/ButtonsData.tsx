@@ -9,6 +9,6 @@ const ButtonsData = [
     path: '/',
     cName: 'nav-links',
   },
-]
+];
 
-export default ButtonsData
+export default ButtonsData;

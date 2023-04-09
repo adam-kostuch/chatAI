@@ -1,42 +1,27 @@
-import React from 'react'
-import './App.css'
+import React from 'react';
+import './App.css';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// components
-import OnePage from './OnePage'
+import OnePage from './OnePage/OnePage';
+import LoginPage from './LoginPage/LoginPage';
+import RegisterPage from './RegisterPage/RegisterPage';
+import ChatPartner from './ChatPartner/ChatPartner';
 
 const App: React.FC = () => {
-  const [message, setMessage] = React.useState('')
-  const [response, setResponse] = React.useState('')
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault()
-
-    fetch('http://localhost:8090/openai', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message }),
-    })
-      .then((res) => res.json())
-      .then((data) => setResponse(data.message))
-  }
-
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<OnePage />} />
+          <Route path="/" element={<OnePage />} />
+          {/* Clients Opinions, About Us */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/choose-partner" element={<ChatPartner />} />
         </Routes>
-
-        <form onSubmit={handleSubmit}>
-          <input type='text' value={message} onChange={(event) => setMessage(event.target.value)} />
-          <button type='submit'>Submit</button>
-        </form>
-        <div>{response}</div>
       </BrowserRouter>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

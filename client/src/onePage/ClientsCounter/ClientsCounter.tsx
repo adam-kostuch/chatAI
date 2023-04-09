@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { styled, Box, Container, Typography } from '@mui/material'
+import * as React from 'react';
+import { styled, Box, Container, Typography } from '@mui/material';
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -14,7 +14,7 @@ const CustomContainer = styled(Container)(({ theme }) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-}))
+}));
 
 const CustomContent = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -28,17 +28,25 @@ const CustomContent = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     marginTop: '150px',
   },
-}))
+}));
 
 const ClientsCounter = () => {
   return (
-    <CustomContainer maxWidth={false} disableGutters className='container full-width'>
-      <CustomContent className='content'>
-        <Typography sx={{ fontSize: '64px', color: 'black' }}>100+ Clients </Typography>
-        <Typography>Various clients around the world who have used Chattie! </Typography>
+    <CustomContainer
+      maxWidth={false}
+      disableGutters
+      className="container full-width"
+    >
+      <CustomContent className="content">
+        <Typography sx={{ fontSize: '64px', color: 'black' }}>
+          100+ Clients{' '}
+        </Typography>
+        <Typography>
+          Various clients around the world who have used Chattie!{' '}
+        </Typography>
       </CustomContent>
     </CustomContainer>
-  )
-}
+  );
+};
 
-export default ClientsCounter
+export default ClientsCounter;

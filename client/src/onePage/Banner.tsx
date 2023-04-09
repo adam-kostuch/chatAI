@@ -1,9 +1,9 @@
-import { styled, Container, Box, Typography, Button } from '@mui/material'
-import * as React from 'react'
+import { styled, Container, Box, Typography, Button } from '@mui/material';
+import * as React from 'react';
 
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown'
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
-import BacgroundCircles from '../assets/background.png'
+import BacgroundCircles from '../assets/background.png';
 
 const BannerContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -15,7 +15,7 @@ const BannerContainer = styled(Container)(({ theme }) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-}))
+}));
 
 const BannerImage = styled('img')(({ theme }) => ({
   marginTop: '60px',
@@ -30,7 +30,7 @@ const BannerImage = styled('img')(({ theme }) => ({
     width: '320px',
     height: '200px',
   },
-}))
+}));
 
 const BannerContent = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -46,7 +46,7 @@ const BannerContent = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     marginTop: '150px',
   },
-}))
+}));
 
 const BannerTitle = styled(Typography)(({ theme }) => ({
   lineHeight: 1.5,
@@ -55,7 +55,7 @@ const BannerTitle = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     fontSize: '42px',
   },
-}))
+}));
 
 const BannerDescription = styled(Typography)(({ theme }) => ({
   lineHeight: 1.25,
@@ -68,7 +68,7 @@ const BannerDescription = styled(Typography)(({ theme }) => ({
     letterSpacing: 1.15,
     marginBottom: '1.5em',
   },
-}))
+}));
 
 const Banner = () => {
   // React.useEffect(() => {
@@ -82,20 +82,24 @@ const Banner = () => {
   // })
 
   return (
-    <BannerContainer maxWidth={false} disableGutters className='banner-container full width'>
+    <BannerContainer
+      maxWidth={false}
+      disableGutters
+      className="banner-container full width"
+    >
       <BannerImage src={BacgroundCircles} />
-      <BannerContent className='banner-content'>
-        <Typography variant='h6'>I&apos;m waiting</Typography>
+      <BannerContent className="banner-content">
+        <Typography variant="h6">I&apos;m waiting</Typography>
         <BannerTitle>Chattie Friend</BannerTitle>
-        <BannerDescription className='banner-desc' variant='subtitle1'>
+        <BannerDescription className="banner-desc" variant="subtitle1">
           Helping you and making new friends through chat easier
         </BannerDescription>
-        <Button variant='contained' endIcon={<KeyboardDoubleArrowDownIcon />}>
+        <Button variant="contained" endIcon={<KeyboardDoubleArrowDownIcon />}>
           Scroll Down
         </Button>
       </BannerContent>
     </BannerContainer>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;
