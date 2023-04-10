@@ -37,7 +37,7 @@ const App: React.FC = () => {
   // login
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [userResponse, setUserResponse] = React.useState('');
+  const [userResponse] = React.useState('');
 
   const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();

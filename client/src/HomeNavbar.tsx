@@ -5,14 +5,14 @@ import React from 'react';
 
 const HomeNavbar = () => {
   return (
-    <Box sx={{ position: 'absolute' }}>
+    <Box position="absolute">
       <Link to="/" style={{ textDecoration: 'none' }}>
         <Typography
           variant="h6"
           component="div"
+          ml="100px"
+          mt="50px"
           sx={{
-            marginLeft: '100px',
-            marginTop: '50px',
             color: 'white',
             flexGrow: 1,
             display: { xs: 'none', sm: 'block' },
