@@ -1,104 +1,48 @@
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "jest": true,
-        "jquery": true
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "jest": true,
+    "jquery": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "airbnb-typescript",
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
-    ],
-    "overrides": [
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-        "jsx": true
-        },
-        "ecmaVersion": 2015,
-        "sourceType": "module",
-        "project": "./tsconfig.json",
-        "extraFileExtensions": [".snap"]
-    },
-    "plugins": [
-        "react", 
-        "react-hooks", 
-        "@typescript-eslint", 
-        "prettier"
-    ],
-    "rules": {
-        "@typescript-eslint/ban-types": 0,
-        "@typescript-eslint/camelcase": 0,
-        "@typescript-eslint/explicit-module-boundary-types": 0,
-        "@typescript-eslint/interface-name-prefix": 0,
-        "@typescript-eslint/naming-convention": [
-          "error",
-          {
-            "selector": "variable",
-            "modifiers": ["destructured"],
-            "format": null
-          }
-        ],
-        "@typescript-eslint/no-explicit-any": 0,
-        "@typescript-eslint/no-unused-vars": "error",
-        "@typescript-eslint/no-use-before-define": 0,
-        "arrow-body-style": "off",
-        "comma-dangle": [
-          "error",
-          {
-            "arrays": "always-multiline",
-            "objects": "always-multiline",
-            "imports": "always-multiline",
-            "exports": "always-multiline",
-            "functions": "never"
-          }
-        ],
-        "import/extensions": [
-          "error",
-          "ignorePackages",
-          {
-            "js": "never",
-            "jsx": "never",
-            "ts": "never",
-            "tsx": "never"
-          }
-        ],
-        "import/no-cycle": "off",
-        "import/no-unresolved": [
-          2,
-          {
-            "caseSensitive": false,
-            "commonjs": true
-          }
-        ],
-        "jest/no-large-snapshots": [
-          "error",
-          {
-            "maxSize": 150,
-            "inlineMaxSize": 50
-          }
-        ],
-        "jsx-a11y/anchor-is-valid": "off",
-        "no-use-before-define": 0,
-        "prettier/prettier": 2,
-        "react/destructuring-assignment": "off",
-        "react/forbid-prop-types": 0,
-        "react/jsx-filename-extension": 0,
-        "react/jsx-no-duplicate-props": [
-          1,
-          {
-            "ignoreCase": false
-          }
-        ],
-        "react/jsx-props-no-spreading": "off",
-        "react/prop-types": 0,
-        "react/require-default-props": 0,
-        "react/static-property-placement": 0,
-        "semi": 2,
-        "sonarjs/prefer-immediate-return": 2
-      }
+    "ecmaVersion": 2015,
+    "sourceType": "module",
+    "extraFileExtensions": [".snap"]
+  },
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
+  "rules": {
+    "@typescript-eslint/ban-types": 0,
+    "@typescript-eslint/camelcase": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/interface-name-prefix": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-use-before-define": 0,
+    "arrow-body-style": "off",
+    "import/no-cycle": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "no-use-before-define": 0,
+    "prettier/prettier": 2,
+    "react/destructuring-assignment": "off",
+    "react/forbid-prop-types": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": 0,
+    "react/require-default-props": 0,
+    "react/static-property-placement": 0,
+    "semi": 2,
+    "no-global-assign": "off"
+  }
 }
