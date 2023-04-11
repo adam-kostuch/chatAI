@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
-import BacgroundCircles from '../assets/background.png';
+import BacgroundCircles from '../../assets/background.png';
 
 const BannerContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
