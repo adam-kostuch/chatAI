@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 
 import HomeNavbar from '../HomeNavbar';
 
-import image1 from '../assets/image.png';
+import image1 from '../../assets/image.png';
 
 const Img = styled('img')({
   margin: 'auto',

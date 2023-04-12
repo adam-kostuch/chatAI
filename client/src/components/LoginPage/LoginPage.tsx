@@ -10,13 +10,18 @@ import {
   Grid,
   TextField,
   Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from '@mui/material';
 
 import { Link } from 'react-router-dom';
 
 import HomeNavbar from '../HomeNavbar';
 
-import backgroundRobot from '../assets/backgroundRobot.png';
+import backgroundRobot from '../../assets/backgroundRobot.png';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -39,6 +44,14 @@ const CustomBorderTextField = styled(TextField)({
 });
 
 const LoginPage = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <>
       <HomeNavbar />
@@ -107,9 +120,19 @@ const LoginPage = () => {
                   <Typography>It will take less than a minute.</Typography>
                 </Box>
                 <Link to="/register" style={{ textDecoration: 'none' }}>
-                  <Typography sx={{ color: '#FF6700' }}>
+                  <Button
+                    onClick={handleClose}
+                    disableRipple
+                    disableFocusRipple
+                    sx={{
+                      color: '#FF6700',
+                      '&:hover': {
+                        backgroundColor: 'rgb(255, 103, 0, 0.05)',
+                      },
+                    }}
+                  >
                     Create an account
-                  </Typography>
+                  </Button>
                 </Link>
               </Grid>
               <Grid container spacing={2}>
@@ -176,9 +199,93 @@ const LoginPage = () => {
                 >
                   SIGN IN
                 </Button>
-                <Typography sx={{ color: '#FF6700' }}>
-                  Forget your password?
-                </Typography>
+                <div>
+                  <Button
+                    disableRipple
+                    disableFocusRipple
+                    onClick={handleOpen}
+                    sx={{
+                      color: '#FF6700',
+                      '&:hover': { backgroundColor: 'rgb(255, 103, 0, 0.05)' },
+                    }}
+                  >
+                    Forget your password?
+                  </Button>
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    sx={{
+                      '& .MuiDialog-container': {
+                        '& .MuiPaper-root': {
+                          width: '100%',
+                          maxWidth: '500px',
+                        },
+                      },
+                    }}
+                  >
+                    <DialogTitle>Forget your password?</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText>
+                        We’ll email you a link to resset your password.
+                      </DialogContentText>
+                      <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Email Address"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                        sx={{
+                          '& label': {
+                            '&.Mui-focused': {
+                              color: 'black',
+                            },
+                          },
+                          '& .MuiOutlinedInput-root': {
+                            '&.Mui-focused fieldset': {
+                              borderColor: 'black',
+                            },
+                          },
+                          '& .MuiInput-underline:after': {
+                            borderBottomColor: 'black',
+                          },
+                        }}
+                      />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button
+                        onClick={handleClose}
+                        disableRipple
+                        disableFocusRipple
+                        sx={{
+                          color: '#FF6700',
+                          '&:hover': {
+                            backgroundColor: 'rgb(255, 103, 0, 0.05)',
+                          },
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        onClick={handleClose}
+                        disableRipple
+                        disableFocusRipple
+                        sx={{
+                          backgroundColor: '#FF6700',
+                          ':hover': {
+                            bgcolor: 'black',
+                            color: 'white',
+                          },
+                        }}
+                      >
+                        Send me a password reset link
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
               </Grid>
             </Box>
           </Box>
