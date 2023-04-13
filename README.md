@@ -38,6 +38,12 @@ To install the rest of chattie run installation script and follow the tutorials 
 $ ./scripts/setup.sh
 ```
 
+NOTE: You can run both `api` and `client` simultaneously in one bash (the idea is to work on frontend, for backend it's still recommended to run the server in the terminal using npm)! The backend server will be first run and will hide in the background while the client is being seen with all of the prompts in the terminal. In order to use it you MUST be in base path of the repository and then run the following:
+
+```bash
+$ ./scripts/start_chattie.sh
+```
+
 ## Collaborators
 
 - [Kinga Kuś](https://github.com/kinga-kus/)

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
-import BacgroundCircles from '../assets/background.png';
+import BackgroundCircles from '../../assets/background.png';
 
 const BannerContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -87,7 +87,7 @@ const Banner = () => {
       disableGutters
       className="banner-container full width"
     >
-      <BannerImage src={BacgroundCircles} />
+      <BannerImage src={BackgroundCircles} />
       <BannerContent className="banner-content">
         <Typography variant="h6">I&apos;m waiting</Typography>
         <BannerTitle>Chattie Friend</BannerTitle>

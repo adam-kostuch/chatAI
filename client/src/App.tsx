@@ -1,25 +1,33 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ChattieContextProvider } from './ChattieContext';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import OnePage from './components/OnePage/OnePage';
+import LoginPage from './components/LoginPage/LoginPage';
+import RegisterPage from './components/RegisterPage/RegisterPage';
+import ChatPartner from './components/ChatPartner/ChatPartner';
+import ForgetPassword from './components/LoginPage/ForgetPassword';
+import SampleData from './SampleData';
 
-import OnePage from './OnePage/OnePage';
-import LoginPage from './LoginPage/LoginPage';
-import RegisterPage from './RegisterPage/RegisterPage';
-import ChatPartner from './ChatPartner/ChatPartner';
+const queryClient = new QueryClient();
 
 const App: React.FC = () => {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<OnePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/choose-partner" element={<ChatPartner />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <ChattieContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<OnePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/choose-partner" element={<ChatPartner />} />
+            <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route path="/sample" element={<SampleData />} />
+          </Routes>
+        </Router>
+      </QueryClientProvider>
+    </ChattieContextProvider>
   );
 };
 

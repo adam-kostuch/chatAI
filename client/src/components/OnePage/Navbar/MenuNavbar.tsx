@@ -21,8 +21,8 @@ import NavbarData from './NavbarData';
 import CustomLink from './CustomLink';
 import CustomButton from '../CustomButton';
 
-import LoginPage from 'src/LoginPage/LoginPage';
-import RegisterPage from 'src/RegisterPage/RegisterPage';
+import LoginPage from '../../LoginPage/LoginPage';
+import RegisterPage from '../../RegisterPage/RegisterPage';
 
 // const NavbarLink = styled(Link)({
 //   color: 'white',
