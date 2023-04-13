@@ -9,6 +9,7 @@
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
     - [Design](#design)
+  - [Authentication](#authentication)
   - [Installation](#installation)
 
 ## Description
@@ -25,6 +26,10 @@ To showcase our design and the vision for the project see the [Figma design](htt
 
 ![figma-welcome](../docs/assets/figma-welcome.png)
 
+## Authentication
+
+In order to properly authenticate user we use the idea of setting the session cookie in local storage (cookies ideally, but it's harsh implementing).
+
 ## Installation
 
 In order to install and run chattie client locally you need to run the following or follow the installation guide from the base path:
@@ -36,3 +41,11 @@ $ cd client && npm install
 ```bash
 $ npm run start
 ```
+
+Once completed make sure that you have created the `.env` file with the content below:
+
+```env
+REACT_APP_FIREBASE_API_KEY=...
+```
+
+Enjoy!
