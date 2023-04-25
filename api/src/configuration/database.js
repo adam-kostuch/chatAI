@@ -1,5 +1,7 @@
-import firebase from 'firebase-admin';
+import firebase from 'firebase/compat/app';
 import { FIREBASE_KEY_ID, FIREBASE_KEY } from './constants.js';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const firebaseCert = {
   type: 'service_account',
@@ -20,3 +22,5 @@ firebase.initializeApp({
 });
 
 export { firebase };
+export const db = getFirestore(firebase);
+export const auth = getAuth(firebase);
