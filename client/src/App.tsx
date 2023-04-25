@@ -8,6 +8,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import ChatPartner from './components/ChatPartner/ChatPartner';
 import ForgetPassword from './components/LoginPage/ForgetPassword';
+import RealtimeChat from './components/RealtimeChat/RealtimeChat';
 import SampleData from './SampleData';
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App: React.FC = () => {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/choose-partner" element={<ChatPartner />} />
             <Route path="/forget-password" element={<ForgetPassword />} />
+            <Route path="/realtime-chat" element={<RealtimeChat />} />
             <Route path="/sample" element={<SampleData />} />
           </Routes>
         </Router>
