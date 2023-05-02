@@ -14,7 +14,12 @@ import * as React from 'react';
 
 const Chats = () => {
   return (
-    <Grid item xs={9} className="chats">
+    <Grid
+      item
+      xs={9}
+      className="chats"
+      sx={{ width: '100vw', backgroundColor: 'white' }}
+    >
       <List className="message-area user-chat" sx={{ height: '80vh' }}>
         <ListItem key="1" sx={{ textAlign: 'right' }}>
           <Grid container>
@@ -48,7 +53,7 @@ const Chats = () => {
         </ListItem>
       </List>
       <Divider />
-      <Grid container style={{ padding: '20px' }}>
+      <Grid container style={{ padding: '5px' }}>
         <Grid item xs={11}>
           <TextField
             id="outlined-basic-email"

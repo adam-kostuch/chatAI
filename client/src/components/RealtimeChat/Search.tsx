@@ -1,4 +1,16 @@
+import * as React from 'react';
+
 import {
+  collection,
+  getDocs,
+  query,
+  where,
+  DocumentData,
+} from 'firebase/firestore';
+import { useChattieContext } from '../../ChattieContext';
+
+import {
+  styled,
   List,
   Grid,
   ListItem,
@@ -9,65 +21,85 @@ import {
   TextField,
 } from '@mui/material';
 
-import * as React from 'react';
+const CustomBorderTextField = styled(TextField)({
+  '& label': {
+    '&.Mui-focused': {
+      color: '#FF6700',
+    },
+  },
+  '.MuiInputLabel-root': {
+    color: 'white',
+  },
+  '& .MuiInputBase-root': {
+    color: 'white',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'white',
+    },
+    '&:hover fieldset': {
+      borderColor: '#FCCAA9',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#FF6700',
+    },
+  },
+});
 
 const Search = () => {
+  const [username, setUsername] = React.useState('');
+  const [user, setUser] = React.useState<DocumentData>();
+  const [err, setErr] = React.useState(false);
+
+  const { db } = useChattieContext();
+
+  const handleSearch = async () => {
+    const q = query(
+      collection(db, 'users'),
+      where('display_name', '==', username)
+    );
+
+    try {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setUser(doc.data());
+      });
+    } catch (err) {
+      setErr(true);
+    }
+  };
+
+  const handleKey = (e: any) => {
+    e.code === 'Enter' && handleSearch();
+  };
+
   return (
-    <>
-      <Grid item xs={3}>
-        <List>
-          <ListItem button key="Adas">
+    <Grid item>
+      <Grid className="search" item xs={12} style={{ padding: '10px' }}>
+        <CustomBorderTextField
+          className="search-form"
+          id="outlined-basic-email"
+          label="Fina a user"
+          variant="outlined"
+          fullWidth
+          onKeyDown={handleKey}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </Grid>
+      {err && <span>User not found</span>}
+      {user && (
+        <List className="user-chat">
+          <ListItem button key={user.displayName}>
             <ListItemIcon>
-              <Avatar
-                alt="Adas"
-                src="https://material-ui.com/static/images/avatar/1.jpg"
-              />
+              <Avatar alt="" src={user.photoURL} />
             </ListItemIcon>
             <ListItemText primary="Adas Kostuch"></ListItemText>
           </ListItem>
         </List>
-        <Divider />
-        <Grid item xs={12} style={{ padding: '10px' }}>
-          <TextField
-            id="outlined-basic-email"
-            label="Search"
-            variant="outlined"
-            fullWidth
-          />
-        </Grid>
-        <Divider />
-        <List>
-          <ListItem button key="RemySharp">
-            <ListItemIcon>
-              <Avatar
-                alt="Remy Sharp"
-                src="https://material-ui.com/static/images/avatar/1.jpg"
-              />
-            </ListItemIcon>
-            <ListItemText primary="Remy Sharp">Remy Sharp</ListItemText>
-            <ListItemText secondary="online"></ListItemText>
-          </ListItem>
-          <ListItem button key="Alice">
-            <ListItemIcon>
-              <Avatar
-                alt="Alice"
-                src="https://material-ui.com/static/images/avatar/3.jpg"
-              />
-            </ListItemIcon>
-            <ListItemText primary="Alice">Alice</ListItemText>
-          </ListItem>
-          <ListItem button key="CindyBaker">
-            <ListItemIcon>
-              <Avatar
-                alt="Cindy Baker"
-                src="https://material-ui.com/static/images/avatar/2.jpg"
-              />
-            </ListItemIcon>
-            <ListItemText primary="Cindy Baker">Cindy Baker</ListItemText>
-          </ListItem>
-        </List>
-      </Grid>
-    </>
+      )}
+      <Divider />
+      <Divider />
+    </Grid>
   );
 };
 
