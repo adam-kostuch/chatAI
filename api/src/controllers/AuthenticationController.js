@@ -8,14 +8,10 @@ const RegisterController = async (req, res) => {
     .auth()
     .createUser({ email, password, displayName })
     .then((userData) => {
-      console.info(`[SERVER] Successfully created user with uid: ${userData.uid}!`);
-
-      res.redirect('/authentication/login');
+      res.status(200).json({uuid: userData.uid}).send(`[SERVER] Successfully created user with uid: ${userData.uid}!`);
     })
     .catch((error) => {
-      console.error(`[SERVER] Error creating user: ${error}`);
-
-      res.redirect('/authentication/register');
+      res.status(500).send(`[SERVER] Error creating user: ${error}`);
     });
 };
 
@@ -30,9 +26,7 @@ const LoginController = async (req, res) => {
     .createSessionCookie(idToken, { expiresIn })
     .then(
       (sessionCookie) => {
-        console.log('[SERVER] User logged in!');
-
-        res.json({ sessionCookie });
+        res.status(200).send('[SERVER] User logged in!').json({ sessionCookie }).end();
       },
       (error) => {
         res.status(401).send(`[SERVER] Unauthorized: ${error}`);
@@ -40,12 +34,10 @@ const LoginController = async (req, res) => {
     );
 };
 
-// eslint-disable-next-line no-unused-vars
 const SignOutController = async (_req, _res) => {
   console.log('[SERVER] User logged out!');
 };
 
-// eslint-disable-next-line no-unused-vars
 const ChangePasswordController = async (_req, _res) => {
   console.log(`[SERVER] Change password email sent!`);
 };

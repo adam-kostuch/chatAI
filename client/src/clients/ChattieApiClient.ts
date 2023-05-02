@@ -31,14 +31,8 @@ class ChattieApiClient {
     password,
   }: RegistrationProps) {
     const response = await axios.post(
-      'http://localhost:8090/authentication/registration',
-      { displayName, email, password },
-      {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }
+      'http://localhost:8090/authentication/register',
+      { displayName, email, password }
     );
 
     return response;

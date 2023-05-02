@@ -1,12 +1,16 @@
-import * as React from 'react';
+import React, { FC, useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useChattieContext } from '../../ChattieContext';
 
 import {
   styled,
   Box,
   Button,
-  Checkbox,
   Container,
-  FormControlLabel,
   Grid,
   TextField,
   Typography,
@@ -16,8 +20,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
-
-import { Link } from 'react-router-dom';
+import { LoadingButton } from '@mui/lab';
 
 import HomeNavbar from '../HomeNavbar';
 
@@ -43,14 +46,69 @@ const CustomBorderTextField = styled(TextField)({
   },
 });
 
-const LoginPage = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
+const LoginSchema = Yup.object({
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string().required('Required'),
+});
+
+const LoginPage: FC = () => {
+  const { auth, apiClient } = useChattieContext();
+
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [idToken, setIdToken] = useState('');
+  const [submit, setSubmit] = useState(false);
+
+  const { isLoading, isSuccess } = useQuery(
+    ['login', { email, password }],
+    async () => await apiClient.login(idToken),
+    {
+      enabled: submit,
+      retry: false,
+    }
+  );
+
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: LoginSchema,
+    onSubmit: async (values) => {
+      setEmail(values.email);
+      setPassword(values.password);
+      setSubmit(true);
+
+      await signInWithEmailAndPassword(auth, email, password).then(
+        ({ user }: any) => {
+          console.log({ user });
+          return user.getIdToken().then(async (idToken: any) => {
+            setIdToken(idToken);
+
+            return idToken;
+          });
+        }
+      );
+    },
+  });
+
+  console.log(formik.values);
+
+  useEffect(() => {
+    if (isSuccess && idToken !== '') {
+      window.localStorage.setItem('cookie', JSON.stringify(idToken));
+      window.location.href = '/chat-partner';
+    }
+  }, [isSuccess]);
 
   return (
     <>
@@ -135,46 +193,53 @@ const LoginPage = () => {
                   </Button>
                 </Link>
               </Grid>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <CustomBorderTextField
-                    autoComplete="given-name"
-                    name="userName"
-                    required
-                    fullWidth
-                    id="userName"
-                    label="Username"
-                    autoFocus
-                  />
+              <Box
+                component="form"
+                onSubmit={formik.handleSubmit}
+                noValidate
+                sx={{ mt: 3 }}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <CustomBorderTextField
+                      autoComplete="email"
+                      name="email"
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email"
+                      autoFocus
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.email}
+                    />
+                    {formik.touched.email && formik.errors.email && (
+                      <Box color="red" fontSize={14} pl={2}>
+                        {formik.errors.email}
+                      </Box>
+                    )}
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CustomBorderTextField
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.password}
+                    />
+                    {formik.touched.password && formik.errors.password && (
+                      <Box color="red" fontSize={14} pl={2}>
+                        {formik.errors.password}
+                      </Box>
+                    )}
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <CustomBorderTextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        value="allowExtraEmails"
-                        sx={{
-                          color: 'black',
-                          '&.Mui-checked': {
-                            color: '#FF6700',
-                          },
-                        }}
-                      />
-                    }
-                    label="I’ve read and aggre to Terms & Conditions"
-                  />
-                </Grid>
-              </Grid>
+              </Box>
               <Grid
                 container
                 className="grid sign-in-link"
@@ -186,9 +251,14 @@ const LoginPage = () => {
                   mb: 2,
                 }}
               >
-                <Button
+                <LoadingButton
                   type="submit"
                   variant="contained"
+                  loading={isLoading}
+                  disabled={
+                    Object.keys(formik.values).length === 0 ||
+                    Object.keys(formik.errors).length !== 0
+                  }
                   sx={{
                     backgroundColor: '#FF6700',
                     ':hover': {
@@ -198,7 +268,7 @@ const LoginPage = () => {
                   }}
                 >
                   SIGN IN
-                </Button>
+                </LoadingButton>
                 <div>
                   <Button
                     disableRipple
@@ -209,7 +279,7 @@ const LoginPage = () => {
                       '&:hover': { backgroundColor: 'rgb(255, 103, 0, 0.05)' },
                     }}
                   >
-                    Forget your password?
+                    Forgot your password?
                   </Button>
                   <Dialog
                     open={open}
