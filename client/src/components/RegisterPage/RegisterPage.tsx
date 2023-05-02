@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FC } from 'react';
 import * as Yup from 'yup';
+import firebase from 'firebase-admin';
 import { useFormik } from 'formik';
 import { useQuery } from 'react-query';
 import { useChattieContext } from '../../ChattieContext';
@@ -89,6 +90,11 @@ const RegisterPage: FC = () => {
       setPassword(values.password);
 
       setSubmit(true);
+
+      const ref1 = firebase.database().ref().child('users').push();
+      // const key = ref1.key;
+      // values.id = key;
+      ref1.set(values);
     },
   });
 
