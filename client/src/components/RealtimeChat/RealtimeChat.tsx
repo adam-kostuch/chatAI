@@ -56,31 +56,20 @@
 // export default RealtimeChat;
 
 import * as React from 'react';
-import { Grid, Paper, Typography } from '@mui/material';
-
-import Search from './Search';
+import { Container } from '@mui/material';
+import NavbarChat from './NavbarChat';
 import Chats from './Chats';
 
 const RealtimeChat = () => {
   return (
-    <>
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography variant="h5" className="header-message">
-            Realtime Chat
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        component={Paper}
-        className="chat-section"
-        sx={{ width: '100%', height: '100vh' }}
-      >
-        <Search />
-        <Chats />
-      </Grid>
-    </>
+    <Container
+      maxWidth={false}
+      disableGutters
+      sx={{ display: 'flex', flexDirection: 'row', height: '100vh' }}
+    >
+      <NavbarChat />
+      <Chats />
+    </Container>
   );
 };
 

@@ -20,6 +20,7 @@ import { LoadingButton } from '@mui/lab';
 import HomeNavbar from '../HomeNavbar';
 
 import image1 from '../../assets/image.png';
+// import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 const Img = styled('img')({
   margin: 'auto',
