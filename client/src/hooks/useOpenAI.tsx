@@ -1,6 +1,6 @@
 // import { useQuery } from 'react-query';
 // import { useChattieContext } from 'src/ChattieContext';
-import ChattieApiClient from 'src/clients/ChattieApiClient';
+import ChattieApiClient from '../clients/ChattieApiClient';
 
 const useOpenAI = async (message: string) => {
   // const { apiClient, isValidSession } = useChattieContext();

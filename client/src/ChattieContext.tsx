@@ -2,7 +2,6 @@ import * as React from 'react';
 import ChattieApiClient from './clients/ChattieApiClient';
 import { initializeApp } from 'firebase/app';
 import { Auth, getAuth } from 'firebase/auth';
-import useStateWithLocalStorage from './hooks/useStateWithLocalStorage';
 import { Firestore, getFirestore } from 'firebase/firestore';
 
 // Web app's Firebase configuration
@@ -16,7 +15,6 @@ const firebaseConfig = {
 };
 
 export interface ChattieContextProps {
-  isValidSession: boolean;
   apiClient: ChattieApiClient;
   auth: Auth;
   db: Firestore;
@@ -34,12 +32,8 @@ const ChattieContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const firebase = initializeApp(firebaseConfig);
   const auth = getAuth(firebase);
   const db = getFirestore(firebase);
-  const [cookie] = useStateWithLocalStorage<string>('cookie', '');
-
   return (
-    <ChattieContext.Provider
-      value={{ isValidSession: cookie.length !== 0, apiClient, auth, db }}
-    >
+    <ChattieContext.Provider value={{ apiClient, auth, db }}>
       {children}
     </ChattieContext.Provider>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import useRegistration from './hooks/useRegistration';
 import useLogin from './hooks/useLogin';
 import useSignOut from './hooks/useSignOut';
 import useChangePassword from './hooks/useChangePassword';
@@ -9,12 +8,6 @@ const SampleData: React.FC = () => {
   // openai
   const [message, setMessage] = React.useState('');
   const [openaiResponse, setOpenaiResponse] = React.useState('');
-
-  // registration
-  const [newDisplayName, setNewDisplayName] = React.useState('');
-  const [newEmail, setNewEmail] = React.useState('');
-  const [newPassword, setNewPassword] = React.useState('');
-  const [newUserResponse] = React.useState('');
 
   // login
   const [email, setEmail] = React.useState('');
@@ -30,18 +23,6 @@ const SampleData: React.FC = () => {
     const { data } = useOpenAI(message);
 
     setOpenaiResponse(data ?? '');
-  };
-
-  const handleCreateUser = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const { data, isLoading, isError } = useRegistration({
-      email: newEmail,
-      displayName: newDisplayName,
-      password: newPassword,
-    });
-
-    console.log({ data, isLoading, isError });
   };
 
   const handleLogin = async (event: React.ChangeEvent<HTMLFormElement>) => {
@@ -91,29 +72,6 @@ const SampleData: React.FC = () => {
           <button type="submit">Submit</button>
         </form>
         <div>{openaiResponse}</div>
-      </div>
-      <div style={{ height: '50px' }} />
-      <div>
-        <form onSubmit={handleCreateUser}>
-          Registration
-          <input
-            type="text"
-            value={newDisplayName}
-            onChange={(event) => setNewDisplayName(event.target.value)}
-          />
-          <input
-            type="text"
-            value={newEmail}
-            onChange={(event) => setNewEmail(event.target.value)}
-          />
-          <input
-            type="text"
-            value={newPassword}
-            onChange={(event) => setNewPassword(event.target.value)}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <div>{newUserResponse}</div>
       </div>
       <div style={{ height: '50px' }} />
       <div>
