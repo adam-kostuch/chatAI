@@ -20,6 +20,7 @@ import { LoadingButton } from '@mui/lab';
 import HomeNavbar from '../HomeNavbar';
 
 import image1 from '../../assets/image.png';
+import { addDoc, collection } from 'firebase/firestore';
 // import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 const Img = styled('img')({
@@ -57,7 +58,7 @@ const SignupSchema = Yup.object({
 });
 
 const RegisterPage: FC = () => {
-  const { apiClient } = useChattieContext();
+  const { apiClient, db } = useChattieContext();
 
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -83,10 +84,20 @@ const RegisterPage: FC = () => {
       password: '',
     },
     validationSchema: SignupSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       setDisplayName(values.username);
       setEmail(values.email);
       setPassword(values.password);
+
+      try {
+        const docRef = await addDoc(collection(db, 'users'), {
+          displayName: values.username,
+          email: values.email,
+        });
+        console.log('Document written with ID: ', docRef.id);
+      } catch (e) {
+        console.error('Error adding document: ', e);
+      }
 
       setSubmit(true);
     },
