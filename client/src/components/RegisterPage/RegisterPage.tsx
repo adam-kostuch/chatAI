@@ -14,6 +14,8 @@ import {
   Grid,
   TextField,
   Typography,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
@@ -63,12 +65,12 @@ const RegisterPage: FC = () => {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [policyTerms, setPolicyTerms] = useState(false);
   const [submit, setSubmit] = useState(false);
+  const [policyTerms, setPolicyTerms] = useState(false);
 
   const registrationProps = { displayName, email, password };
 
-  const { isSuccess, isLoading } = useQuery(
+  const { isSuccess, isError, isLoading } = useQuery(
     ['register', registrationProps],
     async () => await apiClient.registration(registrationProps),
     {
@@ -90,16 +92,16 @@ const RegisterPage: FC = () => {
       setPassword(values.password);
 
       try {
-        const docRef = await addDoc(collection(db, 'users'), {
+        const userRef = await addDoc(collection(db, 'users'), {
           displayName: values.username,
           email: values.email,
         });
-        console.log('Document written with ID: ', docRef.id);
-      } catch (e) {
-        console.error('Error adding document: ', e);
-      }
 
-      setSubmit(true);
+        console.log('User written with ID: ', userRef.id);
+        setSubmit(true);
+      } catch (error) {
+        console.error('Error creating user: ', error);
+      }
     },
   });
 
@@ -111,6 +113,15 @@ const RegisterPage: FC = () => {
 
   return (
     <>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={isError}
+        autoHideDuration={1000}
+      >
+        <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
+          User with given email address or username already exists!
+        </Alert>
+      </Snackbar>
       <HomeNavbar />
       <Grid
         container
