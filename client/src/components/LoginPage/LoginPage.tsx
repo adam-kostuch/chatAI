@@ -31,6 +31,8 @@ import HomeNavbar from '../HomeNavbar';
 
 import backgroundRobot from '../../assets/backgroundRobot.png';
 import { useCookies } from 'react-cookie';
+import { COOKIE_TOKEN } from '../../types';
+import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -58,6 +60,8 @@ const LoginSchema = Yup.object({
 });
 
 const LoginPage: FC = () => {
+  useCheckAuthentication();
+
   const { auth, apiClient } = useChattieContext();
 
   // HOC logic for sent reset password
@@ -65,7 +69,7 @@ const LoginPage: FC = () => {
   const [isEmailSent, setIsEmailSent] = useState(false);
 
   // Cookies validation logic
-  const [, setCookies] = useCookies(['token']);
+  const [, setCookies] = useCookies([COOKIE_TOKEN]);
 
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
@@ -124,6 +128,7 @@ const LoginPage: FC = () => {
 
         setSubmit(true);
       } catch (error) {
+        handleEmailError(true);
         console.error('Error singing in', error);
       }
     },
@@ -131,13 +136,13 @@ const LoginPage: FC = () => {
 
   useEffect(() => {
     if (isSuccess && idToken !== '') {
-      setCookies('token', idToken, {
+      setCookies(COOKIE_TOKEN, idToken, {
         // Setting the token to one hour
         expires: new Date(Date.now() + 1000 * 60 * 60),
         path: '/',
       });
 
-      window.location.href = '/choose-partner';
+      window.location.href = '/pick-a-partner';
     }
   }, [isSuccess]);
 
@@ -146,8 +151,8 @@ const LoginPage: FC = () => {
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={isError}
-        autoHideDuration={1000}
-        onClose={() => setIsError(false)}
+        autoHideDuration={6000}
+        onClose={() => handleEmailError(false)}
       >
         <Alert variant="filled" severity="error" sx={{ width: '100%' }}>
           Signing in failed! User with provided email does not exist.
@@ -156,7 +161,7 @@ const LoginPage: FC = () => {
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={isEmailSent}
-        autoHideDuration={1000}
+        autoHideDuration={6000}
         onClose={() => setIsEmailSent(false)}
       >
         <Alert variant="filled" severity="info" sx={{ width: '100%' }}>

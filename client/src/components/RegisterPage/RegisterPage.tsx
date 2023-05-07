@@ -23,6 +23,7 @@ import HomeNavbar from '../HomeNavbar';
 
 import image1 from '../../assets/image.png';
 import { addDoc, collection } from 'firebase/firestore';
+import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
 // import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 const Img = styled('img')({
@@ -60,6 +61,8 @@ const SignupSchema = Yup.object({
 });
 
 const RegisterPage: FC = () => {
+  useCheckAuthentication();
+
   const { apiClient, db } = useChattieContext();
 
   const [displayName, setDisplayName] = useState('');

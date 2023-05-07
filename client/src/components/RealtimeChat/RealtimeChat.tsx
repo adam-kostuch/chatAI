@@ -59,8 +59,11 @@ import * as React from 'react';
 import { Container } from '@mui/material';
 import NavbarChat from './NavbarChat';
 import Chats from './Chats';
+import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
 
 const RealtimeChat = () => {
+  useCheckAuthentication();
+
   return (
     <Container
       maxWidth={false}

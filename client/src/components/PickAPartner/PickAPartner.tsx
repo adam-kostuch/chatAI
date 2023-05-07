@@ -6,6 +6,7 @@ import { styled, Container, Box, Typography, Grid } from '@mui/material';
 import Menu from './Menu';
 import RealPartner from '../../assets/HyperspaceFloating.png';
 import RobotPartner from '../../assets/HyperspaceRobot1.png';
+import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
 
 const ChatPartnerData = [
   {
@@ -35,6 +36,8 @@ const CustomContainer = styled(Container)(({ theme }) => ({
 }));
 
 const PickAPartner = () => {
+  useCheckAuthentication();
+
   return (
     <>
       <Menu />
@@ -65,26 +68,26 @@ const PickAPartner = () => {
           >
             {ChatPartnerData.map((partner) => (
               <Grid item className="example-container" p={20} key="grid">
-                <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.8 }}
-                  style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    display: 'flex',
-                  }}
-                >
-                  <Link to={partner.path}>
+                <Link to={partner.path} style={{ textDecoration: 'none' }}>
+                  <motion.div
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.8 }}
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      display: 'flex',
+                    }}
+                  >
                     <img
                       src={partner.image}
                       alt={partner.alt}
                       style={{ width: '150px', height: '150px' }}
                     />
-                  </Link>
-                </motion.div>
-                <Typography variant="h5" pt={5}>
-                  {partner.name}
-                </Typography>
+                  </motion.div>
+                  <Typography variant="h5" color="black" pt={5}>
+                    {partner.name}
+                  </Typography>
+                </Link>
               </Grid>
             ))}
           </Grid>
