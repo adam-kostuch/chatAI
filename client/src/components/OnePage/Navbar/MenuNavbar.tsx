@@ -3,15 +3,12 @@ import { Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import {
-  // styled,
   AppBar,
   Box,
   Toolbar,
   Typography,
-  // ListItem,
   Button,
   CssBaseline,
-  // Drawer,
   IconButton,
 } from '@mui/material';
 
@@ -19,22 +16,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import NavbarData from './NavbarData';
 import CustomLink from './CustomLink';
-import CustomButton from '../CustomButton';
+import CustomButton from '../../CustomButton';
 
 import LoginPage from '../../LoginPage/LoginPage';
 import RegisterPage from '../../RegisterPage/RegisterPage';
-
-// const NavbarLink = styled(Link)({
-//   color: 'white',
-//   textAlign: 'center',
-//   textDecoration: 'none',
-//   padding: '0.5rem 1rem',
-//   '&:hover': {
-//     backgroundColor: '#6d76f7',
-//     borderRadius: '4px',
-//     transition: 'all 0.2s ease-out',
-//   },
-// })
 
 const MenuNavbar = () => {
   return (
@@ -87,23 +72,6 @@ const MenuNavbar = () => {
             </Box>
           </Toolbar>
         </AppBar>
-        {/* <Box component='nav'>
-          <Drawer
-            container={container}
-            variant='temporary'
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Box> */}
       </Box>
       <Routes>
         <Route path="/register" element={<RegisterPage />} />

@@ -18,6 +18,8 @@ const CustomContainer = styled(Container)(({ theme }) => ({
   color: 'white',
   width: '100%',
   height: '100vh',
+  justifyContent: 'center',
+  alignItems: 'center',
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
     alignItems: 'center',
