@@ -1,10 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './PickAPartner.css';
 import { styled, Container, Box, Typography, Grid } from '@mui/material';
-
 import Menu from './Menu';
-
 import RealPartner from '../../assets/HyperspaceFloating.png';
 import RobotPartner from '../../assets/HyperspaceRobot1.png';
 
@@ -13,11 +12,13 @@ const ChatPartnerData = [
     name: 'Robot A.I. Chattie',
     image: RobotPartner,
     alt: 'image of robot partner',
+    path: '/realtime-chat',
   },
   {
     name: 'Random person',
     image: RealPartner,
     alt: 'image of real partner',
+    path: '/robot-chat',
   },
 ];
 
@@ -38,7 +39,13 @@ const PickAPartner = () => {
     <>
       <Menu />
       <Container
-        sx={{ justifyContent: 'center', display: 'flex', textAlign: 'center' }}
+        maxWidth={false}
+        sx={{
+          justifyContent: 'center',
+          display: 'flex',
+          textAlign: 'center',
+          backgroundColor: '#F8F8F8',
+        }}
       >
         <Box sx={{ position: 'absolute', paddingTop: '100px' }}>
           <Typography variant="h3">Choose Your Chatter!</Typography>
@@ -67,11 +74,13 @@ const PickAPartner = () => {
                     display: 'flex',
                   }}
                 >
-                  <img
-                    src={partner.image}
-                    alt={partner.alt}
-                    style={{ width: '150px', height: '150px' }}
-                  />
+                  <Link to={partner.path}>
+                    <img
+                      src={partner.image}
+                      alt={partner.alt}
+                      style={{ width: '150px', height: '150px' }}
+                    />
+                  </Link>
                 </motion.div>
                 <Typography variant="h5" pt={5}>
                   {partner.name}

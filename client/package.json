@@ -20,6 +20,7 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "firebase": "^9.17.2",
     "formik": "^2.2.9",
+    "framer-motion": "^10.12.8",
     "gsap": "^3.11.5",
     "gsap-trial": "^3.11.5",
     "js-cookie": "^3.0.1",
