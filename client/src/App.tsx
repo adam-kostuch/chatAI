@@ -10,6 +10,7 @@ import ForgetPassword from './components/LoginPage/ForgetPassword';
 import RealtimeChat from './components/RealtimeChat/RealtimeChat';
 import PickAPartner from './components/PickAPartner/PickAPartner';
 import SampleData from './SampleData';
+import RobotChat from './components/RobotChat/RobotChat';
 import { CookiesProvider } from 'react-cookie';
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App: React.FC = () => {
               <Route path="/realtime-chat" element={<RealtimeChat />} />
               <Route path="/sample" element={<SampleData />} />
               <Route path="/pick-a-partner" element={<PickAPartner />} />
+              <Route path="robot-chat" element={<RobotChat />} />
             </Routes>
           </Router>
         </QueryClientProvider>
