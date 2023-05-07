@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "@types/node": "^18.16.0"
-  },
-  "dependencies": {
-    "framer-motion": "^10.12.8"
-  }
-}

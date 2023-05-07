@@ -8,7 +8,9 @@ const RegisterController = async (req, res) => {
     .auth()
     .createUser({ email, password, displayName })
     .then((userData) => {
-      res.status(200).json({uuid: userData.uid}).send(`[SERVER] Successfully created user with uid: ${userData.uid}!`);
+      console.info(`[SERVER] Successfully created user with uid: ${userData.uid}!`);
+
+      res.status(200).json({uuid: userData.uid})
     })
     .catch((error) => {
       res.status(500).send(`[SERVER] Error creating user: ${error}`);
@@ -26,7 +28,9 @@ const LoginController = async (req, res) => {
     .createSessionCookie(idToken, { expiresIn })
     .then(
       (sessionCookie) => {
-        res.status(200).send('[SERVER] User logged in!').json({ sessionCookie }).end();
+        console.info('[SERVER] User logged in!');
+
+        res.status(200).json({ sessionCookie });
       },
       (error) => {
         res.status(401).send(`[SERVER] Unauthorized: ${error}`);
