@@ -106,12 +106,12 @@ const Footer = () => {
             </h3>
           </SloganBox>
           <GroupsBox className="groups">
-            {FooterData.map((data) => (
-              <CustomBoxGroup className={data.className} key="">
+            {FooterData.map((data, idx) => (
+              <CustomBoxGroup className={data.className} key={data.name + idx}>
                 <h4>{data.name}</h4>
                 <div style={{ fontSize: '25px' }}>
-                  {data.subnames.map((subname) => (
-                    <p key="subname">{subname}</p>
+                  {data.subnames.map((subname, idx) => (
+                    <p key={subname + idx}>{subname}</p>
                   ))}
                 </div>
               </CustomBoxGroup>
