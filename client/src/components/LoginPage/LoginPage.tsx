@@ -8,7 +8,6 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { useChattieContext } from '../../ChattieContext';
-
 import {
   styled,
   Box,
@@ -26,28 +25,40 @@ import {
   Alert,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-
-import HomeNavbar from '../HomeNavbar';
-
-import backgroundRobot from '../../assets/backgroundRobot.png';
 import { useCookies } from 'react-cookie';
 
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '70%',
-  maxHeight: '80%',
-});
+// import './TextScrolling.js';
 
 const CustomBorderTextField = styled(TextField)({
-  '& label': {
-    '&.Mui-focused': {
-      color: 'black',
-    },
+  '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:before': {
+    borderBottom: ' 1px solid white',
   },
-  '& .MuiOutlinedInput-root': {
-    '&.Mui-focused fieldset': {
-      borderColor: 'black',
+  '& .css-1x51dt5-MuiInputBase-input-MuiInput-input': {
+    color: 'white',
+  },
+  '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+    color: 'white',
+  },
+  '& .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root': {
+    color: 'white',
+  },
+  '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:after': {
+    borderBottom: '1px solid #FF6700',
+  },
+  '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': {
+    color: 'white',
+  },
+});
+
+const CustomLoadingButton = styled(LoadingButton)({
+  '& .MuiButtonbase-root': {
+    '& .MuiButtonbase-root': {
+      '& .MuiLoadingButton-root': {
+        '& .Mui-disabled': {
+          backgroundColor: 'grey',
+          color: 'white',
+        },
+      },
     },
   },
 });
@@ -163,55 +174,80 @@ const LoginPage: FC = () => {
           Link to password reset has been sent to provided email!
         </Alert>
       </Snackbar>
-      <HomeNavbar />
+      {/* animations start */}
       <Grid
         container
-        className="grid-login full-width"
-        sx={{ height: '100vh' }}
+        className="login full-width"
+        sx={{ height: '100vh', width: '100%' }}
       >
         <Grid
           item
+          className="animated-images container"
           xs={false}
           sm={4}
           md={6}
           sx={{
-            backgroundColor: 'black',
+            backgroundColor: '#FF6700',
+            width: '50%',
           }}
         >
-          <Box
-            sx={{
-              maxWidth: '480px',
-              maxHeight: '171px',
-              marginLeft: '100px',
-              marginTop: '100px',
+          <div
+            className="group"
+            style={{
+              position: 'relative',
+              width: 'fit-content',
+              alignItems: 'center',
+              padding: '0 2.5rem 1.25rem 2.5rem',
+              // border: '2px solid white',
+              // borderRadius: '1.25rem',
+              fontSize: '2rem',
+              fontWeight: 'bold',
               color: 'white',
             }}
           >
-            <Typography variant="h4">Welcome!</Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </Typography>
-          </Box>
-          <Img alt="image" src={backgroundRobot} />
+            <p
+              className="text"
+              style={{
+                position: 'absolute',
+                padding: 0,
+                width: 'max-content',
+                animation: 'my-animation 24s linear infinite',
+              }}
+            >
+              Lorem ipsuiusajn sdf askdf kd fjkasd f ksdjfks jdf k jsdf
+            </p>
+          </div>
         </Grid>
+        {/* animations finish */}
         <Container
           component="main"
-          maxWidth="xs"
+          className="containter-text"
           sx={{
+            backgroundColor: '#011222',
             display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            heigth: '100%',
+            width: '50%',
+            position: 'relative',
           }}
         >
           <Box
+            className="text"
             sx={{
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
+              rowGap: '2.5rem',
               textAlign: 'left',
+              width: '30rem',
             }}
           >
-            <Typography component="h1" variant="h2" sx={{ color: '#FF6700' }}>
-              Log In
+            <Typography
+              component="h1"
+              sx={{ color: '#FF6700', fontSize: '40px' }}
+            >
+              Welcome to the Chattie
             </Typography>
             <Box
               component="form"
@@ -227,9 +263,11 @@ const LoginPage: FC = () => {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   mb: 3,
+                  color: 'white',
+                  fontSize: '20px',
                 }}
               >
-                <Box>
+                <Box className="slogan-text">
                   <Typography>Don’t have an account?</Typography>
                   <Typography>It will take less than a minute.</Typography>
                 </Box>
@@ -253,11 +291,12 @@ const LoginPage: FC = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <CustomBorderTextField
+                      id="standard-basic"
+                      variant="standard"
                       autoComplete="email"
                       name="email"
                       required
                       fullWidth
-                      id="email"
                       label="Email"
                       autoFocus
                       onChange={formik.handleChange}
@@ -272,12 +311,13 @@ const LoginPage: FC = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <CustomBorderTextField
+                      id="standard-basic"
+                      variant="standard"
                       required
                       fullWidth
                       name="password"
                       label="Password"
                       type="password"
-                      id="password"
                       autoComplete="new-password"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
@@ -302,7 +342,7 @@ const LoginPage: FC = () => {
                   mb: 2,
                 }}
               >
-                <LoadingButton
+                <CustomLoadingButton
                   type="submit"
                   variant="contained"
                   loading={isLoading}
@@ -319,7 +359,7 @@ const LoginPage: FC = () => {
                   }}
                 >
                   SIGN IN
-                </LoadingButton>
+                </CustomLoadingButton>
                 <Box>
                   <Button
                     disableRipple
