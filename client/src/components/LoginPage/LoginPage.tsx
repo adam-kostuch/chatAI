@@ -51,15 +51,15 @@ const CustomBorderTextField = styled(TextField)({
 });
 
 const CustomLoadingButton = styled(LoadingButton)({
-  '& .MuiButtonbase-root': {
-    '& .MuiButtonbase-root': {
-      '& .MuiLoadingButton-root': {
-        '& .Mui-disabled': {
-          backgroundColor: 'grey',
-          color: 'white',
-        },
-      },
-    },
+  backgroundColor: 'white',
+  color: '#011222',
+  '&:hover': {
+    backgroundColor: '#FF6700',
+    color: 'white',
+  },
+  '& .Mui-disabled': {
+    backgroundColor: 'red',
+    color: 'white',
   },
 });
 
@@ -191,35 +191,11 @@ const LoginPage: FC = () => {
             width: '50%',
           }}
         >
-          <div
-            className="group"
-            style={{
-              position: 'relative',
-              width: 'fit-content',
-              alignItems: 'center',
-              padding: '0 2.5rem 1.25rem 2.5rem',
-              // border: '2px solid white',
-              // borderRadius: '1.25rem',
-              fontSize: '2rem',
-              fontWeight: 'bold',
-              color: 'white',
-            }}
-          >
-            <p
-              className="text"
-              style={{
-                position: 'absolute',
-                padding: 0,
-                width: 'max-content',
-                animation: 'my-animation 24s linear infinite',
-              }}
-            >
-              Lorem ipsuiusajn sdf askdf kd fjkasd f ksdjfks jdf k jsdf
-            </p>
-          </div>
+          here will be image
         </Grid>
         {/* animations finish */}
         <Container
+          maxWidth={false}
           component="main"
           className="containter-text"
           sx={{
@@ -230,6 +206,7 @@ const LoginPage: FC = () => {
             heigth: '100%',
             width: '50%',
             position: 'relative',
+            margin: 0,
           }}
         >
           <Box
@@ -350,13 +327,6 @@ const LoginPage: FC = () => {
                     Object.keys(formik.values).length === 0 ||
                     Object.keys(formik.errors).length !== 0
                   }
-                  sx={{
-                    backgroundColor: '#FF6700',
-                    ':hover': {
-                      bgcolor: 'black',
-                      color: 'white',
-                    },
-                  }}
                 >
                   SIGN IN
                 </CustomLoadingButton>
