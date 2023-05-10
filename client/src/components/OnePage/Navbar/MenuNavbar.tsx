@@ -20,8 +20,11 @@ import CustomButton from '../../CustomButton';
 
 import LoginPage from '../../LoginPage/LoginPage';
 import RegisterPage from '../../RegisterPage/RegisterPage';
+import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
 
 const MenuNavbar = () => {
+  const isAuthenticated = useCheckAuthentication();
+
   return (
     <>
       <Box sx={{ display: 'flex' }}>
@@ -32,7 +35,6 @@ const MenuNavbar = () => {
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              // onClick={handleDrawerToggle}
               sx={{ mr: 2, display: { sm: 'none' } }}
             >
               <MenuIcon />
@@ -59,16 +61,26 @@ const MenuNavbar = () => {
               ))}
             </Box>
             <Box sx={{ display: 'flex', marginLeft: '80px', color: 'white' }}>
-              <Link to="/login" style={{ textDecoration: 'none' }}>
-                <Button sx={{ color: '#fff' }}>SIGN IN</Button>
-              </Link>
-              <Link to="/register" style={{ textDecoration: 'none' }}>
+              {!isAuthenticated ? (
+                <>
+                  <Link to="/login" style={{ textDecoration: 'none' }}>
+                    <Button sx={{ color: '#fff' }}>SIGN IN</Button>
+                  </Link>
+                  <Link to="/register" style={{ textDecoration: 'none' }}>
+                    <CustomButton
+                      backgroundColor="#FF9147"
+                      color="#fff"
+                      buttonText="SIGN UP"
+                    />
+                  </Link>
+                </>
+              ) : (
                 <CustomButton
                   backgroundColor="#FF9147"
                   color="#fff"
-                  buttonText="SIGN UP"
+                  buttonText="LOG OUT"
                 />
-              </Link>
+              )}
             </Box>
           </Toolbar>
         </AppBar>

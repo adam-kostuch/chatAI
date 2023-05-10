@@ -1,10 +1,16 @@
+import { signOut } from '@firebase/auth';
 import { Button, styled } from '@mui/material';
 import React, { FC } from 'react';
+import { useCookies } from 'react-cookie';
+import { useChattieContext } from 'src/ChattieContext';
+import { COOKIE_TOKEN } from 'src/types';
+
+type ButtonActionType = 'LOG OUT' | 'SIGN UP';
 
 interface ICustomButton {
   backgroundColor: string;
   color: string;
-  buttonText: string;
+  buttonText: ButtonActionType;
 }
 
 const CustomButton: FC<ICustomButton> = ({
@@ -12,6 +18,9 @@ const CustomButton: FC<ICustomButton> = ({
   color,
   buttonText,
 }) => {
+  const { auth } = useChattieContext();
+  const [, , removeCookie] = useCookies();
+
   const CustomButtonWrapper = styled(Button)(({ theme }) => ({
     backgroundColor: backgroundColor,
     maxWidth: '100px',
@@ -35,7 +44,23 @@ const CustomButton: FC<ICustomButton> = ({
     },
   }));
 
-  return <CustomButtonWrapper>{buttonText}</CustomButtonWrapper>;
+  const handleSignOut = async () => {
+    await signOut(auth)
+      .then(() => removeCookie(COOKIE_TOKEN))
+      .catch((error) => {
+        console.error("Couldn't sign out user!", error);
+      });
+  };
+
+  return (
+    <CustomButtonWrapper
+      onClick={() => {
+        buttonText === 'LOG OUT' && handleSignOut();
+      }}
+    >
+      {buttonText}
+    </CustomButtonWrapper>
+  );
 };
 
 export default CustomButton;
