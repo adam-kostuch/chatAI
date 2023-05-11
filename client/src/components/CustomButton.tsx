@@ -24,6 +24,9 @@ const CustomButton: FC<ICustomButton> = ({
     '&:hover': {
       backgroundColor: color,
       color: backgroundColor,
+      borderColor: backgroundColor,
+      outline: '1px solid',
+      outlineOffset: '-1px',
     },
     [theme.breakpoints.down('md')]: {
       margin: theme.spacing(0, 'auto', 3, 'auto'),

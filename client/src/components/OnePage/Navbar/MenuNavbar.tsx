@@ -1,77 +1,71 @@
 import * as React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  Button,
-  CssBaseline,
-  IconButton,
-} from '@mui/material';
-
-import MenuIcon from '@mui/icons-material/Menu';
-
+import { Box } from '@mui/material';
 import NavbarData from './NavbarData';
 import CustomLink from './CustomLink';
 import CustomButton from '../../CustomButton';
-
 import LoginPage from '../../LoginPage/LoginPage';
 import RegisterPage from '../../RegisterPage/RegisterPage';
 
 const MenuNavbar = () => {
   return (
     <>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar component="nav" color="transparent" elevation={0}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              // onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                color: 'white',
-                flexGrow: 1,
-                display: { xs: 'none', sm: 'block' },
+      <Box
+        sx={{
+          display: 'block',
+          maxWidth: '1200px',
+          left: 0,
+          right: 0,
+          position: 'fixed',
+          color: 'white',
+          padding: '20px',
+          margin: '0 112px 0 112px',
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: '#FF6700',
+            height: '80px',
+            borderRadius: '15px',
+            flexDirection: 'column',
+            position: 'relative',
+            justifyContent: 'center',
+          }}
+        >
+          <Box
+            className="header"
+            sx={{
+              justifyContent: 'space-between',
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0 20px 0 20px',
+            }}
+          >
+            <p>CHATTIE</p>
+            <ul
+              style={{
+                display: 'flex',
+                columnGap: '30px',
               }}
             >
-              Chattie
-            </Typography>
-            <Box sx={{ display: 'flex' }}>
               {NavbarData.map((item) => (
                 <CustomLink
                   key={item.title}
                   color="#fff"
-                  lineColor="#FF9147"
                   linkText={item.title}
                 />
               ))}
-            </Box>
-            <Box sx={{ display: 'flex', marginLeft: '80px', color: 'white' }}>
-              <Link to="/login" style={{ textDecoration: 'none' }}>
-                <Button sx={{ color: '#fff' }}>SIGN IN</Button>
-              </Link>
-              <Link to="/register" style={{ textDecoration: 'none' }}>
-                <CustomButton
-                  backgroundColor="#FF9147"
-                  color="#fff"
-                  buttonText="SIGN UP"
-                />
-              </Link>
-            </Box>
-          </Toolbar>
-        </AppBar>
+            </ul>
+            <Link to="/login" style={{ textDecoration: 'none' }}>
+              <CustomButton
+                backgroundColor="black"
+                color="#FF6700"
+                buttonText="SIGN UP"
+              />
+            </Link>
+          </Box>
+        </Box>
       </Box>
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
