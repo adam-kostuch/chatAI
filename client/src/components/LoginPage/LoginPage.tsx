@@ -57,8 +57,8 @@ const CustomLoadingButton = styled(LoadingButton)({
     backgroundColor: '#FF6700',
     color: 'white',
   },
-  '& .Mui-disabled': {
-    backgroundColor: 'red',
+  '&:disabled': {
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
     color: 'white',
   },
 });
