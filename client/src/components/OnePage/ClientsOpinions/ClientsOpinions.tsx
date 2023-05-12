@@ -1,117 +1,270 @@
 import * as React from 'react';
-import {
-  styled,
-  Container,
-  Box,
-  Typography,
-  Grid,
-  Paper,
-  Stack,
-  Avatar,
-  Rating,
-} from '@mui/material';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import OpinionsData from './OpinionsData';
-
-const CustomContainer = styled(Container)(({ theme }) => ({
-  display: 'flex',
-  color: 'white',
-  width: '100%',
-  height: '100vh',
-  justifyContent: 'center',
-  alignItems: 'center',
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-}));
-
-const CustomTitle = styled(Typography)(({ theme }) => ({
-  lineHeight: 1.5,
-  fontSize: '64px',
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '42px',
-  },
-}));
-
-const CustomCard = styled(Paper)(() => ({
-  maxWidth: '715px',
-  maxHeight: '180px',
-  textAlign: 'left',
-}));
+import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
+import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 
 const ClientsOpinions = () => {
-  const value = 4;
-
   return (
-    <CustomContainer
-      maxWidth={false}
-      disableGutters
-      className="full-width container"
+    <Container
+      className="clients-opinions container"
+      sx={{ color: 'white', position: 'relative' }}
     >
-      <Grid container sx={{ margin: 5 }}>
-        <Grid
-          item
-          xs={4}
-          sx={{ paddingLeft: '80px', paddingTop: '120px', maxWidth: '420px' }}
+      <Box
+        className="styled card"
+        sx={{
+          margin: '150px auto 50px auto',
+          width: '380px',
+          height: '450px',
+          backgroundColor: '#FF6700',
+          borderRadius: '20px',
+          position: 'relative',
+        }}
+      >
+        <Box
+          className="post box"
+          sx={{ position: 'absolute', zIndex: 10, padding: '30px' }}
         >
-          <CustomTitle className="custom-title reviews">Reviews</CustomTitle>
-          <Typography className="reviews-desc">
-            Taking care of our clients is number one priority
-          </Typography>
-        </Grid>
-        <Grid className="" item xs={8}>
           <Stack
+            direction="row"
             spacing={2}
             sx={{
-              justifyContent: 'center',
               alignItems: 'center',
-              height: '100%',
             }}
           >
-            {OpinionsData.map((data) => (
-              <CustomCard
-                className="custom-card opinions"
-                key="card"
-                sx={{ backgroundColor: 'black', color: 'white' }}
-              >
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      marginBottom: '27px',
-                    }}
-                  >
-                    <Avatar sx={{ bgcolor: 'orange' }}>
-                      {data.personAvatarInitial}
-                    </Avatar>
-                    <Typography sx={{ marginLeft: '40px' }}>
-                      {data.personName}
-                    </Typography>
-                  </Box>
-                  <Rating
-                    name="read-only"
-                    value={value}
-                    readOnly
-                    emptyIcon={
-                      <StarBorderIcon
-                        fontSize="inherit"
-                        className="empty-star icon"
-                        sx={{ color: 'grey' }}
-                      />
-                    }
-                  />
-                </Box>
-                <Typography sx={{ marginBottom: '60px' }}>
-                  {data.description}
-                </Typography>
-              </CustomCard>
-            ))}
+            <Avatar alt="Chattie" src="" />
+            <Typography>Chattie</Typography>
           </Stack>
-        </Grid>
-      </Grid>
-    </CustomContainer>
+          <Box
+            className="post-photo"
+            sx={{
+              backgroundColor: 'black',
+              borderRadius: '20px',
+              marginTop: '20px',
+              marginBottom: '20px',
+              width: '327px',
+              height: '227px',
+              padding: '20px',
+            }}
+          >
+            <Typography className="text-post" sx={{ fontSize: '40px' }}>
+              How Do <span style={{ color: '#FF6700' }}>YOU</span> Feel About
+              <span style={{ color: '#FF6700' }}> Chattie</span>?
+            </Typography>
+          </Box>
+          <Stack direction="row" spacing={2}>
+            <Stack direction="row" spacing={0.5}>
+              <ChatBubbleOutlineOutlinedIcon />
+              <Typography>687</Typography>
+            </Stack>
+            <Stack direction="row" spacing={0.5}>
+              <FavoriteBorderOutlinedIcon />
+              <Typography>17,500</Typography>
+            </Stack>
+            <Stack direction="row" spacing={0.5}>
+              <SendOutlinedIcon />
+              <Typography>431</Typography>
+            </Stack>
+          </Stack>
+        </Box>
+      </Box>
+      <Box
+        className="circle box"
+        sx={{ width: '90%', position: 'absolute', zIndex: 10, top: 0 }}
+      >
+        <Stack
+          direction="row"
+          className="comment-1"
+          spacing={2}
+          sx={{ position: 'relative', top: 0, left: 15, alignItems: 'center' }}
+        >
+          <span
+            className="circle avatar-1"
+            style={{
+              width: '120px',
+              height: '120px',
+              backgroundColor: '#FFFFFF',
+              borderRadius: '50%',
+            }}
+          ></span>
+          <Box
+            className="comment-text box"
+            sx={{
+              backgroundColor: '#0000F8',
+              width: '250px',
+              height: '120px',
+              borderRadius: '20px',
+              color: 'white',
+              padding: 3,
+              justifyContent: 'center',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Typography sx={{ fontWeight: 'bold' }}>
+              I love this application! It&apos;s so easy to use and has all the
+              features I need to communicate.
+            </Typography>
+          </Box>
+        </Stack>
+        <Stack
+          direction="row"
+          className="comment-2"
+          spacing={2}
+          sx={{
+            position: 'relative',
+            top: -180,
+            left: 700,
+            alignItems: 'center',
+          }}
+        >
+          <span
+            className="circle avatar-1"
+            style={{
+              width: '120px',
+              height: '120px',
+              backgroundColor: '#FFFFFF',
+              borderRadius: '50%',
+            }}
+          ></span>
+          <Box
+            className="comment-text box"
+            sx={{
+              backgroundColor: '#0000F8',
+              width: '180px',
+              height: '100px',
+              borderRadius: '20px',
+              color: 'white',
+              padding: 3,
+              justifyContent: 'center',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Typography sx={{ fontWeight: 'bold' }}>
+              Definitely my go-to chat app!
+            </Typography>
+          </Box>
+        </Stack>
+        <Stack
+          direction="row"
+          className="comment-3"
+          spacing={2}
+          sx={{
+            position: 'relative',
+            top: -50,
+            left: 750,
+            alignItems: 'center',
+          }}
+        >
+          <span
+            className="circle avatar-1"
+            style={{
+              width: '120px',
+              height: '120px',
+              backgroundColor: '#FFFFFF',
+              borderRadius: '50%',
+            }}
+          ></span>
+          <Box
+            className="comment-text box"
+            sx={{
+              backgroundColor: '#0000F8',
+              width: '250px',
+              height: '70px',
+              borderRadius: '20px',
+              color: 'white',
+              padding: 3,
+              justifyContent: 'center',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Typography sx={{ fontWeight: 'bold' }}>
+              Definitely my go-to chat app!
+            </Typography>
+          </Box>
+        </Stack>
+        <Stack
+          direction="row"
+          className="comment-4"
+          spacing={2}
+          sx={{
+            position: 'relative',
+            top: -40,
+            left: 20,
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            className="comment-text box"
+            sx={{
+              backgroundColor: '#0000F8',
+              width: '250px',
+              height: '60px',
+              borderRadius: '20px',
+              color: 'white',
+              padding: 3,
+              justifyContent: 'center',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Typography sx={{ fontWeight: 'bold' }}>
+              Definitely my go-to chat app!
+            </Typography>
+          </Box>
+          <span
+            className="circle avatar-1"
+            style={{
+              width: '120px',
+              height: '120px',
+              backgroundColor: '#FFFFFF',
+              borderRadius: '50%',
+            }}
+          ></span>
+        </Stack>
+        <Stack
+          direction="row"
+          className="comment-5"
+          spacing={2}
+          sx={{
+            position: 'relative',
+            top: -140,
+            left: 650,
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            className="comment-text box"
+            sx={{
+              backgroundColor: '#0000F8',
+              width: '180px',
+              height: '100px',
+              borderRadius: '20px',
+              color: 'white',
+              padding: 3,
+              justifyContent: 'center',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Typography sx={{ fontWeight: 'bold' }}>
+              Definitely my go-to chat app!
+            </Typography>
+          </Box>
+          <span
+            className="circle avatar-1"
+            style={{
+              width: '120px',
+              height: '120px',
+              backgroundColor: '#FFFFFF',
+              borderRadius: '50%',
+            }}
+          ></span>
+        </Stack>
+      </Box>
+    </Container>
   );
 };
 
