@@ -21,28 +21,43 @@ import { LoadingButton } from '@mui/lab';
 
 import HomeNavbar from '../HomeNavbar';
 
-import image1 from '../../assets/image.png';
 import { addDoc, collection } from 'firebase/firestore';
 import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
 // import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '80%',
-  maxHeight: '100%',
+const CustomBorderTextField = styled(TextField)({
+  '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:before': {
+    borderBottom: ' 1px solid white',
+  },
+  '& .css-1x51dt5-MuiInputBase-input-MuiInput-input': {
+    color: 'white',
+  },
+  '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
+    color: 'white',
+  },
+  '& .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root': {
+    color: 'white',
+  },
+  '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:after': {
+    borderBottom: '1px solid #FF6700',
+  },
+  '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': {
+    color: 'white',
+  },
 });
 
-const CustomBorderTextField = styled(TextField)({
-  '& label': {
-    '&.Mui-focused': {
-      color: 'black',
-    },
+const CustomLoadingButton = styled(LoadingButton)({
+  marginTop: '24px',
+  marginBottom: '16px',
+  backgroundColor: 'white',
+  color: '#011222',
+  '&:hover': {
+    backgroundColor: '#FF6700',
+    color: 'white',
   },
-  '& .MuiOutlinedInput-root': {
-    '&.Mui-focused fieldset': {
-      borderColor: 'black',
-    },
+  '&:disabled': {
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    color: 'white',
   },
 });
 
@@ -129,7 +144,7 @@ const RegisterPage: FC = () => {
       <Grid
         container
         className="grid-register full-width"
-        sx={{ height: '100vh' }}
+        sx={{ height: '100vh', width: '100%' }}
       >
         <Grid
           item
@@ -138,38 +153,34 @@ const RegisterPage: FC = () => {
           md={6}
           sx={{
             backgroundColor: 'black',
+            width: '50%',
           }}
         >
-          <Img alt="image" src={image1} />
-          <Box
-            sx={{
-              maxWidth: '480px',
-              maxHeight: '171px',
-              marginLeft: '100px',
-              marginTop: '10px',
-              color: 'white',
-            }}
-          >
-            <Typography variant="h4">Welcome!</Typography>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </Typography>
-          </Box>
+          <Typography variant="h4">Welcome!</Typography>
         </Grid>
         <Container
+          maxWidth={false}
           component="main"
-          maxWidth="xs"
+          className="containter-text"
           sx={{
+            backgroundColor: '#011222',
             display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            heigth: '100%',
+            width: '50%',
+            position: 'relative',
+            margin: 0,
           }}
         >
           <Box
+            className="text"
             sx={{
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               textAlign: 'left',
+              color: 'white',
             }}
           >
             <Typography component="h1" variant="h2" sx={{ color: '#FF6700' }}>
@@ -186,6 +197,7 @@ const RegisterPage: FC = () => {
                   <CustomBorderTextField
                     autoComplete="given-name"
                     name="username"
+                    variant="standard"
                     required
                     fullWidth
                     id="username"
@@ -204,6 +216,7 @@ const RegisterPage: FC = () => {
                 <Grid item xs={12}>
                   <CustomBorderTextField
                     required
+                    variant="standard"
                     fullWidth
                     id="email"
                     label="Email Address"
@@ -222,6 +235,7 @@ const RegisterPage: FC = () => {
                 <Grid item xs={12}>
                   <CustomBorderTextField
                     required
+                    variant="standard"
                     fullWidth
                     name="password"
                     label="Password"
@@ -247,7 +261,7 @@ const RegisterPage: FC = () => {
                           setPolicyTerms((prevValue) => !prevValue);
                         }}
                         sx={{
-                          color: 'black',
+                          color: 'white',
                           '&.Mui-checked': {
                             color: '#FF6700',
                           },
@@ -258,7 +272,7 @@ const RegisterPage: FC = () => {
                   />
                 </Grid>
               </Grid>
-              <LoadingButton
+              <CustomLoadingButton
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -268,18 +282,9 @@ const RegisterPage: FC = () => {
                   Object.keys(formik.errors).length !== 0 ||
                   !policyTerms
                 }
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  backgroundColor: '#FF6700',
-                  ':hover': {
-                    bgcolor: 'black',
-                    color: 'white',
-                  },
-                }}
               >
                 CREATE AN ACCOUNT
-              </LoadingButton>
+              </CustomLoadingButton>
               <Grid
                 container
                 className="grid sign-in-link"
