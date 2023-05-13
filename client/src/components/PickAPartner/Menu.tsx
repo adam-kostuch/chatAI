@@ -1,6 +1,5 @@
 import { AppBar, Box, CssBaseline, Toolbar, Typography } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import CustomButton from '../CustomButton';
 
@@ -22,13 +21,11 @@ const Menu = () => {
             Chattie
           </Typography>
           <Box sx={{ display: 'flex', marginLeft: '80px' }}>
-            <Link to="/login" style={{ textDecoration: 'none' }}>
-              <CustomButton
-                backgroundColor="black"
-                color="#FF9147"
-                buttonText="LOG OUT"
-              />
-            </Link>
+            <CustomButton
+              backgroundColor="black"
+              color="#FF9147"
+              buttonText="LOG OUT"
+            />
           </Box>
         </Toolbar>
       </AppBar>
