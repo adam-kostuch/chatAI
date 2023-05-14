@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import ChattieApiClient from './clients/ChattieApiClient';
 import { initializeApp } from 'firebase/app';
 import { Auth, getAuth } from 'firebase/auth';
@@ -40,8 +40,9 @@ const ChattieContextProvider: React.FC<{ children: React.ReactNode }> = ({
 };
 
 const useChattieContext = (): ChattieContextProps => {
-  const context = React.useContext(ChattieContext);
-  if (context === null) {
+  const context = useContext(ChattieContext);
+
+  if (context == null) {
     throw new Error(
       'useChattieContext must be used within a ChattieContextProvider'
     );

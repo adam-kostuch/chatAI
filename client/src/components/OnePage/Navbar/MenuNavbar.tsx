@@ -1,77 +1,53 @@
 import * as React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { AppBar, Box, Button, Stack, Toolbar, Typography } from '@mui/material';
 import NavbarData from './NavbarData';
-import CustomLink from './CustomLink';
 import CustomButton from '../../CustomButton';
-import LoginPage from '../../LoginPage/LoginPage';
-import RegisterPage from '../../RegisterPage/RegisterPage';
+import { MIDNIGHT_BLACK, VANILLA_WHITE, BLAZE_ORANGE } from '@chattie/colors';
 
 const MenuNavbar = () => {
   return (
-    <>
-      <Box
-        sx={{
-          display: 'block',
-          maxWidth: '1200px',
-          left: 0,
-          right: 0,
-          position: 'fixed',
-          color: 'white',
-          padding: '20px',
-          margin: '0 112px 0 112px',
-        }}
-      >
+    <AppBar
+      position="fixed"
+      sx={{ mt: 2, mr: '5%', width: '90%', borderRadius: '10px' }}
+    >
+      <Toolbar sx={{ bgcolor: BLAZE_ORANGE, borderRadius: '10px' }}>
         <Box
-          sx={{
-            backgroundColor: '#FF6700',
-            height: '80px',
-            borderRadius: '15px',
-            flexDirection: 'column',
-            position: 'relative',
-            justifyContent: 'center',
-          }}
+          width="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          className="header menu-navbar"
         >
-          <Box
-            className="header"
-            sx={{
-              justifyContent: 'space-between',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0 20px 0 20px',
-            }}
-          >
-            <p>CHATTIE</p>
-            <ul
-              style={{
-                display: 'flex',
-                columnGap: '30px',
-              }}
-            >
-              {NavbarData.map((item) => (
-                <CustomLink
-                  key={item.title}
-                  color="#fff"
-                  linkText={item.title}
-                />
-              ))}
-            </ul>
-            <Link to="/login" style={{ textDecoration: 'none' }}>
-              <CustomButton
-                backgroundColor="black"
-                color="#FF6700"
-                buttonText="SIGN UP"
-              />
-            </Link>
+          <Button href="/#" variant="text" sx={{ color: VANILLA_WHITE }}>
+            <Typography variant="h6" sx={{ fontWeight: '700' }}>
+              CHATTIE
+            </Typography>
+          </Button>
+          <Box component="ul" display="flex" p={0} gap={6}>
+            {NavbarData.map(({ title }, idx) => (
+              <Button
+                key={`${title}-${idx}`}
+                sx={{ color: VANILLA_WHITE, fontSize: '1rem' }}
+              >
+                {title}
+              </Button>
+            ))}
           </Box>
+          <Stack direction="row" gap={2}>
+            <CustomButton
+              backgroundColor={BLAZE_ORANGE}
+              color={VANILLA_WHITE}
+              buttonLabel="SIGN IN"
+            />
+            <CustomButton
+              backgroundColor={MIDNIGHT_BLACK}
+              color={BLAZE_ORANGE}
+              buttonLabel="SIGN UP"
+            />
+          </Stack>
         </Box>
-      </Box>
-      <Routes>
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
-    </>
+      </Toolbar>
+    </AppBar>
   );
 };
 
