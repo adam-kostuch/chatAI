@@ -24,7 +24,7 @@ const Menu = () => {
             <CustomButton
               backgroundColor="black"
               color="#FF9147"
-              buttonText="LOG OUT"
+              buttonLabel="LOG OUT"
             />
           </Box>
         </Toolbar>

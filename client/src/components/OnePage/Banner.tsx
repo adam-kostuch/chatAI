@@ -51,7 +51,7 @@ const BannerContent = styled(Box)(({ theme }) => ({
 const BannerTitle = styled(Typography)(({ theme }) => ({
   lineHeight: 1.5,
   fontSize: '128px',
-  marginBotton: '20px',
+  marginBottom: '20px',
   [theme.breakpoints.down('sm')]: {
     fontSize: '42px',
   },
@@ -82,11 +82,7 @@ const Banner = () => {
   // })
 
   return (
-    <BannerContainer
-      maxWidth={false}
-      disableGutters
-      className="banner-container full width"
-    >
+    <BannerContainer maxWidth={false} className="banner-container full width">
       <BannerImage src={BackgroundCircles} />
       <BannerContent className="banner-content">
         <Typography variant="h6">I&apos;m waiting</Typography>

@@ -1,48 +1,46 @@
-import { signOut } from '@firebase/auth';
-import { Button, styled } from '@mui/material';
 import React, { FC } from 'react';
+import { Button } from '@mui/material';
+import { signOut } from '@firebase/auth';
 import { useCookies } from 'react-cookie';
 import { useChattieContext } from 'src/ChattieContext';
 import { COOKIE_TOKEN } from 'src/types';
 
-type ButtonActionType = 'LOG OUT' | 'SIGN UP';
+const assertUnreachable = (_: never): never => {
+  throw new Error(`Unexpected value: ${_}`);
+};
 
-interface ICustomButton {
-  backgroundColor: string;
+type ButtonActions = 'LOG OUT' | 'SIGN UP' | 'SIGN IN';
+
+interface RedirectButtonProps {
   color: string;
-  buttonText: ButtonActionType;
+  backgroundColor: string;
+  buttonLabel: ButtonActions;
 }
 
-const CustomButton: FC<ICustomButton> = ({
-  backgroundColor,
+const RedirectButton: FC<RedirectButtonProps> = ({
   color,
-  buttonText,
+  backgroundColor,
+  buttonLabel,
 }) => {
   const { auth } = useChattieContext();
   const [, , removeCookie] = useCookies();
 
-  const CustomButtonWrapper = styled(Button)(({ theme }) => ({
-    backgroundColor: backgroundColor,
-    maxWidth: '100px',
-    color: color,
-    fontSize: '14px',
-    cursor: 'pointer',
-    borderRadius: '10px',
-    display: 'block',
-    marginLeft: '20px',
-    '&:hover': {
-      backgroundColor: color,
-      color: backgroundColor,
-    },
-    [theme.breakpoints.down('md')]: {
-      margin: theme.spacing(0, 'auto', 3, 'auto'),
-      width: '90%',
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(3),
-      width: '90%',
-    },
-  }));
+  const handleRedirect = () => {
+    switch (buttonLabel) {
+      case 'SIGN IN':
+        handleSignIn();
+        break;
+      case 'SIGN UP':
+        handleSignUp();
+        break;
+      case 'LOG OUT':
+        handleSignOut();
+        break;
+      default:
+        assertUnreachable(buttonLabel);
+        break;
+    }
+  };
 
   const handleSignOut = async () => {
     await signOut(auth)
@@ -52,15 +50,33 @@ const CustomButton: FC<ICustomButton> = ({
       });
   };
 
+  const handleSignUp = () => {
+    window.location.href = '/register';
+  };
+
+  const handleSignIn = () => {
+    window.location.href = '/login';
+  };
+
   return (
-    <CustomButtonWrapper
-      onClick={() => {
-        buttonText === 'LOG OUT' && handleSignOut();
+    <Button
+      variant={buttonLabel === 'SIGN IN' ? 'text' : 'contained'}
+      onClick={() => handleRedirect()}
+      sx={{
+        color,
+        backgroundColor,
+        fontSize: '1rem',
+        fontWeight: '700',
+        borderRadius: '10px',
+        '&:hover': {
+          backgroundColor: color,
+          color: backgroundColor,
+        },
       }}
     >
-      {buttonText}
-    </CustomButtonWrapper>
+      {buttonLabel}
+    </Button>
   );
 };
 
-export default CustomButton;
+export default RedirectButton;

@@ -1,95 +1,53 @@
 import * as React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  Button,
-  CssBaseline,
-  IconButton,
-} from '@mui/material';
-
-import MenuIcon from '@mui/icons-material/Menu';
-
+import { AppBar, Box, Button, Stack, Toolbar, Typography } from '@mui/material';
 import NavbarData from './NavbarData';
-import CustomLink from './CustomLink';
 import CustomButton from '../../CustomButton';
-
-import LoginPage from '../../LoginPage/LoginPage';
-import RegisterPage from '../../RegisterPage/RegisterPage';
-import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
+import { MIDNIGHT_BLACK, VANILLA_WHITE, BLAZE_ORANGE } from '@chattie/colors';
 
 const MenuNavbar = () => {
-  const isAuthenticated = useCheckAuthentication();
-
   return (
-    <>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar component="nav" color="transparent" elevation={0}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              sx={{ mr: 2, display: { sm: 'none' } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                color: 'white',
-                flexGrow: 1,
-                display: { xs: 'none', sm: 'block' },
-              }}
-            >
-              Chattie
+    <AppBar
+      position="fixed"
+      sx={{ mt: 2, mr: '5%', width: '90%', borderRadius: '10px' }}
+    >
+      <Toolbar sx={{ bgcolor: BLAZE_ORANGE, borderRadius: '10px' }}>
+        <Box
+          width="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          className="header menu-navbar"
+        >
+          <Button href="/#" variant="text" sx={{ color: VANILLA_WHITE }}>
+            <Typography variant="h6" sx={{ fontWeight: '700' }}>
+              CHATTIE
             </Typography>
-            <Box sx={{ display: 'flex' }}>
-              {NavbarData.map((item) => (
-                <CustomLink
-                  key={item.title}
-                  color="#fff"
-                  lineColor="#FF9147"
-                  linkText={item.title}
-                />
-              ))}
-            </Box>
-            <Box sx={{ display: 'flex', marginLeft: '80px', color: 'white' }}>
-              {!isAuthenticated ? (
-                <>
-                  <Link to="/login" style={{ textDecoration: 'none' }}>
-                    <Button sx={{ color: '#fff' }}>SIGN IN</Button>
-                  </Link>
-                  <Link to="/register" style={{ textDecoration: 'none' }}>
-                    <CustomButton
-                      backgroundColor="#FF9147"
-                      color="#fff"
-                      buttonText="SIGN UP"
-                    />
-                  </Link>
-                </>
-              ) : (
-                <CustomButton
-                  backgroundColor="#FF9147"
-                  color="#fff"
-                  buttonText="LOG OUT"
-                />
-              )}
-            </Box>
-          </Toolbar>
-        </AppBar>
-      </Box>
-      <Routes>
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
-    </>
+          </Button>
+          <Box component="ul" display="flex" p={0} gap={6}>
+            {NavbarData.map(({ title }, idx) => (
+              <Button
+                key={`${title}-${idx}`}
+                sx={{ color: VANILLA_WHITE, fontSize: '1rem' }}
+              >
+                {title}
+              </Button>
+            ))}
+          </Box>
+          <Stack direction="row" gap={2}>
+            <CustomButton
+              backgroundColor={BLAZE_ORANGE}
+              color={VANILLA_WHITE}
+              buttonLabel="SIGN IN"
+            />
+            <CustomButton
+              backgroundColor={MIDNIGHT_BLACK}
+              color={BLAZE_ORANGE}
+              buttonLabel="SIGN UP"
+            />
+          </Stack>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 
