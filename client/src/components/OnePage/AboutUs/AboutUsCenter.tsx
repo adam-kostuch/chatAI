@@ -8,7 +8,7 @@ const AboutUsContainer = styled(Container)(({ theme }) => ({
   position: 'relative',
   justifyContent: 'center',
   width: '100%',
-  height: '200vh',
+  height: '100vh',
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -25,7 +25,7 @@ const AboutUsContent = styled(Box)(({ theme }) => ({
   textAlign: 'center',
   maxWidth: 895,
   padding: '30px',
-  marginTop: '400px',
+  // marginTop: '400px',
   [theme.breakpoints.down('md')]: {
     marginTop: '150px',
   },
@@ -38,7 +38,7 @@ const AboutUsCenter = () => {
     <AboutUsContainer className="main" maxWidth={false} disableGutters>
       <AboutUsContent>
         {BotDesc.map((desc) => (
-          <Typography className="text" key={desc} sx={{ fontSize: '96px' }}>
+          <Typography className="text" key={desc} sx={{ fontSize: '48px' }}>
             {desc}
           </Typography>
         ))}

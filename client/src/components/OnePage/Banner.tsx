@@ -1,59 +1,47 @@
 import { styled, Container, Box, Typography, Button } from '@mui/material';
 import * as React from 'react';
-
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
-
-import BackgroundCircles from '../../assets/background.png';
+import { APPROX_BLUE, NEW_MIDNIGHT_BLUE } from '@chattie/colors';
 
 const BannerContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
+  flexDirection: 'column',
   position: 'relative',
   justifyContent: 'center',
   width: '100%',
   height: '100vh',
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
-    alignItems: 'center',
-  },
-}));
-
-const BannerImage = styled('img')(({ theme }) => ({
-  marginTop: '60px',
-  position: 'relative',
-  width: '70%',
-  height: '90%',
-  [theme.breakpoints.down('md')]: {
-    width: '650px',
-    height: '400px',
-  },
-  [theme.breakpoints.down('sm')]: {
-    width: '320px',
-    height: '200px',
+    alignItems: 'lelt',
   },
 }));
 
 const BannerContent = styled(Box)(({ theme }) => ({
   display: 'flex',
   color: 'white',
-  position: 'absolute',
+  position: 'relative',
   flexDirection: 'column',
   justifyContent: 'center',
-  alignItems: 'center',
-  textAlign: 'center',
+  alignItems: 'left',
+  textAlign: 'left',
   maxWidth: 895,
   padding: '30px',
-  marginTop: '200px',
+  marginTop: '170px',
   [theme.breakpoints.down('md')]: {
     marginTop: '150px',
   },
 }));
 
-const BannerTitle = styled(Typography)(({ theme }) => ({
-  lineHeight: 1.5,
-  fontSize: '128px',
+const BannerTitle = styled(Typography)(() => ({
+  lineHeight: 1,
   marginBottom: '20px',
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '42px',
+  fontWeight: 350,
+}));
+
+const CustomButton = styled(Button)(() => ({
+  backgroundColor: NEW_MIDNIGHT_BLUE,
+  '&:hover': {
+    backgroundColor: APPROX_BLUE,
+    color: 'white',
   },
 }));
 
@@ -62,7 +50,6 @@ const BannerDescription = styled(Typography)(({ theme }) => ({
   maxWidth: '456px',
   letterSpacing: 1.25,
   marginTop: '22px',
-  marginBottom: '90px',
   [theme.breakpoints.down('md')]: {
     lineHeight: 1.15,
     letterSpacing: 1.15,
@@ -71,29 +58,18 @@ const BannerDescription = styled(Typography)(({ theme }) => ({
 }));
 
 const Banner = () => {
-  // React.useEffect(() => {
-  //   const t1 = gsap.timeline()
-  //   t1.from('.banner-content', {
-  //     y: 100,
-  //     duration: 5,
-  //     opacity: 0,
-  //     ease: 'power4',
-  //   })
-  // })
-
   return (
     <BannerContainer maxWidth={false} className="banner-container full width">
-      <BannerImage src={BackgroundCircles} />
       <BannerContent className="banner-content">
-        <Typography variant="h6">I&apos;m waiting</Typography>
-        <BannerTitle>Chattie Friend</BannerTitle>
-        <BannerDescription className="banner-desc" variant="subtitle1">
-          Helping you and making new friends through chat easier
+        <BannerTitle variant="h2">Chattie Friend</BannerTitle>
+        <BannerDescription className="banner-desc" variant="subtitle2">
+          Get in touch with people all around the world though chat. Robot
+          Chattie helps you solving problems and gets you needed information.
         </BannerDescription>
-        <Button variant="contained" endIcon={<KeyboardDoubleArrowDownIcon />}>
-          Scroll Down
-        </Button>
       </BannerContent>
+      <Box sx={{ padding: '30px' }}>
+        <CustomButton variant="contained">Let’s start</CustomButton>
+      </Box>
     </BannerContainer>
   );
 };

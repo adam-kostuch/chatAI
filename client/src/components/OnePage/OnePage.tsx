@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { Box, Container, Fab, Fade, useScrollTrigger } from '@mui/material';
 import { KeyboardArrowUp } from '@mui/icons-material';
+import { WOODSMOKE } from '@chattie/colors';
 
 // components
 import Banner from './Banner';
@@ -11,7 +12,7 @@ import ClientsOpinions from './ClientsOpinions/ClientsOpinions';
 import Footer from './Footer/Footer';
 
 const OnePage: FC = () => (
-  <Container maxWidth={false} sx={{ backgroundColor: 'black' }}>
+  <Container maxWidth={false} sx={{ backgroundColor: WOODSMOKE }}>
     <MenuNavbar />
     <Banner />
     <AboutUs />
