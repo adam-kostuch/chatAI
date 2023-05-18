@@ -1,5 +1,6 @@
 import { styled, Container, Box, Typography, Button } from '@mui/material';
 import * as React from 'react';
+import { APPROX_BLUE, NEW_MIDNIGHT_BLUE } from '@chattie/colors';
 
 const BannerContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -37,9 +38,9 @@ const BannerTitle = styled(Typography)(() => ({
 }));
 
 const CustomButton = styled(Button)(() => ({
-  backgroundColor: '#0000A4',
+  backgroundColor: NEW_MIDNIGHT_BLUE,
   '&:hover': {
-    backgroundColor: '#0000F8',
+    backgroundColor: APPROX_BLUE,
     color: 'white',
   },
 }));

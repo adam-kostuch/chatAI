@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled, Box, Container, Typography } from '@mui/material';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
+import { APPROX_BLUE } from '@chattie/colors';
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -37,8 +38,8 @@ const ClientsCounter = () => {
       className="container full-width"
     >
       <CustomContent className="content">
-        <SmartToyIcon sx={{ color: '#0000F8', fontSize: '80px' }} />
-        <Typography sx={{ fontSize: '64px', color: '#0000F8' }}>
+        <SmartToyIcon sx={{ color: APPROX_BLUE, fontSize: '80px' }} />
+        <Typography sx={{ fontSize: '64px', color: APPROX_BLUE }}>
           100+ Clients{' '}
         </Typography>
         <Typography>
