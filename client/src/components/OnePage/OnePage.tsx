@@ -11,7 +11,7 @@ import ClientsOpinions from './ClientsOpinions/ClientsOpinions';
 import Footer from './Footer/Footer';
 
 const OnePage: FC = () => (
-  <Container maxWidth={false} sx={{ backgroundColor: 'black' }}>
+  <Container maxWidth={false} sx={{ backgroundColor: '#131318' }}>
     <MenuNavbar />
     <Banner />
     <AboutUs />
