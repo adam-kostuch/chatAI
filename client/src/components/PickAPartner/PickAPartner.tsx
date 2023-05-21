@@ -5,7 +5,7 @@ import { styled, Container, Box, Typography, Grid } from '@mui/material';
 import Menu from './Menu';
 import RealPartner from '../../assets/HyperspaceFloating.png';
 import RobotPartner from '../../assets/HyperspaceRobot1.png';
-import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
+import { useCheckAuthentication } from 'src/hooks';
 import { VANILLA_WHITE } from '@chattie/colors';
 import './PickAPartner.css';
 

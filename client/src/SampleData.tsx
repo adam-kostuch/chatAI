@@ -1,5 +1,5 @@
 import { FC, ChangeEvent, useState } from 'react';
-import useOpenAI from './hooks/useOpenAI';
+import { useOpenAI } from './hooks';
 
 const SampleData: FC = () => {
   // openai

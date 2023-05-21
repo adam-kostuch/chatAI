@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import HomeNavbar from '../HomeNavbar';
-import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
+import { useCheckAuthentication } from 'src/hooks';
 import { addDoc, collection } from 'firebase/firestore';
 import { BLAZE_ORANGE, VANILLA_WHITE, WOODSMOKE } from '@chattie/colors';
 

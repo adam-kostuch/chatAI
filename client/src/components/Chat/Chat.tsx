@@ -1,11 +1,9 @@
 import { FC } from 'react';
 import { Stack } from '@mui/material';
-import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
-import useStateWithLocalStorage from 'src/hooks/useStateWithLocalStorage';
+import { useCheckAuthentication, useStateWithLocalStorage } from 'src/hooks';
 import { ProfilePanel, MessagePanel, HistoryPanel } from './components';
 import { VANILLA_WHITE, WOODSMOKE } from '@chattie/colors';
 import { chatters } from 'src/mocks/rawChatters';
-import './styles/Chat.css';
 
 const Chat: FC = () => {
   useCheckAuthentication();
@@ -22,7 +20,7 @@ const Chat: FC = () => {
   return (
     <Stack direction="row" bgcolor={WOODSMOKE} color={VANILLA_WHITE}>
       <ProfilePanel />
-      <Stack direction="row" width="100%" gap={4} p={6}>
+      <Stack direction="row" width="100%" gap={4} p={5}>
         <HistoryPanel
           activePrompt={activePrompt}
           handleChangePrompt={handleChangePrompt}

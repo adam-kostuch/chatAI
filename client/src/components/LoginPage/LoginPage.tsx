@@ -27,7 +27,7 @@ import {
 import { LoadingButton } from '@mui/lab';
 import { useCookies } from 'react-cookie';
 import { COOKIE_TOKEN } from '../../types';
-import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
+import { useCheckAuthentication } from 'src/hooks';
 import { BLAZE_ORANGE, WOODSMOKE, VANILLA_WHITE } from '@chattie/colors';
 
 const CustomBorderTextField = styled(TextField)({

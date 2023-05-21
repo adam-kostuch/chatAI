@@ -58,7 +58,7 @@ import { FC } from 'react';
 import { Container } from '@mui/material';
 import NavbarChat from './NavbarChat';
 import Chats from './Chats';
-import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
+import { useCheckAuthentication } from 'src/hooks';
 
 const RealtimeChat: FC = () => {
   useCheckAuthentication();
