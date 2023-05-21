@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { styled, Box, Container, Typography } from '@mui/material';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { APPROX_BLUE } from '@chattie/colors';
@@ -30,7 +30,7 @@ const CustomContent = styled(Box)(({ theme }) => ({
   },
 }));
 
-const ClientsCounter = () => {
+const ClientsCounter: FC = () => {
   return (
     <CustomContainer
       maxWidth={false}

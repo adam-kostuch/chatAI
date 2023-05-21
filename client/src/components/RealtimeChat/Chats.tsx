@@ -1,3 +1,5 @@
+import { FC } from 'react';
+import { Send } from '@mui/icons-material';
 import {
   Grid,
   List,
@@ -8,11 +10,7 @@ import {
   Fab,
 } from '@mui/material';
 
-import SendIcon from '@mui/icons-material/Send';
-
-import * as React from 'react';
-
-const Chats = () => {
+const Chats: FC = () => {
   return (
     <Grid
       item
@@ -63,7 +61,7 @@ const Chats = () => {
         </Grid>
         <Grid xs={1} sx={{ textAlign: 'right' }}>
           <Fab color="primary" aria-label="add">
-            <SendIcon />
+            <Send />
           </Fab>
         </Grid>
       </Grid>

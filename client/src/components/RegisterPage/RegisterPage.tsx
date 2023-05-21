@@ -1,10 +1,9 @@
-import React, { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC } from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useQuery } from 'react-query';
 import { useChattieContext } from '../../ChattieContext';
 import { Link } from 'react-router-dom';
-
 import {
   styled,
   Box,
@@ -18,12 +17,10 @@ import {
   Alert,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-
 import HomeNavbar from '../HomeNavbar';
-
-import { addDoc, collection } from 'firebase/firestore';
 import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
-// import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { addDoc, collection } from 'firebase/firestore';
+import { BLAZE_ORANGE, VANILLA_WHITE, WOODSMOKE } from '@chattie/colors';
 
 const CustomBorderTextField = styled(TextField)({
   '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:before': {
@@ -39,7 +36,7 @@ const CustomBorderTextField = styled(TextField)({
     color: 'white',
   },
   '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:after': {
-    borderBottom: '1px solid #FF6700',
+    borderBottom: `1px solid ${BLAZE_ORANGE}`,
   },
   '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': {
     color: 'white',
@@ -50,13 +47,14 @@ const CustomLoadingButton = styled(LoadingButton)({
   marginTop: '24px',
   marginBottom: '16px',
   backgroundColor: 'white',
-  color: '#011222',
+  color: WOODSMOKE,
   '&:hover': {
-    backgroundColor: '#FF6700',
+    backgroundColor: BLAZE_ORANGE,
     color: 'white',
   },
   '&:disabled': {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: VANILLA_WHITE,
+    opacity: 0.5,
     color: 'white',
   },
 });
@@ -163,7 +161,7 @@ const RegisterPage: FC = () => {
           component="main"
           className="containter-text"
           sx={{
-            backgroundColor: '#011222',
+            backgroundColor: WOODSMOKE,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -183,7 +181,11 @@ const RegisterPage: FC = () => {
               color: 'white',
             }}
           >
-            <Typography component="h1" variant="h2" sx={{ color: '#FF6700' }}>
+            <Typography
+              component="h1"
+              variant="h2"
+              sx={{ color: BLAZE_ORANGE }}
+            >
               Register
             </Typography>
             <Box
@@ -263,7 +265,7 @@ const RegisterPage: FC = () => {
                         sx={{
                           color: 'white',
                           '&.Mui-checked': {
-                            color: '#FF6700',
+                            color: BLAZE_ORANGE,
                           },
                         }}
                       />
@@ -292,7 +294,7 @@ const RegisterPage: FC = () => {
               >
                 <Typography>Already have an account? &nbsp;</Typography>
                 <Link to="/login" style={{ textDecoration: 'none' }}>
-                  <Typography sx={{ color: '#FF6700' }}>Sign in</Typography>
+                  <Typography sx={{ color: BLAZE_ORANGE }}>Sign in</Typography>
                 </Link>
               </Grid>
             </Box>

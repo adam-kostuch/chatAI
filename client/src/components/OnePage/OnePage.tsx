@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { Box, Container, Fab, Fade, useScrollTrigger } from '@mui/material';
 import { KeyboardArrowUp } from '@mui/icons-material';
 import { WOODSMOKE } from '@chattie/colors';

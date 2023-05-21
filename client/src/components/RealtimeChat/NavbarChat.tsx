@@ -1,12 +1,9 @@
+import { FC } from 'react';
 import { Container } from '@mui/material';
-import * as React from 'react';
-// import { useChattieContext } from '../../ChattieContext';
 import ChatUsers from './ChatUsers';
 import Search from './Search';
 
-const NavbarChat = () => {
-  // const { currentUser } = useChattieContext();
-
+const NavbarChat: FC = () => {
   return (
     <Container
       sx={{

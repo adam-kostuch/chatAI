@@ -1,25 +1,26 @@
-import React from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import './PickAPartner.css';
 import { styled, Container, Box, Typography, Grid } from '@mui/material';
 import Menu from './Menu';
 import RealPartner from '../../assets/HyperspaceFloating.png';
 import RobotPartner from '../../assets/HyperspaceRobot1.png';
 import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
+import { VANILLA_WHITE } from '@chattie/colors';
+import './PickAPartner.css';
 
 const ChatPartnerData = [
   {
     name: 'Robot A.I. Chattie',
     image: RobotPartner,
     alt: 'image of robot partner',
-    path: '/realtime-chat',
+    path: '/robot-chat',
   },
   {
     name: 'Random person',
     image: RealPartner,
     alt: 'image of real partner',
-    path: '/robot-chat',
+    path: '/realtime-chat',
   },
 ];
 
@@ -35,7 +36,7 @@ const CustomContainer = styled(Container)(({ theme }) => ({
   },
 }));
 
-const PickAPartner = () => {
+const PickAPartner: FC = () => {
   useCheckAuthentication();
 
   return (
@@ -47,7 +48,7 @@ const PickAPartner = () => {
           justifyContent: 'center',
           display: 'flex',
           textAlign: 'center',
-          backgroundColor: '#F8F8F8',
+          backgroundColor: VANILLA_WHITE,
         }}
       >
         <Box sx={{ position: 'absolute', paddingTop: '100px' }}>

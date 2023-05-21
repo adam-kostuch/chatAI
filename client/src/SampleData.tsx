@@ -1,12 +1,12 @@
-import React from 'react';
+import { FC, ChangeEvent, useState } from 'react';
 import useOpenAI from './hooks/useOpenAI';
 
-const SampleData: React.FC = () => {
+const SampleData: FC = () => {
   // openai
-  const [message, setMessage] = React.useState('');
-  const [openaiResponse, setOpenaiResponse] = React.useState('');
+  const [message, setMessage] = useState('');
+  const [openaiResponse, setOpenaiResponse] = useState('');
 
-  const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const { data } = useOpenAI(message);

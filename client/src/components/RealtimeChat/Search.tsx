@@ -1,5 +1,4 @@
-import * as React from 'react';
-
+import { FC, useState } from 'react';
 import {
   collection,
   getDocs,
@@ -8,7 +7,6 @@ import {
   DocumentData,
 } from 'firebase/firestore';
 import { useChattieContext } from '../../ChattieContext';
-
 import {
   styled,
   List,
@@ -20,11 +18,12 @@ import {
   Divider,
   TextField,
 } from '@mui/material';
+import { BLAZE_ORANGE, SOFTEN_ORANGE } from '@chattie/colors';
 
 const CustomBorderTextField = styled(TextField)({
   '& label': {
     '&.Mui-focused': {
-      color: '#FF6700',
+      color: BLAZE_ORANGE,
     },
   },
   '.MuiInputLabel-root': {
@@ -38,18 +37,18 @@ const CustomBorderTextField = styled(TextField)({
       borderColor: 'white',
     },
     '&:hover fieldset': {
-      borderColor: '#FCCAA9',
+      borderColor: SOFTEN_ORANGE,
     },
     '&.Mui-focused fieldset': {
-      borderColor: '#FF6700',
+      borderColor: BLAZE_ORANGE,
     },
   },
 });
 
-const Search = () => {
-  const [username, setUsername] = React.useState('');
-  const [user, setUser] = React.useState<DocumentData>();
-  const [err, setErr] = React.useState(false);
+const Search: FC = () => {
+  const [username, setUsername] = useState('');
+  const [user, setUser] = useState<DocumentData>();
+  const [err, setErr] = useState(false);
 
   const { db } = useChattieContext();
 
