@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { createContext, useContext } from 'react';
 import ChattieApiClient from './clients/ChattieApiClient';
 import { initializeApp } from 'firebase/app';
 import { Auth, getAuth } from 'firebase/auth';
@@ -20,7 +20,7 @@ export interface ChattieContextProps {
   db: Firestore;
 }
 
-export const ChattieContext = React.createContext<ChattieContextProps>(
+export const ChattieContext = createContext<ChattieContextProps>(
   {} as ChattieContextProps
 );
 

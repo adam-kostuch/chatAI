@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { styled, Container, Box, Typography } from '@mui/material';
 
 const AboutUsContainer = styled(Container)(({ theme }) => ({
@@ -18,9 +18,7 @@ const AboutUsContainer = styled(Container)(({ theme }) => ({
 const AboutUsContent = styled(Box)(({ theme }) => ({
   display: 'flex',
   color: 'white',
-  // position: 'absolute',
   flexDirection: 'column',
-  // justifyContent: 'center',
   alignItems: 'center',
   textAlign: 'center',
   maxWidth: 895,
@@ -33,7 +31,7 @@ const AboutUsContent = styled(Box)(({ theme }) => ({
 
 const BotDesc = ['innovative bot', 'using advanced', 'AI technology'];
 
-const AboutUsCenter = () => {
+const AboutUsCenter: FC = () => {
   return (
     <AboutUsContainer className="main" maxWidth={false} disableGutters>
       <AboutUsContent>

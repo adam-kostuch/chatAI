@@ -1,14 +1,15 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import { BLAZE_ORANGE, APPROX_BLUE, VANILLA_WHITE } from '@chattie/colors';
 
-const ClientsOpinions = () => {
+const ClientsOpinions: FC = () => {
   return (
     <Container
       className="clients-opinions container"
-      sx={{ color: 'white', position: 'relative' }}
+      sx={{ color: 'white', height: '60vh', position: 'relative' }}
     >
       <Box
         className="styled card"
@@ -16,7 +17,7 @@ const ClientsOpinions = () => {
           margin: '150px auto 50px auto',
           width: '380px',
           height: '450px',
-          backgroundColor: '#FF6700',
+          backgroundColor: BLAZE_ORANGE,
           borderRadius: '20px',
           position: 'relative',
         }}
@@ -42,14 +43,14 @@ const ClientsOpinions = () => {
               borderRadius: '20px',
               marginTop: '20px',
               marginBottom: '20px',
-              width: '327px',
+              width: '90&',
               height: '227px',
               padding: '20px',
             }}
           >
             <Typography className="text-post" sx={{ fontSize: '40px' }}>
-              How Do <span style={{ color: '#FF6700' }}>YOU</span> Feel About
-              <span style={{ color: '#FF6700' }}> Chattie</span>?
+              How Do <span style={{ color: BLAZE_ORANGE }}>YOU</span> Feel About
+              <span style={{ color: BLAZE_ORANGE }}> Chattie</span>?
             </Typography>
           </Box>
           <Stack direction="row" spacing={2}>
@@ -70,29 +71,28 @@ const ClientsOpinions = () => {
       </Box>
       <Box
         className="circle box"
-        sx={{ width: '90%', position: 'absolute', zIndex: 10, top: 0 }}
+        sx={{ position: 'absolute', zIndex: 10, top: 0 }}
       >
         <Stack
           direction="row"
           className="comment-1"
           spacing={2}
-          sx={{ position: 'relative', top: 0, left: 15, alignItems: 'center' }}
+          sx={{ position: 'relative', top: 0, left: -30, alignItems: 'center' }}
         >
           <span
             className="circle avatar-1"
             style={{
               width: '120px',
               height: '120px',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: VANILLA_WHITE,
               borderRadius: '50%',
             }}
           ></span>
           <Box
             className="comment-text box"
             sx={{
-              backgroundColor: '#0000F8',
+              backgroundColor: APPROX_BLUE,
               width: '250px',
-              height: '120px',
               borderRadius: '20px',
               color: 'white',
               padding: 3,
@@ -123,14 +123,14 @@ const ClientsOpinions = () => {
             style={{
               width: '120px',
               height: '120px',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: VANILLA_WHITE,
               borderRadius: '50%',
             }}
           ></span>
           <Box
             className="comment-text box"
             sx={{
-              backgroundColor: '#0000F8',
+              backgroundColor: APPROX_BLUE,
               width: '180px',
               height: '100px',
               borderRadius: '20px',
@@ -162,14 +162,14 @@ const ClientsOpinions = () => {
             style={{
               width: '120px',
               height: '120px',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: VANILLA_WHITE,
               borderRadius: '50%',
             }}
           ></span>
           <Box
             className="comment-text box"
             sx={{
-              backgroundColor: '#0000F8',
+              backgroundColor: APPROX_BLUE,
               width: '250px',
               height: '70px',
               borderRadius: '20px',
@@ -199,7 +199,7 @@ const ClientsOpinions = () => {
           <Box
             className="comment-text box"
             sx={{
-              backgroundColor: '#0000F8',
+              backgroundColor: APPROX_BLUE,
               width: '250px',
               height: '60px',
               borderRadius: '20px',
@@ -219,7 +219,7 @@ const ClientsOpinions = () => {
             style={{
               width: '120px',
               height: '120px',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: VANILLA_WHITE,
               borderRadius: '50%',
             }}
           ></span>
@@ -238,7 +238,7 @@ const ClientsOpinions = () => {
           <Box
             className="comment-text box"
             sx={{
-              backgroundColor: '#0000F8',
+              backgroundColor: APPROX_BLUE,
               width: '180px',
               height: '100px',
               borderRadius: '20px',
@@ -258,7 +258,7 @@ const ClientsOpinions = () => {
             style={{
               width: '120px',
               height: '120px',
-              backgroundColor: '#FFFFFF',
+              backgroundColor: VANILLA_WHITE,
               borderRadius: '50%',
             }}
           ></span>

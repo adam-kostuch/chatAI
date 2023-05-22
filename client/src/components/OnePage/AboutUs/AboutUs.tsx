@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { styled, Container, Box, Typography } from '@mui/material';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { BLAZE_ORANGE } from '@chattie/colors';
@@ -43,7 +43,7 @@ const aboutUsTexts2 = [
   'Customizable settings make Chattie a personalized experience tailored to your preferences',
 ];
 
-const AboutUs = () => {
+const AboutUs: FC = () => {
   return (
     <AboutUsContainer className="main" maxWidth={false} disableGutters>
       <AboutUsContent>

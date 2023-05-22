@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -27,9 +27,8 @@ import {
 import { LoadingButton } from '@mui/lab';
 import { useCookies } from 'react-cookie';
 import { COOKIE_TOKEN } from '../../types';
-import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
-
-// import './TextScrolling.js';
+import { useCheckAuthentication } from 'src/hooks';
+import { BLAZE_ORANGE, WOODSMOKE, VANILLA_WHITE } from '@chattie/colors';
 
 const CustomBorderTextField = styled(TextField)({
   '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:before': {
@@ -45,7 +44,7 @@ const CustomBorderTextField = styled(TextField)({
     color: 'white',
   },
   '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:after': {
-    borderBottom: '1px solid #FF6700',
+    borderBottom: `1px solid ${BLAZE_ORANGE}`,
   },
   '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': {
     color: 'white',
@@ -54,13 +53,14 @@ const CustomBorderTextField = styled(TextField)({
 
 const CustomLoadingButton = styled(LoadingButton)({
   backgroundColor: 'white',
-  color: '#011222',
+  color: WOODSMOKE,
   '&:hover': {
-    backgroundColor: '#FF6700',
+    backgroundColor: BLAZE_ORANGE,
     color: 'white',
   },
   '&:disabled': {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: VANILLA_WHITE,
+    opacity: 0.5,
     color: 'white',
   },
 });
@@ -192,7 +192,7 @@ const LoginPage: FC = () => {
           sm={4}
           md={6}
           sx={{
-            backgroundColor: '#FF6700',
+            backgroundColor: BLAZE_ORANGE,
             width: '50%',
           }}
         >
@@ -204,7 +204,7 @@ const LoginPage: FC = () => {
           component="main"
           className="containter-text"
           sx={{
-            backgroundColor: '#011222',
+            backgroundColor: WOODSMOKE,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -227,7 +227,7 @@ const LoginPage: FC = () => {
           >
             <Typography
               component="h1"
-              sx={{ color: '#FF6700', fontSize: '40px' }}
+              sx={{ color: BLAZE_ORANGE, fontSize: '40px' }}
             >
               Welcome to the Chattie
             </Typography>
@@ -259,7 +259,7 @@ const LoginPage: FC = () => {
                     disableRipple
                     disableFocusRipple
                     sx={{
-                      color: '#FF6700',
+                      color: BLAZE_ORANGE,
                       '&:hover': {
                         backgroundColor: 'rgb(255, 103, 0, 0.05)',
                       },
@@ -341,7 +341,7 @@ const LoginPage: FC = () => {
                     disableFocusRipple
                     onClick={handleOpen}
                     sx={{
-                      color: '#FF6700',
+                      color: BLAZE_ORANGE,
                       '&:hover': { backgroundColor: 'rgb(255, 103, 0, 0.05)' },
                     }}
                   >
@@ -460,9 +460,10 @@ const ForgotPasswordModal: FC<{
             disableRipple
             disableFocusRipple
             sx={{
-              color: '#FF6700',
+              color: BLAZE_ORANGE,
               '&:hover': {
-                backgroundColor: 'rgb(255, 103, 0, 0.05)',
+                backgroundColor: WOODSMOKE,
+                opacity: 0.05,
               },
             }}
           >
@@ -475,7 +476,7 @@ const ForgotPasswordModal: FC<{
             disableFocusRipple
             loading={isLoading}
             sx={{
-              backgroundColor: '#FF6700',
+              backgroundColor: BLAZE_ORANGE,
               ':hover': {
                 bgcolor: 'black',
                 color: 'white',

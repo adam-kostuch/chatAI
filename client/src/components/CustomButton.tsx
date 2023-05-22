@@ -1,15 +1,30 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Button } from '@mui/material';
 import { signOut } from '@firebase/auth';
 import { useCookies } from 'react-cookie';
 import { useChattieContext } from 'src/ChattieContext';
 import { COOKIE_TOKEN } from 'src/types';
+import { Auth } from 'firebase/auth';
 
 const assertUnreachable = (_: never): never => {
   throw new Error(`Unexpected value: ${_}`);
 };
 
 type ButtonActions = 'LOG OUT' | 'SIGN UP' | 'SIGN IN';
+
+export const handleSignOut = async ({
+  auth,
+  removeCookie,
+}: {
+  auth: Auth;
+  removeCookie: (name: string, options?: any) => void;
+}) => {
+  await signOut(auth)
+    .then(() => removeCookie(COOKIE_TOKEN))
+    .catch((error) => {
+      console.error("Couldn't sign out user!", error);
+    });
+};
 
 interface RedirectButtonProps {
   color: string;
@@ -34,20 +49,12 @@ const RedirectButton: FC<RedirectButtonProps> = ({
         handleSignUp();
         break;
       case 'LOG OUT':
-        handleSignOut();
+        handleSignOut({ auth, removeCookie });
         break;
       default:
         assertUnreachable(buttonLabel);
         break;
     }
-  };
-
-  const handleSignOut = async () => {
-    await signOut(auth)
-      .then(() => removeCookie(COOKIE_TOKEN))
-      .catch((error) => {
-        console.error("Couldn't sign out user!", error);
-      });
   };
 
   const handleSignUp = () => {

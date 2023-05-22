@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { Box, Container, styled } from '@mui/material';
-import React from 'react';
 import FooterData from './FooterData';
+import { BLAZE_ORANGE } from '@chattie/colors';
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
@@ -10,7 +11,7 @@ const CustomContainer = styled(Container)(({ theme }) => ({
 
 const CustomBoxItems = styled(Box)(({ theme }) => ({
   height: '400px',
-  backgroundColor: '#FF6700',
+  backgroundColor: BLAZE_ORANGE,
   position: 'relative',
   borderRadius: '20px',
   display: 'flex',
@@ -61,7 +62,7 @@ const CopyrightContainer = styled(Container)(({ theme }) => ({
   justifyContent: 'space-between',
   marginBottom: '20px',
   marginTop: '20px',
-  color: '#FF6700',
+  color: BLAZE_ORANGE,
   fontWeight: 'bold',
   [theme.breakpoints.down('md')]: {
     alignItems: 'flex-start',
@@ -88,46 +89,44 @@ const CustomTermsTypography = styled('p')(({ theme }) => ({
   },
 }));
 
-const Footer = () => {
-  return (
-    <Container
-      className="dark-container"
-      sx={{ paddingTop: '120px', paddingBottom: '10px', position: 'relative' }}
-    >
-      <CustomContainer className="footerContainer">
-        <CustomBoxItems className="footer-items">
-          <SloganBox className="slogan">
-            <h3>
-              Hello. We are CHATTIE,
-              <br />
-              connecting people with others
-              <br />
-              and with robots.
-            </h3>
-          </SloganBox>
-          <GroupsBox className="groups">
-            {FooterData.map((data, idx) => (
-              <CustomBoxGroup className={data.className} key={data.name + idx}>
-                <h4>{data.name}</h4>
-                <div style={{ fontSize: '25px' }}>
-                  {data.subnames.map((subname, idx) => (
-                    <p key={subname + idx}>{subname}</p>
-                  ))}
-                </div>
-              </CustomBoxGroup>
-            ))}
-          </GroupsBox>
-        </CustomBoxItems>
-      </CustomContainer>
-      <CopyrightContainer className="copyright-container">
-        <p>&copy; Chattie. All rights reserved.</p>
-        <CustomTermsBox>
-          <CustomTermsTypography>Privacy policy</CustomTermsTypography>
-          <CustomTermsTypography>Terms and services</CustomTermsTypography>
-        </CustomTermsBox>
-      </CopyrightContainer>
-    </Container>
-  );
-};
+const Footer: FC = () => (
+  <Container
+    className="dark-container"
+    sx={{ paddingTop: '120px', paddingBottom: '10px', position: 'relative' }}
+  >
+    <CustomContainer className="footerContainer">
+      <CustomBoxItems className="footer-items">
+        <SloganBox className="slogan">
+          <h3>
+            Hello. We are CHATTIE,
+            <br />
+            connecting people with others
+            <br />
+            and with robots.
+          </h3>
+        </SloganBox>
+        <GroupsBox className="groups">
+          {FooterData.map((data, idx) => (
+            <CustomBoxGroup className={data.className} key={data.name + idx}>
+              <h4>{data.name}</h4>
+              <div style={{ fontSize: '25px' }}>
+                {data.subnames.map((subname, idx) => (
+                  <p key={subname + idx}>{subname}</p>
+                ))}
+              </div>
+            </CustomBoxGroup>
+          ))}
+        </GroupsBox>
+      </CustomBoxItems>
+    </CustomContainer>
+    <CopyrightContainer className="copyright-container">
+      <p>&copy; Chattie. All rights reserved.</p>
+      <CustomTermsBox>
+        <CustomTermsTypography>Privacy policy</CustomTermsTypography>
+        <CustomTermsTypography>Terms and services</CustomTermsTypography>
+      </CustomTermsBox>
+    </CopyrightContainer>
+  </Container>
+);
 
 export default Footer;
