@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useQuery } from 'react-query';
 import { useChattieContext } from '../../ChattieContext';
 import { Link } from 'react-router-dom';
+import { WOODSMOKE, BLAZE_ORANGE, MIDNIGHT_BLACK } from '@chattie/colors';
 
 import {
   styled,
@@ -23,7 +24,6 @@ import HomeNavbar from '../HomeNavbar';
 
 import { addDoc, collection } from 'firebase/firestore';
 import useCheckAuthentication from 'src/hooks/useCheckAuthentication';
-// import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 const CustomBorderTextField = styled(TextField)({
   '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:before': {
@@ -52,7 +52,7 @@ const CustomLoadingButton = styled(LoadingButton)({
   backgroundColor: 'white',
   color: '#011222',
   '&:hover': {
-    backgroundColor: '#FF6700',
+    backgroundColor: BLAZE_ORANGE,
     color: 'white',
   },
   '&:disabled': {
@@ -148,22 +148,23 @@ const RegisterPage: FC = () => {
       >
         <Grid
           item
+          className="scrolling text grid"
           xs={false}
           sm={4}
           md={6}
           sx={{
-            backgroundColor: 'black',
+            backgroundColor: WOODSMOKE,
             width: '50%',
           }}
         >
-          <Typography variant="h4">Welcome!</Typography>
+          <Typography sx={{ color: 'white' }}>There will be sth</Typography>
         </Grid>
         <Container
           maxWidth={false}
           component="main"
           className="containter-text"
           sx={{
-            backgroundColor: '#011222',
+            backgroundColor: MIDNIGHT_BLACK,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -174,16 +175,21 @@ const RegisterPage: FC = () => {
           }}
         >
           <Box
-            className="text"
+            className="box texts custom-width"
             sx={{
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               textAlign: 'left',
               color: 'white',
+              maxWidth: '32rem',
             }}
           >
-            <Typography component="h1" variant="h2" sx={{ color: '#FF6700' }}>
+            <Typography
+              component="h1"
+              variant="h2"
+              sx={{ color: BLAZE_ORANGE }}
+            >
               Register
             </Typography>
             <Box
@@ -263,7 +269,7 @@ const RegisterPage: FC = () => {
                         sx={{
                           color: 'white',
                           '&.Mui-checked': {
-                            color: '#FF6700',
+                            color: BLAZE_ORANGE,
                           },
                         }}
                       />
@@ -292,7 +298,7 @@ const RegisterPage: FC = () => {
               >
                 <Typography>Already have an account? &nbsp;</Typography>
                 <Link to="/login" style={{ textDecoration: 'none' }}>
-                  <Typography sx={{ color: '#FF6700' }}>Sign in</Typography>
+                  <Typography sx={{ color: BLAZE_ORANGE }}>Sign in</Typography>
                 </Link>
               </Grid>
             </Box>

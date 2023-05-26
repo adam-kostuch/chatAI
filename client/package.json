@@ -7,6 +7,7 @@
     "@chattie/colors": "file:config/colors",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@motionone/utils": "^10.15.1",
     "@mui/icons-material": "^5.11.11",
     "@mui/lab": "^5.0.0-alpha.128",
     "@mui/material": "^5.11.12",
@@ -37,12 +38,12 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "eslint": "^8.37.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
     "prettier": "^2.8.4"
   },
   "browserslist": {
