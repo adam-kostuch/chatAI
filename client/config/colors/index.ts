@@ -8,3 +8,7 @@ export const CHARADE = '#272731';
 export const NEW_MIDNIGHT_BLUE = '#0000A4';
 export const BASTILLE = '#2A2A34';
 export const WOODSMOKE = '#131318';
+// NEW PALLETTE
+export const LIGHT_GRAYISH_BLUE = '#BDD4E7';
+export const DARK_GRAYISH_BLUE = '#8693ab';
+export const GRAYISH_BLUE = '#AAB9CF';

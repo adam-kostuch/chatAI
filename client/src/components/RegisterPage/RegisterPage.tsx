@@ -8,7 +8,6 @@ import {
   styled,
   Box,
   Checkbox,
-  Container,
   FormControlLabel,
   Grid,
   TextField,
@@ -17,29 +16,35 @@ import {
   Alert,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import HomeNavbar from '../HomeNavbar';
 import { useCheckAuthentication } from 'src/hooks';
 import { addDoc, collection } from 'firebase/firestore';
-import { BLAZE_ORANGE, VANILLA_WHITE, WOODSMOKE } from '@chattie/colors';
+import {
+  APPROX_BLUE,
+  VANILLA_WHITE,
+  WOODSMOKE,
+  GUN_POWDER,
+  DARK_GRAYISH_BLUE,
+} from '@chattie/colors';
+import { LIGHT_GRAYISH_BLUE } from '@chattie/colors';
 
 const CustomBorderTextField = styled(TextField)({
   '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:before': {
-    borderBottom: ' 1px solid white',
+    borderBottom: ' 1px solid ${DARK_GRAYISH_BLUE}',
   },
   '& .css-1x51dt5-MuiInputBase-input-MuiInput-input': {
-    color: 'white',
+    color: GUN_POWDER,
   },
   '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-    color: 'white',
+    color: APPROX_BLUE,
   },
   '& .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root': {
-    color: 'white',
+    color: APPROX_BLUE,
   },
   '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:after': {
-    borderBottom: `1px solid ${BLAZE_ORANGE}`,
+    borderBottom: `1px solid ${APPROX_BLUE}`,
   },
   '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': {
-    color: 'white',
+    color: APPROX_BLUE,
   },
 });
 
@@ -49,7 +54,7 @@ const CustomLoadingButton = styled(LoadingButton)({
   backgroundColor: 'white',
   color: WOODSMOKE,
   '&:hover': {
-    backgroundColor: BLAZE_ORANGE,
+    backgroundColor: APPROX_BLUE,
     color: 'white',
   },
   '&:disabled': {
@@ -138,168 +143,139 @@ const RegisterPage: FC = () => {
           User with given email address or username already exists!
         </Alert>
       </Snackbar>
-      <HomeNavbar />
       <Grid
         container
         className="grid-register full-width"
         sx={{ height: '100vh', width: '100%' }}
       >
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={6}
+        <Box
+          className="text"
           sx={{
-            backgroundColor: 'black',
-            width: '50%',
-          }}
-        >
-          <Typography variant="h4">Welcome!</Typography>
-        </Grid>
-        <Container
-          maxWidth={false}
-          component="main"
-          className="containter-text"
-          sx={{
-            backgroundColor: WOODSMOKE,
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
-            alignItems: 'center',
-            heigth: '100%',
-            width: '50%',
-            position: 'relative',
-            margin: 0,
+            textAlign: 'left',
+            color: 'white',
           }}
         >
+          <Typography component="h1" variant="h2" sx={{ color: APPROX_BLUE }}>
+            Register
+          </Typography>
           <Box
-            className="text"
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              textAlign: 'left',
-              color: 'white',
-            }}
+            component="form"
+            onSubmit={formik.handleSubmit}
+            noValidate
+            sx={{ mt: 3 }}
           >
-            <Typography
-              component="h1"
-              variant="h2"
-              sx={{ color: BLAZE_ORANGE }}
-            >
-              Register
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={formik.handleSubmit}
-              noValidate
-              sx={{ mt: 3 }}
-            >
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <CustomBorderTextField
-                    autoComplete="given-name"
-                    name="username"
-                    variant="standard"
-                    required
-                    fullWidth
-                    id="username"
-                    label="Username"
-                    autoFocus
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.username}
-                  />
-                  {formik.touched.username && formik.errors.username && (
-                    <Box color="red" fontSize={14} pl={2}>
-                      {formik.errors.username}
-                    </Box>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  <CustomBorderTextField
-                    required
-                    variant="standard"
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.email}
-                  />
-                  {formik.touched.email && formik.errors.email && (
-                    <Box color="red" fontSize={14} pl={2}>
-                      {formik.errors.email}
-                    </Box>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  <CustomBorderTextField
-                    required
-                    variant="standard"
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.password}
-                  />
-                  {formik.touched.password && formik.errors.password && (
-                    <Box color="red" fontSize={14} pl={2}>
-                      {formik.errors.password}
-                    </Box>
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        value="allowExtraEmails"
-                        onChange={() => {
-                          setPolicyTerms((prevValue) => !prevValue);
-                        }}
-                        sx={{
-                          color: 'white',
-                          '&.Mui-checked': {
-                            color: BLAZE_ORANGE,
-                          },
-                        }}
-                      />
-                    }
-                    label="I’ve read and agreed to Terms & Conditions"
-                  />
-                </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <CustomBorderTextField
+                  autoComplete="given-name"
+                  name="username"
+                  variant="standard"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  autoFocus
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.username}
+                />
+                {formik.touched.username && formik.errors.username && (
+                  <Box color="red" fontSize={14} pl={2}>
+                    {formik.errors.username}
+                  </Box>
+                )}
               </Grid>
-              <CustomLoadingButton
-                type="submit"
-                fullWidth
-                variant="contained"
-                loading={isLoading}
-                disabled={
-                  Object.keys(formik.values).length === 0 ||
-                  Object.keys(formik.errors).length !== 0 ||
-                  !policyTerms
-                }
-              >
-                CREATE AN ACCOUNT
-              </CustomLoadingButton>
-              <Grid
-                container
-                className="grid sign-in-link"
-                sx={{ display: 'flex' }}
-              >
-                <Typography>Already have an account? &nbsp;</Typography>
-                <Link to="/login" style={{ textDecoration: 'none' }}>
-                  <Typography sx={{ color: BLAZE_ORANGE }}>Sign in</Typography>
-                </Link>
+              <Grid item xs={12}>
+                <CustomBorderTextField
+                  required
+                  variant="standard"
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                />
+                {formik.touched.email && formik.errors.email && (
+                  <Box color="red" fontSize={14} pl={2}>
+                    {formik.errors.email}
+                  </Box>
+                )}
               </Grid>
-            </Box>
+              <Grid item xs={12}>
+                <CustomBorderTextField
+                  required
+                  variant="standard"
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
+                {formik.touched.password && formik.errors.password && (
+                  <Box color="red" fontSize={14} pl={2}>
+                    {formik.errors.password}
+                  </Box>
+                )}
+              </Grid>
+              <Grid item xs={12} sx={{ color: LIGHT_GRAYISH_BLUE }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      value="allowExtraEmails"
+                      onChange={() => {
+                        setPolicyTerms((prevValue) => !prevValue);
+                      }}
+                      sx={{
+                        color: LIGHT_GRAYISH_BLUE,
+                        '&.Mui-checked': {
+                          color: DARK_GRAYISH_BLUE,
+                        },
+                      }}
+                    />
+                  }
+                  label="I’ve read and agreed to Terms & Conditions"
+                />
+              </Grid>
+            </Grid>
+            <CustomLoadingButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              loading={isLoading}
+              disabled={
+                Object.keys(formik.values).length === 0 ||
+                Object.keys(formik.errors).length !== 0 ||
+                !policyTerms
+              }
+            >
+              CREATE AN ACCOUNT
+            </CustomLoadingButton>
+            <Grid
+              container
+              className="grid sign-in-link"
+              sx={{
+                display: 'flex',
+                color: DARK_GRAYISH_BLUE,
+                gap: '20px',
+              }}
+            >
+              <Typography>Already have an account? &nbsp;</Typography>
+              <Link to="/login" style={{ textDecoration: 'none' }}>
+                <Typography sx={{ color: APPROX_BLUE }}>Sign In</Typography>
+              </Link>
+            </Grid>
           </Box>
-        </Container>
+        </Box>
       </Grid>
     </>
   );
