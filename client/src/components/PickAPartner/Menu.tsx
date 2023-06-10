@@ -22,9 +22,9 @@ const Menu: FC = () => (
         </Typography>
         <Flex ml={10}>
           <CustomButton
-            backgroundColor="black"
+            borderColor="black"
             color={BLAZE_ORANGE}
-            buttonLabel="LOG OUT"
+            buttonLabel="Log Out"
           />
         </Flex>
       </Toolbar>

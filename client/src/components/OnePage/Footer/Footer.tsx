@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Box, Container, styled } from '@mui/material';
 import FooterData from './FooterData';
-import { BLAZE_ORANGE } from '@chattie/colors';
+import { LIGHT_GRAYISH_BLUE, GRAYISH_BLUE } from '@chattie/colors';
 
 const CustomContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
@@ -11,7 +11,7 @@ const CustomContainer = styled(Container)(({ theme }) => ({
 
 const CustomBoxItems = styled(Box)(({ theme }) => ({
   height: '400px',
-  backgroundColor: BLAZE_ORANGE,
+  backgroundColor: LIGHT_GRAYISH_BLUE,
   position: 'relative',
   borderRadius: '20px',
   display: 'flex',
@@ -62,7 +62,7 @@ const CopyrightContainer = styled(Container)(({ theme }) => ({
   justifyContent: 'space-between',
   marginBottom: '20px',
   marginTop: '20px',
-  color: BLAZE_ORANGE,
+  color: GRAYISH_BLUE,
   fontWeight: 'bold',
   [theme.breakpoints.down('md')]: {
     alignItems: 'flex-start',
