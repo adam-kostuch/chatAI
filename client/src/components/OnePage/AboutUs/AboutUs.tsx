@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { styled, Container, Box, Typography } from '@mui/material';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import { BLAZE_ORANGE } from '@chattie/colors';
+import { LIGHT_GRAYISH_BLUE } from '@chattie/colors';
 
 const AboutUsContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -63,11 +63,15 @@ const AboutUs: FC = () => {
         }}
       >
         <ChatBubbleIcon
-          sx={{ color: BLAZE_ORANGE, fontSize: '80px', marginBottom: '7px' }}
+          sx={{
+            color: LIGHT_GRAYISH_BLUE,
+            fontSize: '80px',
+            marginBottom: '7px',
+          }}
         />
         <Typography
           variant="h3"
-          sx={{ color: BLAZE_ORANGE, marginBottom: '10px' }}
+          sx={{ color: LIGHT_GRAYISH_BLUE, marginBottom: '10px' }}
         >
           Chattie is perfect
         </Typography>
@@ -91,11 +95,15 @@ const AboutUs: FC = () => {
         }}
       >
         <ChatBubbleIcon
-          sx={{ color: BLAZE_ORANGE, fontSize: '80px', marginBottom: '7px' }}
+          sx={{
+            color: LIGHT_GRAYISH_BLUE,
+            fontSize: '80px',
+            marginBottom: '7px',
+          }}
         />
         <Typography
           variant="h3"
-          sx={{ color: BLAZE_ORANGE, marginBottom: '10px' }}
+          sx={{ color: LIGHT_GRAYISH_BLUE, marginBottom: '10px' }}
         >
           Personalized app
         </Typography>

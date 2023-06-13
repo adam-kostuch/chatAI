@@ -10,7 +10,7 @@ const assertUnreachable = (_: never): never => {
   throw new Error(`Unexpected value: ${_}`);
 };
 
-type ButtonActions = 'LOG OUT' | 'SIGN UP' | 'SIGN IN';
+type ButtonActions = 'Log Out' | 'Sign Up' | 'Sign In';
 
 export const handleSignOut = async (
   auth: Auth,
@@ -25,13 +25,13 @@ export const handleSignOut = async (
 
 interface RedirectButtonProps {
   color: string;
-  backgroundColor: string;
+  borderColor: string;
   buttonLabel: ButtonActions;
 }
 
 const RedirectButton: FC<RedirectButtonProps> = ({
   color,
-  backgroundColor,
+  borderColor,
   buttonLabel,
 }) => {
   const { auth } = useChattieContext();
@@ -39,13 +39,13 @@ const RedirectButton: FC<RedirectButtonProps> = ({
 
   const handleRedirect = () => {
     switch (buttonLabel) {
-      case 'SIGN IN':
+      case 'Sign In':
         handleSignIn();
         break;
-      case 'SIGN UP':
+      case 'Sign Up':
         handleSignUp();
         break;
-      case 'LOG OUT':
+      case 'Log Out':
         handleSignOut(auth, removeCookie);
         break;
       default:
@@ -65,17 +65,17 @@ const RedirectButton: FC<RedirectButtonProps> = ({
   return (
     <Button
       className={`${buttonLabel.replace(/\s+/g, '-').toLowerCase()}-button`}
-      variant={buttonLabel === 'SIGN IN' ? 'text' : 'contained'}
+      variant={buttonLabel === 'Sign In' ? 'text' : 'outlined'}
       onClick={() => handleRedirect()}
       sx={{
-        color,
-        backgroundColor,
+        color: color,
+        backgroundColor: borderColor,
         fontSize: '1rem',
         fontWeight: '700',
         borderRadius: '10px',
         '&:hover': {
-          backgroundColor: color,
-          color: backgroundColor,
+          borderColor: borderColor,
+          color: borderColor,
         },
       }}
     >

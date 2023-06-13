@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import CustomButton from '../../shared/components/RedirectButton';
+import RedirectButton from '../../shared/components/RedirectButton';
 import { AppBar, CssBaseline, Toolbar, Typography } from '@mui/material';
 import { Flex } from 'src/shared/components';
 import { BLAZE_ORANGE } from '@chattie/colors';
@@ -21,10 +21,10 @@ const Menu: FC = () => (
           Chattie
         </Typography>
         <Flex ml={10}>
-          <CustomButton
-            backgroundColor="black"
+          <RedirectButton
+            borderColor="black"
             color={BLAZE_ORANGE}
-            buttonLabel="LOG OUT"
+            buttonLabel="Log Out"
           />
         </Flex>
       </Toolbar>

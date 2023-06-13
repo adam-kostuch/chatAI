@@ -1,15 +1,15 @@
 import { FC } from 'react';
 import { AppBar, Box, Button, Stack, Toolbar, Typography } from '@mui/material';
 import NavbarData from './NavbarData';
-import CustomButton from '../../../shared/components/RedirectButton';
-import { WOODSMOKE, VANILLA_WHITE, BLAZE_ORANGE } from '@chattie/colors';
+import RedirectButton from '../../../shared/components/RedirectButton';
+import { WOODSMOKE, APPROX_BLUE, LIGHT_GRAYISH_BLUE } from '@chattie/colors';
 
 const MenuNavbar: FC = () => (
   <AppBar
     position="fixed"
     sx={{ mt: 2, mr: '5%', width: '90%', borderRadius: '10px' }}
   >
-    <Toolbar sx={{ bgcolor: BLAZE_ORANGE, borderRadius: '10px' }}>
+    <Toolbar sx={{ bgcolor: LIGHT_GRAYISH_BLUE, borderRadius: '10px' }}>
       <Box
         width="100%"
         display="flex"
@@ -17,7 +17,7 @@ const MenuNavbar: FC = () => (
         justifyContent="space-between"
         className="header menu-navbar"
       >
-        <Button href="/#" variant="text" sx={{ color: VANILLA_WHITE }}>
+        <Button href="/#" variant="text" sx={{ color: APPROX_BLUE }}>
           <Typography variant="h6" sx={{ fontWeight: '700' }}>
             CHATTIE
           </Typography>
@@ -26,22 +26,22 @@ const MenuNavbar: FC = () => (
           {NavbarData.map(({ title }, idx) => (
             <Button
               key={`${title}-${idx}`}
-              sx={{ color: VANILLA_WHITE, fontSize: '1rem' }}
+              sx={{ color: WOODSMOKE, fontSize: '1rem' }}
             >
               {title}
             </Button>
           ))}
         </Box>
         <Stack direction="row" gap={2}>
-          <CustomButton
-            backgroundColor={BLAZE_ORANGE}
-            color={VANILLA_WHITE}
-            buttonLabel="SIGN IN"
+          <RedirectButton
+            borderColor=""
+            color={APPROX_BLUE}
+            buttonLabel="Sign In"
           />
-          <CustomButton
-            backgroundColor={WOODSMOKE}
-            color={BLAZE_ORANGE}
-            buttonLabel="SIGN UP"
+          <RedirectButton
+            borderColor={APPROX_BLUE}
+            color={LIGHT_GRAYISH_BLUE}
+            buttonLabel="Sign Up"
           />
         </Stack>
       </Box>

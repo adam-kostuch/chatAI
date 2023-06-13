@@ -9,6 +9,7 @@ import RegisterPage from './components/RegisterPage/RegisterPage';
 import PickAPartner from './components/PickAPartner/PickAPartner';
 import Chat from './components/Chat/Chat';
 import SampleData from './SampleData';
+import Authentication from './components/Authentication/Authentication';
 
 const client = new QueryClient();
 
@@ -20,8 +21,14 @@ const App: FC = () => (
           <Routes>
             <Route path="/sample" element={<SampleData />} />
             <Route path="*" element={<OnePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route
+              path="/login"
+              element={<Authentication form={<LoginPage />} />}
+            />
+            <Route
+              path="/register"
+              element={<Authentication form={<RegisterPage />} />}
+            />
             <Route path="/pick-a-partner" element={<PickAPartner />} />
             <Route path="/chat" element={<Chat />} />
           </Routes>

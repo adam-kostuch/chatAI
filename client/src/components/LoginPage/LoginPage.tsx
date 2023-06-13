@@ -12,7 +12,6 @@ import {
   styled,
   Box,
   Button,
-  Container,
   Grid,
   TextField,
   Typography,
@@ -28,26 +27,33 @@ import { LoadingButton } from '@mui/lab';
 import { useCookies } from 'react-cookie';
 import { COOKIE_TOKEN } from '../../types';
 import { useCheckAuthentication } from 'src/hooks';
-import { BLAZE_ORANGE, WOODSMOKE, VANILLA_WHITE } from '@chattie/colors';
+import {
+  APPROX_BLUE,
+  WOODSMOKE,
+  DARK_GRAYISH_BLUE,
+  NEW_MIDNIGHT_BLUE,
+  GUN_POWDER,
+} from '@chattie/colors';
+import './LoginPage.css';
 
 const CustomBorderTextField = styled(TextField)({
   '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:before': {
-    borderBottom: ' 1px solid white',
+    borderBottom: ' 1px solid ${DARK_GRAYISH_BLUE}',
   },
   '& .css-1x51dt5-MuiInputBase-input-MuiInput-input': {
-    color: 'white',
+    color: GUN_POWDER,
   },
   '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root': {
-    color: 'white',
+    color: APPROX_BLUE,
   },
   '& .css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root': {
-    color: 'white',
+    color: APPROX_BLUE,
   },
   '& .css-l4u8b9-MuiInputBase-root-MuiInput-root:after': {
-    borderBottom: `1px solid ${BLAZE_ORANGE}`,
+    borderBottom: `1px solid ${DARK_GRAYISH_BLUE}`,
   },
   '& .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused': {
-    color: 'white',
+    color: APPROX_BLUE,
   },
 });
 
@@ -55,11 +61,11 @@ const CustomLoadingButton = styled(LoadingButton)({
   backgroundColor: 'white',
   color: WOODSMOKE,
   '&:hover': {
-    backgroundColor: BLAZE_ORANGE,
+    backgroundColor: APPROX_BLUE,
     color: 'white',
   },
   '&:disabled': {
-    backgroundColor: VANILLA_WHITE,
+    backgroundColor: GUN_POWDER,
     opacity: 0.5,
     color: 'white',
   },
@@ -179,180 +185,123 @@ const LoginPage: FC = () => {
           Link to password reset has been sent to provided email!
         </Alert>
       </Snackbar>
-      {/* animations start */}
-      <Grid
-        container
-        className="login full-width"
-        sx={{ height: '100vh', width: '100%' }}
-      >
+      <Typography component="h1" sx={{ color: APPROX_BLUE, fontSize: '40px' }}>
+        Welcome to the Chattie
+      </Typography>
+      <Box component="form" onSubmit={formik.handleSubmit} noValidate mt={3}>
         <Grid
-          item
-          className="animated-images container"
-          xs={false}
-          sm={4}
-          md={6}
+          container
+          className="grid sign-in-link"
           sx={{
-            backgroundColor: BLAZE_ORANGE,
-            width: '50%',
-          }}
-        >
-          here will be image
-        </Grid>
-        {/* animations finish */}
-        <Container
-          maxWidth={false}
-          component="main"
-          className="containter-text"
-          sx={{
-            backgroundColor: WOODSMOKE,
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             alignItems: 'center',
-            heigth: '100%',
-            width: '50%',
-            position: 'relative',
-            margin: 0,
+            mb: 3,
+            color: DARK_GRAYISH_BLUE,
+            fontSize: '20px',
           }}
         >
-          <Box
-            className="text"
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              rowGap: '2.5rem',
-              textAlign: 'left',
-              width: '30rem',
-            }}
-          >
-            <Typography
-              component="h1"
-              sx={{ color: BLAZE_ORANGE, fontSize: '40px' }}
-            >
-              Welcome to the Chattie
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={formik.handleSubmit}
-              noValidate
-              mt={3}
-            >
-              <Grid
-                container
-                className="grid sign-in-link"
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  mb: 3,
-                  color: 'white',
-                  fontSize: '20px',
-                }}
-              >
-                <Box className="slogan-text">
-                  <Typography>Don’t have an account?</Typography>
-                  <Typography>It will take less than a minute.</Typography>
-                </Box>
-                <Link to="/register" style={{ textDecoration: 'none' }}>
-                  <Button
-                    onClick={handleClose}
-                    disableRipple
-                    disableFocusRipple
-                    sx={{
-                      color: BLAZE_ORANGE,
-                      '&:hover': {
-                        backgroundColor: 'rgb(255, 103, 0, 0.05)',
-                      },
-                    }}
-                  >
-                    Create an account
-                  </Button>
-                </Link>
-              </Grid>
-              <Box sx={{ mt: 3 }}>
-                <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <CustomBorderTextField
-                      id="standard-basic"
-                      variant="standard"
-                      autoComplete="email"
-                      name="email"
-                      required
-                      fullWidth
-                      label="Email"
-                      autoFocus
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.email}
-                    />
-                    {formik.touched.email && formik.errors.email && (
-                      <Box color="red" fontSize={14} pl={2}>
-                        {formik.errors.email}
-                      </Box>
-                    )}
-                  </Grid>
-                  <Grid item xs={12}>
-                    <CustomBorderTextField
-                      id="standard-basic-2"
-                      variant="standard"
-                      required
-                      fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      autoComplete="new-password"
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.password}
-                    />
-                    {formik.touched.password && formik.errors.password && (
-                      <Box color="red" fontSize={14} pl={2}>
-                        {formik.errors.password}
-                      </Box>
-                    )}
-                  </Grid>
-                </Grid>
-              </Box>
-              <Grid
-                container
-                className="grid sign-in-link"
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  mt: 3,
-                  mb: 2,
-                }}
-              >
-                <CustomLoadingButton
-                  type="submit"
-                  variant="contained"
-                  loading={isLoading}
-                  disabled={
-                    Object.keys(formik.values).length === 0 ||
-                    Object.keys(formik.errors).length !== 0
-                  }
-                >
-                  SIGN IN
-                </CustomLoadingButton>
-                <Box>
-                  <Button
-                    disableRipple
-                    disableFocusRipple
-                    onClick={handleOpen}
-                    sx={{
-                      color: BLAZE_ORANGE,
-                      '&:hover': { backgroundColor: 'rgb(255, 103, 0, 0.05)' },
-                    }}
-                  >
-                    Forgot your password?
-                  </Button>
-                </Box>
-              </Grid>
-            </Box>
+          <Box className="slogan-text">
+            <Typography>Don’t have an account?</Typography>
+            <Typography>It will take less than a minute.</Typography>
           </Box>
-        </Container>
-      </Grid>
+          <Link to="/register" style={{ textDecoration: 'none' }}>
+            <Button
+              onClick={handleClose}
+              disableRipple
+              disableFocusRipple
+              sx={{
+                color: GUN_POWDER,
+                '&:hover': {
+                  backgroundColor: 'rgb(76, 76, 93, 0.05)',
+                },
+              }}
+            >
+              Create an account
+            </Button>
+          </Link>
+        </Grid>
+        <Box sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <CustomBorderTextField
+                id="standard-basic"
+                variant="standard"
+                autoComplete="email"
+                name="email"
+                required
+                fullWidth
+                label="Email"
+                autoFocus
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              {formik.touched.email && formik.errors.email && (
+                <Box color="red" fontSize={14} pl={2}>
+                  {formik.errors.email}
+                </Box>
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <CustomBorderTextField
+                id="standard-basic"
+                variant="standard"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                autoComplete="new-password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+              {formik.touched.password && formik.errors.password && (
+                <Box color="red" fontSize={14} pl={2}>
+                  {formik.errors.password}
+                </Box>
+              )}
+            </Grid>
+          </Grid>
+        </Box>
+        <Grid
+          container
+          className="grid sign-in-link"
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mt: 3,
+            mb: 2,
+          }}
+        >
+          <CustomLoadingButton
+            type="submit"
+            variant="contained"
+            loading={isLoading}
+            disabled={
+              Object.keys(formik.values).length === 0 ||
+              Object.keys(formik.errors).length !== 0
+            }
+          >
+            SIGN IN
+          </CustomLoadingButton>
+          <Box>
+            <Button
+              disableRipple
+              disableFocusRipple
+              onClick={handleOpen}
+              sx={{
+                color: GUN_POWDER,
+                backgroundColor: 'rgb(76, 76, 93, 0.05)',
+              }}
+            >
+              Forgot your password?
+            </Button>
+          </Box>
+        </Grid>
+      </Box>
       <ForgotPasswordModal
         isModalOpen={open}
         handleClose={handleClose}
@@ -460,10 +409,9 @@ const ForgotPasswordModal: FC<{
             disableRipple
             disableFocusRipple
             sx={{
-              color: BLAZE_ORANGE,
+              color: GUN_POWDER,
               '&:hover': {
-                backgroundColor: WOODSMOKE,
-                opacity: 0.05,
+                backgroundColor: 'rgb(76, 76, 93, 0.05)',
               },
             }}
           >
@@ -476,9 +424,9 @@ const ForgotPasswordModal: FC<{
             disableFocusRipple
             loading={isLoading}
             sx={{
-              backgroundColor: BLAZE_ORANGE,
+              backgroundColor: APPROX_BLUE,
               ':hover': {
-                bgcolor: 'black',
+                bgcolor: NEW_MIDNIGHT_BLUE,
                 color: 'white',
               },
             }}
