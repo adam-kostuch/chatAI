@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import CustomButton from '../CustomButton';
+import CustomButton from '../../shared/components/RedirectButton';
 import { AppBar, CssBaseline, Toolbar, Typography } from '@mui/material';
 import { Flex } from 'src/shared/components';
 import { BLAZE_ORANGE } from '@chattie/colors';

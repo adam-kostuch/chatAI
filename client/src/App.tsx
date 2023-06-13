@@ -6,17 +6,16 @@ import { ChattieContextProvider } from './ChattieContext';
 import OnePage from './components/OnePage/OnePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
-import RealtimeChat from './components/RealtimeChat/RealtimeChat';
 import PickAPartner from './components/PickAPartner/PickAPartner';
 import Chat from './components/Chat/Chat';
 import SampleData from './SampleData';
 
-const queryClient = new QueryClient();
+const client = new QueryClient();
 
 const App: FC = () => (
   <ChattieContextProvider>
     <CookiesProvider>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={client}>
         <Router>
           <Routes>
             <Route path="/sample" element={<SampleData />} />
@@ -24,8 +23,7 @@ const App: FC = () => (
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/pick-a-partner" element={<PickAPartner />} />
-            <Route path="/realtime-chat" element={<RealtimeChat />} />
-            <Route path="/robot-chat" element={<Chat />} />
+            <Route path="/chat" element={<Chat />} />
           </Routes>
         </Router>
       </QueryClientProvider>

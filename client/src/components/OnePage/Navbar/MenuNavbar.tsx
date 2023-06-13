@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { AppBar, Box, Button, Stack, Toolbar, Typography } from '@mui/material';
 import NavbarData from './NavbarData';
-import CustomButton from '../../CustomButton';
+import CustomButton from '../../../shared/components/RedirectButton';
 import { WOODSMOKE, VANILLA_WHITE, BLAZE_ORANGE } from '@chattie/colors';
 
 const MenuNavbar: FC = () => (

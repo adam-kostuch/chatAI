@@ -11,16 +11,16 @@ import './PickAPartner.css';
 
 const ChatPartnerData = [
   {
-    name: 'Robot A.I. Chattie',
+    name: 'A.I. Robot',
     image: RobotPartner,
     alt: 'image of robot partner',
-    path: '/robot-chat',
+    path: '/chat#robot',
   },
   {
-    name: 'Random person',
+    name: 'Real person',
     image: RealPartner,
     alt: 'image of real partner',
-    path: '/realtime-chat',
+    path: '/chat#realtime',
   },
 ];
 

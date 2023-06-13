@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Button } from '@mui/material';
 import { signOut } from '@firebase/auth';
 import { useCookies } from 'react-cookie';
-import { useChattieContext } from 'src/ChattieContext';
 import { COOKIE_TOKEN } from 'src/types';
 import { Auth } from 'firebase/auth';
+import { useChattieContext } from 'src/ChattieContext';
 
 const assertUnreachable = (_: never): never => {
   throw new Error(`Unexpected value: ${_}`);
@@ -12,17 +12,14 @@ const assertUnreachable = (_: never): never => {
 
 type ButtonActions = 'LOG OUT' | 'SIGN UP' | 'SIGN IN';
 
-export const handleSignOut = async ({
-  auth,
-  removeCookie,
-}: {
-  auth: Auth;
-  removeCookie: (name: string, options?: any) => void;
-}) => {
+export const handleSignOut = async (
+  auth: Auth,
+  removeCookie: (name: string, options?: any) => void
+) => {
   await signOut(auth)
     .then(() => removeCookie(COOKIE_TOKEN))
     .catch((error) => {
-      console.error("Couldn't sign out user!", error);
+      throw new Error(`Error signing out user ${error}`);
     });
 };
 
@@ -49,7 +46,7 @@ const RedirectButton: FC<RedirectButtonProps> = ({
         handleSignUp();
         break;
       case 'LOG OUT':
-        handleSignOut({ auth, removeCookie });
+        handleSignOut(auth, removeCookie);
         break;
       default:
         assertUnreachable(buttonLabel);
@@ -67,6 +64,7 @@ const RedirectButton: FC<RedirectButtonProps> = ({
 
   return (
     <Button
+      className={`${buttonLabel.replace(/\s+/g, '-').toLowerCase()}-button`}
       variant={buttonLabel === 'SIGN IN' ? 'text' : 'contained'}
       onClick={() => handleRedirect()}
       sx={{
