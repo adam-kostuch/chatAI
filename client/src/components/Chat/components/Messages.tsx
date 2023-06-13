@@ -1,123 +1,63 @@
-import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from 'react';
-import { Send } from '@mui/icons-material';
-import { APPROX_BLUE } from '@chattie/colors';
-import { Divider, MessagePanelWrapper, TextField } from 'src/shared/components';
-import { InputAdornment, Stack } from '@mui/material';
-import { SingleMessage } from '.';
+import { FC } from 'react';
+import { Avatar, Stack } from '@mui/material';
+import { CHARADE } from '@chattie/colors';
+import {
+  Divider,
+  MessagePanelWrapper,
+  Typography,
+} from 'src/shared/components';
+import { Chatter } from 'src/types';
+import { RealtimeMessages } from '.';
+import { chattieChatter } from 'src/utils';
+import RobotMessages from './RobotMessages';
 
-type MessageProps = {
-  message: string;
-  isUsersMessage: boolean;
+type MessagePanelProps = {
+  isRobotChat: boolean;
+  activeChatter: Chatter;
+  setActiveChatter: (chatter: Chatter) => void;
 };
 
-const Messages: FC = () => {
-  // We'll need probably here logic to read data
-  const [displayNewMessage, setDisplayNewMessage] = useState(false);
-  const [newMessage, setNewMessage] = useState('');
-
-  const handleNewMessage = (message: string) => {
-    setNewMessage(message);
-  };
-
-  const handleSentMessage = () => {
-    if (newMessage.length !== 0) {
-      setDisplayNewMessage(true);
-    }
-  };
-
-  return (
-    <Stack direction="column" divider={<Divider />}>
-      <DisplayMessages
-        newMessage={newMessage}
-        displayNewMessage={displayNewMessage}
-        handleNewMessage={handleNewMessage}
-        setDisplayNewMessage={setDisplayNewMessage}
-      />
-      <InputMessage
-        newMessage={newMessage}
-        handleNewMessage={handleNewMessage}
-        handleSentMessage={handleSentMessage}
-      />
-    </Stack>
-  );
-};
+const Messages: FC<MessagePanelProps> = (props) => (
+  <Stack
+    bgcolor={CHARADE}
+    borderRadius={4}
+    direction="column"
+    width="100%"
+    className="messages-container"
+    divider={<Divider />}
+  >
+    <ChatterSummary {...props} />
+    {props.isRobotChat ? <RobotMessages /> : <RealtimeMessages {...props} />}
+  </Stack>
+);
 
 export default Messages;
 
-type DisplayMessagesProps = {
-  newMessage: string;
-  displayNewMessage: boolean;
-  handleNewMessage: (message: string) => void;
-  setDisplayNewMessage: (display: boolean) => void;
-};
-
-const DisplayMessages: FC<DisplayMessagesProps> = ({
-  newMessage,
-  displayNewMessage,
-  handleNewMessage,
-  setDisplayNewMessage,
+const ChatterSummary: FC<MessagePanelProps> = ({
+  isRobotChat,
+  activeChatter,
 }) => {
-  const [messages, newMessages] = useState<MessageProps[]>([]);
-
-  useEffect(() => {
-    if (displayNewMessage) {
-      newMessages([{ message: newMessage, isUsersMessage: true }, ...messages]);
-      setDisplayNewMessage(false);
-      handleNewMessage('');
-    }
-  }, [displayNewMessage]);
+  const { displayName, email, profileUrl }: Chatter = isRobotChat
+    ? chattieChatter
+    : activeChatter;
 
   return (
-    <MessagePanelWrapper>
-      <Stack height="72vh" width="100%" direction="column-reverse">
-        {messages.map(({ message, isUsersMessage }, idx) => (
-          <SingleMessage key={idx} isUsersMessage={isUsersMessage}>
-            {message}
-          </SingleMessage>
-        ))}
-      </Stack>
-    </MessagePanelWrapper>
-  );
-};
-
-type InputMessageProps = {
-  newMessage: string;
-  handleNewMessage: (message: string) => void;
-  handleSentMessage: () => void;
-};
-const InputMessage: FC<InputMessageProps> = ({
-  newMessage,
-  handleNewMessage,
-  handleSentMessage,
-}) => {
-  const isButtonDisabled = newMessage.length === 0;
-
-  return (
-    <MessagePanelWrapper borderLeft="0 0 0 16px" borderRight="0 0 16px 0">
-      <TextField
-        value={newMessage}
-        onKeyDown={(event: KeyboardEvent<HTMLInputElement>) => {
-          if (event.code === 'Enter') {
-            handleSentMessage();
-          }
-        }}
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-          handleNewMessage(event.target.value)
-        }
-        placeholder="Let's CHAT(TIE)..."
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Send
-                htmlColor={APPROX_BLUE}
-                onClick={() => handleSentMessage()}
-                color={isButtonDisabled ? 'disabled' : 'primary'}
-                sx={{ cursor: isButtonDisabled ? 'initial' : 'pointer' }}
-              />
-            </InputAdornment>
-          ),
-        }}
+    <MessagePanelWrapper
+      borderLeft="16px 0 0 0"
+      borderRight="0 16px 0 0"
+      className="messages-chatter-summary-container"
+    >
+      <Avatar
+        alt="chatter-profile"
+        src={profileUrl}
+        sx={{ height: 56, width: 56 }}
       />
+      <Stack>
+        <Typography fontSize="1.25em">{displayName}</Typography>
+        <Typography fontSize=".75em" fontWeight="medium">
+          {email}
+        </Typography>
+      </Stack>
     </MessagePanelWrapper>
   );
 };

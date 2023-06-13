@@ -78,7 +78,6 @@ const LoginSchema = Yup.object({
 
 const LoginPage: FC = () => {
   useCheckAuthentication();
-
   const { auth, apiClient } = useChattieContext();
 
   // HOC logic for sent reset password
@@ -135,7 +134,6 @@ const LoginPage: FC = () => {
           values.email,
           values.password
         ).then(({ user }: any) => {
-          console.log({ user });
           return user.getIdToken().then(async (idToken: any) => {
             setIdToken(idToken);
 
@@ -146,11 +144,13 @@ const LoginPage: FC = () => {
         setSubmit(true);
       } catch (error) {
         handleEmailError(true);
-        console.error('Error singing in', error);
+        throw new Error(`Error singing in ${error}`);
       }
     },
   });
 
+  // once the login is successful we set the cookie token
+  // and transfers the use to the pick a partner site
   useEffect(() => {
     if (isSuccess && idToken !== '') {
       setCookies(COOKIE_TOKEN, idToken, {
@@ -314,6 +314,10 @@ const LoginPage: FC = () => {
 
 export default LoginPage;
 
+export const EmailSchema = Yup.object({
+  email: Yup.string().email('Invalid email').required('Required'),
+});
+
 const ForgotPasswordModal: FC<{
   isModalOpen: boolean;
   handleClose: () => void;
@@ -325,7 +329,7 @@ const ForgotPasswordModal: FC<{
 
   const formik = useFormik({
     initialValues: { email: '' },
-    validationSchema: ChangePasswordSchema,
+    validationSchema: EmailSchema,
     onSubmit: async (values) => {
       setIsLoading(true);
 
@@ -340,7 +344,7 @@ const ForgotPasswordModal: FC<{
           });
       } catch (error) {
         handleEmailError(true);
-        console.error('Error sending email', error);
+        throw new Error(`Error sending email ${error}`);
       }
 
       setIsLoading(false);
@@ -434,7 +438,3 @@ const ForgotPasswordModal: FC<{
     </Dialog>
   );
 };
-
-const ChangePasswordSchema = Yup.object({
-  email: Yup.string().email('Invalid email').required('Required'),
-});

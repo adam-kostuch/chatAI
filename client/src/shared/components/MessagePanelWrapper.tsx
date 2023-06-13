@@ -5,9 +5,15 @@ import { GUN_POWDER, VANILLA_WHITE } from '@chattie/colors';
 const MessagePanelWrapper: FC<{
   borderLeft?: string;
   borderRight?: string;
+  className?: string;
   children: ReactNode;
-}> = ({ borderLeft = '', borderRight = '', children }) => (
-  <Stack direction="row" justifyContent="space-between">
+}> = ({ borderLeft = '', borderRight = '', className, children }) => (
+  <Stack
+    direction="row"
+    height="100%"
+    justifyContent="space-between"
+    className={className}
+  >
     <Box
       sx={{ borderRadius: borderLeft, opacity: '35%' }}
       width="5%"

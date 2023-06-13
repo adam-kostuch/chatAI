@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { AppBar, Box, Button, Stack, Toolbar, Typography } from '@mui/material';
 import NavbarData from './NavbarData';
-import CustomButton from '../../CustomButton';
+import RedirectButton from '../../../shared/components/RedirectButton';
 import { WOODSMOKE, APPROX_BLUE, LIGHT_GRAYISH_BLUE } from '@chattie/colors';
 
 const MenuNavbar: FC = () => (
@@ -33,12 +33,12 @@ const MenuNavbar: FC = () => (
           ))}
         </Box>
         <Stack direction="row" gap={2}>
-          <CustomButton
+          <RedirectButton
             borderColor=""
             color={APPROX_BLUE}
             buttonLabel="Sign In"
           />
-          <CustomButton
+          <RedirectButton
             borderColor={APPROX_BLUE}
             color={LIGHT_GRAYISH_BLUE}
             buttonLabel="Sign Up"

@@ -121,7 +121,7 @@ const RegisterPage: FC = () => {
         console.log('User written with ID: ', userRef.id);
         setSubmit(true);
       } catch (error) {
-        console.error('Error creating user: ', error);
+        throw new Error(`Error creating user ${error}`);
       }
     },
   });

@@ -26,13 +26,7 @@ const ClientsOpinions: FC = () => {
           className="post box"
           sx={{ position: 'absolute', zIndex: 10, padding: '30px' }}
         >
-          <Stack
-            direction="row"
-            spacing={2}
-            sx={{
-              alignItems: 'center',
-            }}
-          >
+          <Stack direction="row" alignItems="center" spacing={2}>
             <Avatar alt="Chattie" src="" />
             <Typography>Chattie</Typography>
           </Stack>
