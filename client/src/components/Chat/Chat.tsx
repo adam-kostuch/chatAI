@@ -64,7 +64,7 @@ const Chat: FC = () => {
         }
       });
     } else {
-      setActiveChatter(emptyChatter);
+      setActiveChatter(chatters.length > 0 ? chatters[0] : emptyChatter);
     }
   };
 
@@ -78,11 +78,21 @@ const Chat: FC = () => {
         activeChatter.email
       );
 
-      setChatters(queriedChatters);
+      const emailSet = new Set(chatters.map((chatter) => chatter.email));
+      setChatters([
+        ...chatters,
+        ...queriedChatters.filter((chatter) => !emailSet.has(chatter.email)),
+      ]);
     };
 
     queryChatters();
   }, [activeChatter]);
+
+  useEffect(() => {
+    if (!chatters.some((chatter) => chatter.email === activeChatter.email)) {
+      setActiveChatter(chatters.length > 0 ? chatters[0] : emptyChatter);
+    }
+  }, []);
 
   return (
     <Stack
