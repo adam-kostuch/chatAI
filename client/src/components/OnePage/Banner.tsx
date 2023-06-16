@@ -12,13 +12,15 @@ import backgroundBanner from '../../assets/backgroundBanner.png';
 const BannerContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
+  paddingTop: '100px',
   position: 'relative',
-  justifyContent: 'center',
+  alignItems: 'center',
+  justifyContent: 'space-between',
   width: '100%',
   height: '100vh',
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
-    alignItems: 'lelt',
+    alignItems: 'center',
   },
 }));
 
@@ -65,16 +67,8 @@ const BannerDescription = styled(Typography)(({ theme }) => ({
 }));
 
 const Banner = () => (
-  <BannerContainer
-    maxWidth={false}
-    className="banner-container full width"
-    sx={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      paddingTop: '100px',
-    }}
-  >
-    <Stack direction="row">
+  <BannerContainer maxWidth={false} className="banner-container full width">
+    <Stack direction="row" className="stack">
       <Box>
         <BannerContent className="banner-content">
           <BannerTitle variant="h2">Chattie Friend</BannerTitle>
