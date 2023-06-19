@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { styled, Container, Box, Typography, Grid } from '@mui/material';
 import Menu from './Menu';
-import RealPartner from '../../assets/HyperspaceFloating.png';
-import RobotPartner from '../../assets/HyperspaceRobot1.png';
+// import RealPartner from '../../assets/HyperspaceFloating.png';
+// import RobotPartner from '../../assets/HyperspaceRobot1.png';
+import RealPartner from '../../assets/real_people.png';
+import RobotPartner from '../../assets/vecteezy_robot-chatbot.png';
 import { useCheckAuthentication } from 'src/hooks';
-import { VANILLA_WHITE } from '@chattie/colors';
+import { WOODSMOKE, VANILLA_WHITE } from '@chattie/colors';
 import './PickAPartner.css';
 
 const ChatPartnerData = [
@@ -17,7 +19,7 @@ const ChatPartnerData = [
     path: '/chat#robot',
   },
   {
-    name: 'Real person',
+    name: 'Real Person',
     image: RealPartner,
     alt: 'image of real partner',
     path: '/chat#realtime',
@@ -45,10 +47,11 @@ const PickAPartner: FC = () => {
       <Container
         maxWidth={false}
         sx={{
+          color: VANILLA_WHITE,
           justifyContent: 'center',
           display: 'flex',
           textAlign: 'center',
-          backgroundColor: VANILLA_WHITE,
+          backgroundColor: WOODSMOKE,
         }}
       >
         <Box sx={{ position: 'absolute', paddingTop: '100px' }}>
@@ -82,10 +85,10 @@ const PickAPartner: FC = () => {
                     <img
                       src={partner.image}
                       alt={partner.alt}
-                      style={{ width: '150px', height: '150px' }}
+                      style={{ width: '450px', height: '450px' }}
                     />
                   </motion.div>
-                  <Typography variant="h5" color="black" pt={5}>
+                  <Typography variant="h5" color={VANILLA_WHITE} pt={15}>
                     {partner.name}
                   </Typography>
                 </Link>

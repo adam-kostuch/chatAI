@@ -1,19 +1,18 @@
 import { FC } from 'react';
 import RedirectButton from '../../shared/components/RedirectButton';
-import { AppBar, CssBaseline, Toolbar, Typography } from '@mui/material';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 import { Flex } from 'src/shared/components';
-import { BLAZE_ORANGE } from '@chattie/colors';
+import { VANILLA_WHITE, LIGHT_GRAYISH_BLUE, WOODSMOKE } from '@chattie/colors';
 
 const Menu: FC = () => (
   <Flex>
-    <CssBaseline />
     <AppBar component="nav" color="transparent" elevation={0}>
       <Toolbar>
         <Typography
           variant="h6"
           component="div"
           sx={{
-            color: 'black',
+            color: VANILLA_WHITE,
             flexGrow: 1,
             display: { xs: 'none', sm: 'block' },
           }}
@@ -22,8 +21,8 @@ const Menu: FC = () => (
         </Typography>
         <Flex ml={10}>
           <RedirectButton
-            borderColor="black"
-            color={BLAZE_ORANGE}
+            borderColor={LIGHT_GRAYISH_BLUE}
+            color={WOODSMOKE}
             buttonLabel="Log Out"
           />
         </Flex>
