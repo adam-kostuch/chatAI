@@ -211,6 +211,7 @@ const LoginPage: FC = () => {
               disableRipple
               disableFocusRipple
               sx={{
+                fontFamily: 'Jura',
                 color: GUN_POWDER,
                 '&:hover': {
                   backgroundColor: 'rgb(76, 76, 93, 0.05)',
@@ -294,6 +295,7 @@ const LoginPage: FC = () => {
               onClick={handleOpen}
               sx={{
                 color: GUN_POWDER,
+                fontFamily: 'Jura',
                 backgroundColor: 'rgb(76, 76, 93, 0.05)',
               }}
             >
@@ -410,6 +412,7 @@ const ForgotPasswordModal: FC<{
             disableFocusRipple
             sx={{
               color: GUN_POWDER,
+              fontFamily: 'Jura',
               '&:hover': {
                 backgroundColor: 'rgb(76, 76, 93, 0.05)',
               },

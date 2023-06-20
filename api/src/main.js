@@ -1,9 +1,9 @@
 import app from './configuration/init.js';
-import OpenAIRouter from './routes/OpenAIRoutes.js';
+import AIRouter from './routes/AIRoutes.js';
 import { PORT } from './configuration/constants.js';
 import AuthenticationRouter from './routes/AuthenticationRoutes.js';
 
-app.use('/openai', OpenAIRouter);
+app.use('/ai', AIRouter);
 app.use('/authentication', AuthenticationRouter);
 
 app.listen(PORT, () => {

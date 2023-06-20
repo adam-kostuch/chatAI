@@ -1,15 +1,15 @@
 import { Firestore, addDoc, collection } from 'firebase/firestore';
-import { Chatter, FirestoreMessage, Message } from 'src/types';
+import { Chatter, FirestoreRealtimeMessage, RealtimeMessage } from 'src/types';
 
-const useAddNewMessage = (
+const useAddNewUsersMessage = (
   db: Firestore,
   message: string,
-  allMessages: Message[],
+  allMessages: RealtimeMessage[],
   activeUser: Chatter,
   activeChatter: Chatter
-): Message[] => {
+): RealtimeMessage[] => {
   const collectionRef = collection(db, 'users_chats');
-  const newMessageData: FirestoreMessage = {
+  const newMessageData: FirestoreRealtimeMessage = {
     userEmail: activeUser.email,
     userName: activeUser.displayName,
     chatterEmail: activeChatter.email,
@@ -37,4 +37,4 @@ const useAddNewMessage = (
   ].sort((prevChat, currentChat) => currentChat.date - prevChat.date);
 };
 
-export default useAddNewMessage;
+export default useAddNewUsersMessage;

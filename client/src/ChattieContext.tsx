@@ -6,6 +6,8 @@ import { Auth, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { Firestore, getFirestore } from 'firebase/firestore';
 import { Chatter } from './types';
 import { useUserData } from './hooks';
+import { emptyChatter } from './utils';
+import { Loading } from './shared/components';
 
 // Web app's Firebase configuration
 const firebaseConfig = {
@@ -18,10 +20,10 @@ const firebaseConfig = {
 };
 
 export interface ChattieContextProps {
-  apiClient: ChattieApiClient;
   auth: Auth;
   db: Firestore;
   activeUser: Chatter;
+  apiClient: ChattieApiClient;
 }
 
 export const ChattieContext = createContext<ChattieContextProps>(
@@ -33,24 +35,24 @@ const ChattieContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const firebase = initializeApp(firebaseConfig);
   const auth = getAuth(firebase);
   const db = getFirestore(firebase);
-  const [activeUser, setActiveUser] = useState({} as Chatter);
+  const [activeUser, setActiveUser] = useState(emptyChatter);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setActiveUser(
         user
-          ? (await useUserData(db, user.email as string)) || ({} as Chatter)
-          : ({} as Chatter)
+          ? (await useUserData(db, user.email as string)) || emptyChatter
+          : emptyChatter
       );
       setIsLoading(false);
     });
 
-    return unsubscribe;
+    unsubscribe();
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

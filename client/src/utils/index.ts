@@ -1,3 +1,4 @@
+import * as Avatars from 'src/assets/avatars';
 import { Chatter } from 'src/types';
 
 export const emptyChatter: Chatter = {
@@ -13,3 +14,5 @@ export const chattieChatter: Chatter = {
   profileUrl: '',
   hasUnreadMessages: false,
 };
+
+export const mappedAvatarImages: string[] = Object.values(Avatars);

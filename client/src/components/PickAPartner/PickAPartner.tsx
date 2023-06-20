@@ -16,13 +16,13 @@ const ChatPartnerData = [
     name: 'A.I. Robot',
     image: RobotPartner,
     alt: 'image of robot partner',
-    path: '/chat#robot',
+    path: '/chat/robot',
   },
   {
     name: 'Real Person',
     image: RealPartner,
     alt: 'image of real partner',
-    path: '/chat#realtime',
+    path: '/chat/realtime',
   },
 ];
 
@@ -70,8 +70,8 @@ const PickAPartner: FC = () => {
               marginTop: '100px',
             }}
           >
-            {ChatPartnerData.map((partner) => (
-              <Grid item className="example-container" p={20} key="grid">
+            {ChatPartnerData.map((partner, idx) => (
+              <Grid item className="example-container" p={20} key={idx}>
                 <Link to={partner.path} style={{ textDecoration: 'none' }}>
                   <motion.div
                     whileHover={{ scale: 1.2 }}

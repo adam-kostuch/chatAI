@@ -75,10 +75,10 @@ const AboutUs: FC = () => {
         >
           Chattie is perfect
         </Typography>
-        {aboutUsTexts1.map((text) => (
+        {aboutUsTexts1.map((text, idx) => (
           <Typography
             variant="subtitle1"
-            key="texts"
+            key={idx}
             sx={{ maxWidth: '440px', marginBottom: '25px' }}
           >
             {text}
@@ -107,10 +107,10 @@ const AboutUs: FC = () => {
         >
           Personalized app
         </Typography>
-        {aboutUsTexts2.map((text) => (
+        {aboutUsTexts2.map((text, idx) => (
           <Typography
             variant="subtitle1"
-            key="texts"
+            key={idx}
             sx={{ maxWidth: '440px', marginBottom: '25px' }}
           >
             {text}

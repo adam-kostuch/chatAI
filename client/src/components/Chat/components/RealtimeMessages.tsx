@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { useChattieContext } from 'src/ChattieContext';
-import { AllMessages, Message } from 'src/types';
+import { AllMessages, RealtimeMessage } from 'src/types';
 import { MessagesContent } from '.';
 import {
-  useAddNewMessage,
-  useQueryMessages,
+  useQueryUsersMessages,
+  useAddNewUsersMessage,
   useUpdateMessagesState,
 } from 'src/hooks';
 
@@ -15,14 +15,14 @@ const RealtimeMessages: FC<AllMessages> = ({
   const { activeUser, db } = useChattieContext();
   const [displayNewMessage, setDisplayNewMessage] = useState(false);
   const [newMessage, setNewMessage] = useState('');
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<RealtimeMessage[]>([]);
 
   const handleNewMessage = (message: string) => {
     setNewMessage(message);
   };
 
   const queryMessages = async () => {
-    const [queriedMessages, queriedChatsIds] = await useQueryMessages(
+    const [queriedMessages, queriedChatsIds] = await useQueryUsersMessages(
       db,
       activeUser.email,
       activeChatter.email
@@ -33,7 +33,7 @@ const RealtimeMessages: FC<AllMessages> = ({
   };
 
   const updateMessages = async () => {
-    const [, queriedChatsIds] = await useQueryMessages(
+    const [, queriedChatsIds] = await useQueryUsersMessages(
       db,
       activeUser.email,
       activeChatter.email
@@ -44,7 +44,10 @@ const RealtimeMessages: FC<AllMessages> = ({
   };
 
   const handleSentMessage = () => {
-    if (newMessage.length !== 0) {
+    if (
+      newMessage.length !== 0 &&
+      (activeChatter.email || activeChatter.displayName)
+    ) {
       setDisplayNewMessage(true);
       updateMessages();
     }
@@ -54,7 +57,7 @@ const RealtimeMessages: FC<AllMessages> = ({
   // the new message to the array containing the history of messages
   useEffect(() => {
     if (displayNewMessage) {
-      const queriedMessages = useAddNewMessage(
+      const queriedMessages = useAddNewUsersMessage(
         db,
         newMessage,
         messages,
@@ -71,7 +74,7 @@ const RealtimeMessages: FC<AllMessages> = ({
   // this hook is being called once the user changes the chatter
   useEffect(() => {
     queryMessages();
-  }, [activeChatter]);
+  }, [activeChatter, activeUser]);
 
   return (
     <MessagesContent

@@ -5,7 +5,7 @@ import {
   where,
   getDocs,
 } from 'firebase/firestore';
-import { Chatter, FirestoreMessage } from 'src/types';
+import { Chatter, FirestoreRealtimeMessage } from 'src/types';
 
 const useQueryChatters = async (
   db: Firestore,
@@ -14,7 +14,8 @@ const useQueryChatters = async (
 ): Promise<Chatter[]> => {
   try {
     const usersChatsRef = collection(db, 'users_chats');
-    const userQueryRef = query(
+    const usersRef = collection(db, 'users');
+    const userChatsQueryRef = query(
       usersChatsRef,
       where('userEmail', '==', userEmail)
     );
@@ -22,16 +23,25 @@ const useQueryChatters = async (
       usersChatsRef,
       where('chatterEmail', '==', userEmail)
     );
-    const [userChatsSnap, chatterChatsSnap] = await Promise.all([
-      getDocs(userQueryRef),
-      getDocs(chatterQueryRef),
-    ]);
+
+    const usersQueryRef = query(usersRef, where('email', '==', chatterEmail));
+    const [usersQuerySnap, userChatsSnap, chatterChatsSnap] = await Promise.all(
+      [
+        getDocs(usersQueryRef),
+        getDocs(userChatsQueryRef),
+        getDocs(chatterQueryRef),
+      ]
+    );
+
     const mergedChatsSnap = [...userChatsSnap.docs, ...chatterChatsSnap.docs];
+    const mappedUsers = [...usersQuerySnap.docs];
     const queriedChatters: Chatter[] = [];
+
+    console.log({ m: mappedUsers[0].data() });
 
     if (mergedChatsSnap.length > 0) {
       mergedChatsSnap.forEach((document) => {
-        const mergedChat = document.data() as FirestoreMessage;
+        const mergedChat = document.data() as FirestoreRealtimeMessage;
 
         if (
           !queriedChatters.some(
@@ -41,9 +51,11 @@ const useQueryChatters = async (
           queriedChatters.push({
             displayName: mergedChat.chatterName,
             email: mergedChat.chatterEmail,
-            profileUrl: '',
+            profileUrl: mappedUsers
+              .filter((user) => user.data().email === chatterEmail)[0]
+              .data().profileUrl,
             hasUnreadMessages: mergedChatsSnap.some((doc) => {
-              const chat = doc.data() as FirestoreMessage;
+              const chat = doc.data() as FirestoreRealtimeMessage;
 
               return !chat.isRead && chat.userEmail === mergedChat.chatterEmail;
             }),
@@ -62,7 +74,7 @@ const useQueryChatters = async (
           queriedChatters.push({
             displayName: user.displayName,
             email: user.email,
-            profileUrl: '',
+            profileUrl: user.profileUrl,
             hasUnreadMessages: false,
           });
         }

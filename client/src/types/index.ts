@@ -16,13 +16,21 @@ export type Chatter = {
   hasUnreadMessages: boolean;
 };
 
-export type Message = {
+export type RealtimeMessage = {
   message: string;
   isUsersMessage: boolean;
   date: number;
 };
 
-export type FirestoreMessage = Omit<Message, 'isUsersMessage'> & {
+export type RobotMessage = RealtimeMessage & {
+  userEmail: string;
+  userName: string;
+};
+
+export type FirestoreRealtimeMessage = Omit<
+  RealtimeMessage,
+  'isUsersMessage'
+> & {
   userEmail: string;
   userName: string;
   chatterEmail: string;

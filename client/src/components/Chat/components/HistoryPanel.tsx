@@ -5,6 +5,9 @@ import { SCAMPI, BASTILLE, GUN_POWDER, APPROX_BLUE } from '@chattie/colors';
 import { Circle, Close, Search } from '@mui/icons-material';
 import { Chatter } from 'src/types';
 import { NewConversationModal } from '.';
+import { useModal } from 'src/hooks';
+import { NewConversationModalProps } from './NewConversationModal';
+import { getUserImage } from 'src/helpers';
 
 type HistoryPanelProps = {
   chatters: Chatter[];
@@ -13,21 +16,13 @@ type HistoryPanelProps = {
   handleNewChatters: (chatter: Chatter) => void;
 };
 
-const HistoryPanel: FC<HistoryPanelProps> = ({
-  chatters,
-  handleNewChatters,
-  ...props
-}) => {
+const HistoryPanel: FC<HistoryPanelProps> = (props) => {
+  const { chatters, handleNewChatters } = props;
   const [searchedPrompt, setSearchedPrompt] = useState('');
-  const [showModal, setShowModal] = useState(false);
-
-  const handleModalOpen = () => {
-    setShowModal(true);
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
-  };
+  const {
+    onOpen: onNewConversationModalOpen,
+    modalProps: newConversationModalProps,
+  } = useModal<Omit<NewConversationModalProps, 'isOpen' | 'onClose'>>();
 
   return (
     <>
@@ -37,9 +32,9 @@ const HistoryPanel: FC<HistoryPanelProps> = ({
             Chat
           </Typography>
           <Button
-            sx={{ py: 0 }}
+            sx={{ py: 0, fontFamily: 'Jura' }}
             variant="outlined"
-            onClick={handleModalOpen}
+            onClick={() => onNewConversationModalOpen({ ...props })}
             className="new-message-button"
           >
             New Message
@@ -92,8 +87,7 @@ const HistoryPanel: FC<HistoryPanelProps> = ({
         </Box>
       </Stack>
       <NewConversationModal
-        isModalOpen={showModal}
-        handleClose={handleModalClose}
+        {...newConversationModalProps}
         handleNewChatters={handleNewChatters}
       />
     </>
@@ -119,6 +113,10 @@ const SingleChatter: FC<SingleChatterProps> = ({
   const trimLength = 16;
   const isSelectedChatter = activeChatter.displayName === displayName;
 
+  if (!email || !displayName) {
+    return <></>;
+  }
+
   return (
     <Stack
       p={2}
@@ -141,7 +139,11 @@ const SingleChatter: FC<SingleChatterProps> = ({
       }}
     >
       <Stack direction="row" gap={2} alignItems="center">
-        <Avatar src={profileUrl} alt={email} sx={{ height: 46, width: 46 }} />
+        <Avatar
+          alt={email}
+          src={getUserImage(profileUrl)}
+          sx={{ height: 46, width: 46 }}
+        />
         <Typography fontSize="1.25em">
           {displayName.length >= trimLength
             ? `${displayName.slice(0, trimLength)}...`
