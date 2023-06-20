@@ -3,11 +3,11 @@ import { InputAdornment, Stack } from '@mui/material';
 import { Send } from '@mui/icons-material';
 import { APPROX_BLUE } from '@chattie/colors';
 import { Divider, MessagePanelWrapper, TextField } from 'src/shared/components';
-import { Message } from 'src/types';
+import { RealtimeMessage } from 'src/types';
 import { SingleMessage } from '.';
 
 type DisplayMessagesProps = {
-  messages: Message[];
+  messages: RealtimeMessage[];
 };
 
 type InputMessageProps = {
@@ -29,6 +29,28 @@ const MessagesContent: FC<MessagesContentProps> = ({
 );
 
 export default MessagesContent;
+
+const DisplayMessages: FC<DisplayMessagesProps> = ({ messages }) => (
+  <MessagePanelWrapper>
+    <Stack
+      height="72vh"
+      width="100%"
+      pr={1}
+      direction="column-reverse"
+      sx={{ overflowY: 'auto' }}
+    >
+      {messages.map(({ message, date, isUsersMessage }, idx) => (
+        <SingleMessage
+          key={idx}
+          timestamp={date}
+          isUsersMessage={isUsersMessage}
+        >
+          {message}
+        </SingleMessage>
+      ))}
+    </Stack>
+  </MessagePanelWrapper>
+);
 
 const InputMessage: FC<InputMessageProps> = ({
   newMessage,
@@ -67,25 +89,3 @@ const InputMessage: FC<InputMessageProps> = ({
     </MessagePanelWrapper>
   );
 };
-
-const DisplayMessages: FC<DisplayMessagesProps> = ({ messages }) => (
-  <MessagePanelWrapper>
-    <Stack
-      height="72vh"
-      width="100%"
-      pr={1}
-      direction="column-reverse"
-      sx={{ overflowY: 'auto' }}
-    >
-      {messages.map(({ message, date, isUsersMessage }, idx) => (
-        <SingleMessage
-          key={idx}
-          timestamp={date}
-          isUsersMessage={isUsersMessage}
-        >
-          {message}
-        </SingleMessage>
-      ))}
-    </Stack>
-  </MessagePanelWrapper>
-);

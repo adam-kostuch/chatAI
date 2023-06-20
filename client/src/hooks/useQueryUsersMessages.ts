@@ -5,13 +5,13 @@ import {
   where,
   getDocs,
 } from 'firebase/firestore';
-import { Message, FirestoreMessage } from 'src/types';
+import { RealtimeMessage, FirestoreRealtimeMessage } from 'src/types';
 
-const useQueryMessages = async (
+const useQueryUsersMessages = async (
   db: Firestore,
   userEmail: string,
   chatterEmail: string
-): Promise<[Message[], string[]]> => {
+): Promise<[RealtimeMessage[], string[]]> => {
   const collectionRef = collection(db, 'users_chats');
 
   // TODO: it might be good to save in cache information about chat messages (for one session)
@@ -23,11 +23,11 @@ const useQueryMessages = async (
       where('chatterEmail', 'in', [userEmail, chatterEmail])
     );
     const userChatsSnap = await getDocs(queryRef);
-    const userChats: Message[] = [];
+    const userChats: RealtimeMessage[] = [];
     const chatsIds: string[] = [];
 
     userChatsSnap.forEach((document) => {
-      const userChat = document.data() as FirestoreMessage;
+      const userChat = document.data() as FirestoreRealtimeMessage;
 
       userChats.push({
         isUsersMessage: userChat.userEmail === userEmail,
@@ -52,4 +52,4 @@ const useQueryMessages = async (
   }
 };
 
-export default useQueryMessages;
+export default useQueryUsersMessages;

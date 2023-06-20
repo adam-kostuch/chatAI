@@ -8,8 +8,8 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import PickAPartner from './components/PickAPartner/PickAPartner';
 import Chat from './components/Chat/Chat';
-import SampleData from './SampleData';
 import Authentication from './components/Authentication/Authentication';
+import { CHAT_PARTNER } from './types';
 
 const client = new QueryClient();
 
@@ -19,7 +19,6 @@ const App: FC = () => (
       <QueryClientProvider client={client}>
         <Router>
           <Routes>
-            <Route path="/sample" element={<SampleData />} />
             <Route path="*" element={<OnePage />} />
             <Route
               path="/login"
@@ -30,7 +29,14 @@ const App: FC = () => (
               element={<Authentication form={<RegisterPage />} />}
             />
             <Route path="/pick-a-partner" element={<PickAPartner />} />
-            <Route path="/chat" element={<Chat />} />
+            <Route
+              path="/chat/robot"
+              element={<Chat partner={CHAT_PARTNER.ROBOT} />}
+            />
+            <Route
+              path="/chat/realtime"
+              element={<Chat partner={CHAT_PARTNER.REALTIME} />}
+            />
           </Routes>
         </Router>
       </QueryClientProvider>

@@ -5,10 +5,12 @@ import { useCookies } from 'react-cookie';
 import { COOKIE_TOKEN } from 'src/types';
 import { Auth } from 'firebase/auth';
 import { useChattieContext } from 'src/ChattieContext';
-
-const assertUnreachable = (_: never): never => {
-  throw new Error(`Unexpected value: ${_}`);
-};
+import {
+  APPROX_BLUE,
+  LIGHT_GRAYISH_BLUE,
+  VANILLA_WHITE,
+} from '@chattie/colors';
+import { assertUnreachable } from 'src/helpers';
 
 type ButtonActions = 'Log Out' | 'Sign Up' | 'Sign In';
 
@@ -17,25 +19,25 @@ export const handleSignOut = async (
   removeCookie: (name: string, options?: any) => void
 ) => {
   await signOut(auth)
-    .then(() => removeCookie(COOKIE_TOKEN))
+    .then(() => {
+      removeCookie(COOKIE_TOKEN);
+      window.location.href = '/';
+    })
     .catch((error) => {
       throw new Error(`Error signing out user ${error}`);
     });
 };
 
 interface RedirectButtonProps {
-  color: string;
-  borderColor: string;
   buttonLabel: ButtonActions;
 }
 
-const RedirectButton: FC<RedirectButtonProps> = ({
-  color,
-  borderColor,
-  buttonLabel,
-}) => {
+const RedirectButton: FC<RedirectButtonProps> = ({ buttonLabel }) => {
   const { auth } = useChattieContext();
   const [, , removeCookie] = useCookies();
+  const primaryColor = buttonLabel === 'Sign In' ? APPROX_BLUE : VANILLA_WHITE;
+  const secondaryColor =
+    buttonLabel === 'Sign In' ? LIGHT_GRAYISH_BLUE : APPROX_BLUE;
 
   const handleRedirect = () => {
     switch (buttonLabel) {
@@ -68,14 +70,15 @@ const RedirectButton: FC<RedirectButtonProps> = ({
       variant={buttonLabel === 'Sign In' ? 'text' : 'outlined'}
       onClick={() => handleRedirect()}
       sx={{
-        color: color,
-        backgroundColor: borderColor,
+        color: primaryColor,
+        backgroundColor: secondaryColor,
         fontSize: '1rem',
         fontWeight: '700',
         borderRadius: '10px',
+        fontFamily: 'Jura',
         '&:hover': {
-          borderColor: borderColor,
-          color: borderColor,
+          borderColor: primaryColor,
+          color: secondaryColor,
         },
       }}
     >

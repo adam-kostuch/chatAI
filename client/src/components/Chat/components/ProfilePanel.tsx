@@ -13,6 +13,11 @@ import { Divider, Flex, Typography } from 'src/shared/components';
 import { handleSignOut } from 'src/shared/components/RedirectButton';
 import { useCookies } from 'react-cookie';
 import { useChattieContext } from 'src/ChattieContext';
+import { useModal } from 'src/hooks';
+import ImageModal, {
+  ImageModalProps,
+} from 'src/components/ImageModal/ImageModal';
+import { getUserImage } from 'src/helpers';
 
 const ProfilePanel: FC = () => {
   const { auth } = useChattieContext();
@@ -48,45 +53,55 @@ const ProfilePanel: FC = () => {
 export default ProfilePanel;
 
 const ProfileDetails: FC = () => {
+  const { onOpen: onImageModalOpen, modalProps: imageModalProps } =
+    useModal<Omit<ImageModalProps, 'isOpen' | 'onClose'>>();
   const {
-    activeUser: { displayName, email },
+    activeUser: { displayName, email, profileUrl },
   } = useChattieContext();
 
   return (
-    <Stack gap={6} className="profile-panel-details-container">
-      <Flex justifyContent="center" alignItems="center" p={10}>
-        <Stack gap={2}>
-          <Flex justifyContent="center">
-            <Avatar
-              src=""
-              alt="profile-picture"
-              sx={{
-                height: 100,
-                width: 100,
-                boxShadow: `0 0 20px ${APPROX_BLUE}`,
-              }}
-            />
-          </Flex>
-          <Stack textAlign="center" gap={0.5}>
-            <Typography fontSize="1.5rem">{displayName}</Typography>
-            <Typography fontSize="1rem">{email}</Typography>
+    <>
+      <Stack gap={6} className="profile-panel-details-container">
+        <Flex justifyContent="center" alignItems="center" p={10}>
+          <Stack gap={2}>
+            <Flex justifyContent="center">
+              <Avatar
+                src={getUserImage(profileUrl)}
+                alt="profile-picture"
+                sx={{
+                  height: 100,
+                  width: 100,
+                  boxShadow: `0 0 20px ${APPROX_BLUE}`,
+                  '&:hover': {
+                    cursor: 'pointer',
+                    opacity: '0.6',
+                  },
+                }}
+                onClick={() => onImageModalOpen({})}
+              />
+            </Flex>
+            <Stack textAlign="center" gap={0.5}>
+              <Typography fontSize="1.5rem">{displayName}</Typography>
+              <Typography fontSize="1rem">{email}</Typography>
+            </Stack>
           </Stack>
+        </Flex>
+        <Stack p={4}>
+          <Tooltip
+            placement="top"
+            arrow
+            title="Settings are not yet available. We're working on that."
+          >
+            <Box textAlign="center" className="profile-panel-settings-button">
+              <ActionButton disabled>
+                <Settings /> Settings
+              </ActionButton>
+            </Box>
+          </Tooltip>
         </Stack>
-      </Flex>
-      <Stack p={4}>
-        <Tooltip
-          placement="top"
-          arrow
-          title="Settings are not yet available. We're working on that."
-        >
-          <Box textAlign="center" className="profile-panel-settings-button">
-            <ActionButton disabled>
-              <Settings /> Settings
-            </ActionButton>
-          </Box>
-        </Tooltip>
       </Stack>
-    </Stack>
+      <ImageModal {...imageModalProps} />
+    </>
   );
 };
 
@@ -98,6 +113,7 @@ const ActionButton: FC<ButtonProps> = ({ children, ...props }) => (
       gap: 0.5,
       textTransform: 'capitalize',
       fontSize: '1rem',
+      fontFamily: 'Jura',
     }}
   >
     {children}

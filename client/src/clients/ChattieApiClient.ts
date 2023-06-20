@@ -2,12 +2,13 @@ import axios from 'axios';
 import { RegistrationProps } from '../types';
 
 class ChattieApiClient {
-  public async openai(message: string): Promise<string> {
-    const response = await axios.post('http://localhost:8090/openai', {
+  public async ai(message: string, sessionId: string): Promise<string> {
+    const response = await axios.post('http://localhost:8090/ai', {
       message,
+      sessionId,
     });
 
-    return response.data;
+    return response.data.message;
   }
 
   public async login(idToken: string) {

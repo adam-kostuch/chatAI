@@ -10,32 +10,39 @@ import { Chatter } from 'src/types';
 import { RealtimeMessages } from '.';
 import { chattieChatter } from 'src/utils';
 import RobotMessages from './RobotMessages';
+import { getUserImage } from 'src/helpers';
 
 type MessagePanelProps = {
-  isRobotChat: boolean;
   activeChatter: Chatter;
+  isRobotChat: boolean;
   setActiveChatter: (chatter: Chatter) => void;
 };
 
-const Messages: FC<MessagePanelProps> = (props) => (
-  <Stack
-    bgcolor={CHARADE}
-    borderRadius={4}
-    direction="column"
-    width="100%"
-    className="messages-container"
-    divider={<Divider />}
-  >
-    <ChatterSummary {...props} />
-    {props.isRobotChat ? <RobotMessages /> : <RealtimeMessages {...props} />}
-  </Stack>
-);
+type ChatterSummaryProps = Omit<MessagePanelProps, 'setActiveChatter'>;
+
+const Messages: FC<MessagePanelProps> = (props) => {
+  const { isRobotChat } = props;
+
+  return (
+    <Stack
+      bgcolor={CHARADE}
+      borderRadius={4}
+      direction="column"
+      width="100%"
+      className="messages-container"
+      divider={<Divider />}
+    >
+      <ChatterSummary {...props} />
+      {isRobotChat ? <RobotMessages /> : <RealtimeMessages {...props} />}
+    </Stack>
+  );
+};
 
 export default Messages;
 
-const ChatterSummary: FC<MessagePanelProps> = ({
-  isRobotChat,
+const ChatterSummary: FC<ChatterSummaryProps> = ({
   activeChatter,
+  isRobotChat,
 }) => {
   const { displayName, email, profileUrl }: Chatter = isRobotChat
     ? chattieChatter
@@ -49,7 +56,7 @@ const ChatterSummary: FC<MessagePanelProps> = ({
     >
       <Avatar
         alt="chatter-profile"
-        src={profileUrl}
+        src={getUserImage(profileUrl)}
         sx={{ height: 56, width: 56 }}
       />
       <Stack>

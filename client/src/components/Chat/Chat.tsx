@@ -11,19 +11,11 @@ import { LATEST_CHATTER, CHAT_PARTNER, Chatter } from 'src/types';
 import { useChattieContext } from 'src/ChattieContext';
 import { emptyChatter } from 'src/utils';
 
-const getHash = (): CHAT_PARTNER => {
-  const hash = window.location.hash.slice(1);
-
-  switch (hash) {
-    case 'realtime':
-      return CHAT_PARTNER.REALTIME;
-    case 'robot':
-    default:
-      return CHAT_PARTNER.ROBOT;
-  }
+type ChatProps = {
+  partner: CHAT_PARTNER;
 };
 
-const Chat: FC = () => {
+const Chat: FC<ChatProps> = ({ partner }) => {
   useCheckAuthentication();
 
   const { activeUser, db } = useChattieContext();
@@ -34,8 +26,7 @@ const Chat: FC = () => {
   );
 
   // checking the site url to determine who is the chatter
-  const hash = getHash();
-  const isRobotChat = hash === CHAT_PARTNER.ROBOT;
+  const isRobotChat = partner === CHAT_PARTNER.ROBOT;
 
   // function called on single chatter clicked in history panel
   const handleActiveChatter = (searchedChatter: string) => {
@@ -86,10 +77,10 @@ const Chat: FC = () => {
     };
 
     queryChatters();
-  }, [activeChatter]);
+  }, [activeChatter, activeUser]);
 
   useEffect(() => {
-    if (!chatters.some((chatter) => chatter.email === activeChatter.email)) {
+    if (!activeChatter.email || !activeChatter.displayName) {
       setActiveChatter(chatters.length > 0 ? chatters[0] : emptyChatter);
     }
   }, []);
@@ -99,7 +90,7 @@ const Chat: FC = () => {
       direction="row"
       bgcolor={WOODSMOKE}
       color={VANILLA_WHITE}
-      className={`${hash}-chat-container`}
+      className={`${partner}-chat-container`}
     >
       <ProfilePanel />
       <Stack direction="row" width="100%" gap={4} p={5}>
@@ -112,9 +103,9 @@ const Chat: FC = () => {
           />
         )}
         <Messages
-          isRobotChat={isRobotChat}
           activeChatter={activeChatter}
           setActiveChatter={setActiveChatter}
+          isRobotChat={isRobotChat}
         />
       </Stack>
     </Stack>

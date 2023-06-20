@@ -1,35 +1,26 @@
 import { FC } from 'react';
-import RedirectButton from '../../shared/components/RedirectButton';
 import { AppBar, CssBaseline, Toolbar, Typography } from '@mui/material';
-import { Flex } from 'src/shared/components';
-import { BLAZE_ORANGE } from '@chattie/colors';
+import { RedirectButton } from 'src/shared/components';
+import { WOODSMOKE } from '@chattie/colors';
 
 const Menu: FC = () => (
-  <Flex>
+  <>
     <CssBaseline />
     <AppBar component="nav" color="transparent" elevation={0}>
       <Toolbar>
         <Typography
           variant="h6"
           component="div"
-          sx={{
-            color: 'black',
-            flexGrow: 1,
-            display: { xs: 'none', sm: 'block' },
-          }}
+          color={WOODSMOKE}
+          fontWeight="bold"
+          sx={{ flexGrow: 1 }}
         >
           Chattie
         </Typography>
-        <Flex ml={10}>
-          <RedirectButton
-            borderColor="black"
-            color={BLAZE_ORANGE}
-            buttonLabel="Log Out"
-          />
-        </Flex>
+        <RedirectButton buttonLabel="Log Out" />
       </Toolbar>
     </AppBar>
-  </Flex>
+  </>
 );
 
 export default Menu;
