@@ -9,8 +9,7 @@ import { Chatter, FirestoreRealtimeMessage } from 'src/types';
 
 const useQueryChatters = async (
   db: Firestore,
-  userEmail: string,
-  chatterEmail: string
+  userEmail: string
 ): Promise<Chatter[]> => {
   try {
     const usersChatsRef = collection(db, 'users_chats');

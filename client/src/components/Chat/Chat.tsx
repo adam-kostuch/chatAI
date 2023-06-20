@@ -63,11 +63,7 @@ const Chat: FC<ChatProps> = ({ partner }) => {
   // so we can find and show to the user the chatters
   useEffect(() => {
     const queryChatters = async () => {
-      const queriedChatters = await useQueryChatters(
-        db,
-        activeUser.email,
-        activeChatter.email
-      );
+      const queriedChatters = await useQueryChatters(db, activeUser.email);
 
       const emailSet = new Set(chatters.map((chatter) => chatter.email));
       setChatters([
