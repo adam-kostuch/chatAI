@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { Flex, TextField, Typography } from 'src/shared/components';
 import { Box, InputAdornment, Stack, Avatar, Button } from '@mui/material';
 import { SCAMPI, BASTILLE, GUN_POWDER, APPROX_BLUE } from '@chattie/colors';
-import { Circle, Close, Search } from '@mui/icons-material';
+import { Close, Search } from '@mui/icons-material';
 import { Chatter } from 'src/types';
 import { NewConversationModal } from '.';
 import { useModal } from 'src/hooks';
@@ -107,7 +107,6 @@ const SingleChatter: FC<SingleChatterProps> = ({
   profileUrl,
   displayName,
   activeChatter,
-  hasUnreadMessages,
   handleActiveChatter,
 }) => {
   const trimLength = 16;
@@ -150,7 +149,7 @@ const SingleChatter: FC<SingleChatterProps> = ({
             : displayName}
         </Typography>
       </Stack>
-      {hasUnreadMessages && <Circle fontSize="small" />}
+      {/* {hasUnreadMessages && <Circle fontSize="small" />} */}
     </Stack>
   );
 };

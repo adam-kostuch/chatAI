@@ -24,20 +24,13 @@ const useQueryChatters = async (
       where('chatterEmail', '==', userEmail)
     );
 
-    const usersQueryRef = query(usersRef, where('email', '==', chatterEmail));
     const [usersQuerySnap, userChatsSnap, chatterChatsSnap] = await Promise.all(
-      [
-        getDocs(usersQueryRef),
-        getDocs(userChatsQueryRef),
-        getDocs(chatterQueryRef),
-      ]
+      [getDocs(usersRef), getDocs(userChatsQueryRef), getDocs(chatterQueryRef)]
     );
 
     const mergedChatsSnap = [...userChatsSnap.docs, ...chatterChatsSnap.docs];
-    const mappedUsers = [...usersQuerySnap.docs];
+    const mappedUsers = usersQuerySnap.docs.map((snapshot) => snapshot.data());
     const queriedChatters: Chatter[] = [];
-
-    console.log({ m: mappedUsers[0].data() });
 
     if (mergedChatsSnap.length > 0) {
       mergedChatsSnap.forEach((document) => {
@@ -45,29 +38,30 @@ const useQueryChatters = async (
 
         if (
           !queriedChatters.some(
-            (chatter) => chatter.email === mergedChat.chatterEmail
+            (chatter) => chatter.email === mergedChat.userEmail
           )
         ) {
-          queriedChatters.push({
-            displayName: mergedChat.chatterName,
-            email: mergedChat.chatterEmail,
-            profileUrl: mappedUsers
-              .filter((user) => user.data().email === chatterEmail)[0]
-              .data().profileUrl,
-            hasUnreadMessages: mergedChatsSnap.some((doc) => {
-              const chat = doc.data() as FirestoreRealtimeMessage;
+          const email =
+            mergedChat.userEmail === userEmail
+              ? mergedChat.chatterEmail
+              : mergedChat.userEmail;
+          const displayName =
+            mergedChat.userEmail === userEmail
+              ? mergedChat.chatterName
+              : mergedChat.userName;
 
-              return !chat.isRead && chat.userEmail === mergedChat.chatterEmail;
-            }),
+          queriedChatters.push({
+            displayName,
+            email,
+            profileUrl: mappedUsers.filter(
+              (user) => user.email === mergedChat.chatterEmail
+            )[0]?.profileUrl,
+            hasUnreadMessages: !mergedChatsSnap.at(-1)?.data(),
           });
         }
       });
     } else {
-      const usersRef = collection(db, 'users');
-      const usersQueryRef = query(usersRef, where('email', '==', chatterEmail));
-      const usersSnap = await getDocs(usersQueryRef);
-
-      usersSnap.forEach((document) => {
+      usersQuerySnap.forEach((document) => {
         const user = document.data() as Chatter;
 
         if (!queriedChatters.some((chatter) => chatter.email === user.email)) {
@@ -81,9 +75,15 @@ const useQueryChatters = async (
       });
     }
 
+    const uniqueChatters = Array.from(
+      new Set(queriedChatters.map((chatter) => chatter.email))
+    ).map((email) => {
+      return queriedChatters.find((chatter) => chatter.email === email);
+    }) as Chatter[];
+
     // sorting the array based on the the user display name
     // also we filter if the queried user is not active user
-    const chatters = queriedChatters
+    const chatters = uniqueChatters
       .filter((chatter) => chatter.email !== userEmail)
       .sort((prevChat, currentChat) => {
         const nameA = prevChat.displayName.toUpperCase();
@@ -100,7 +100,6 @@ const useQueryChatters = async (
 
     return chatters;
   } catch (error) {
-    return [];
     throw new Error(`Error reading documents ${error}`);
   }
 };

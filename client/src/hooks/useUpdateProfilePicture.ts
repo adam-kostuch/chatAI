@@ -11,7 +11,7 @@ import {
 const useUpdateProfilePicture = async (
   db: Firestore,
   userEmail: string,
-  profileUrl: number
+  profileUrl: string
 ) => {
   const collectionRef = collection(db, 'users');
 
@@ -30,7 +30,7 @@ const useUpdateProfilePicture = async (
     chatsIds.forEach((chatId) => {
       const docRef = doc(db, 'users', chatId);
 
-      batch.update(docRef, { profileUrl });
+      batch.update(docRef, { profileUrl: parseInt(profileUrl) });
     });
 
     batch

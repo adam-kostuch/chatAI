@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -11,14 +10,14 @@ import {
 import { WOODSMOKE, VANILLA_WHITE } from '@chattie/colors';
 import { Typography } from 'src/shared/components';
 import { mappedAvatarImages } from 'src/utils';
-import { useChattieContext } from 'src/ChattieContext';
-import { useUpdateProfilePicture } from 'src/hooks';
 import { APPROX_BLUE } from '@chattie/colors';
 import { GUN_POWDER } from '@chattie/colors';
 
 export type ImageModalProps = {
   isOpen: boolean;
   onClose: () => void;
+  imageNumber: string;
+  handleImageChange: (idx: string) => void;
 };
 
 type ImageModalContentProps = Omit<ImageModalProps, 'isOpen'>;
@@ -49,24 +48,11 @@ const ImageModal = (props: ImageModalProps) => {
 
 export default ImageModal;
 
-const ImageModalContent = ({ onClose }: ImageModalContentProps) => {
-  const { db, activeUser } = useChattieContext();
-  const [imageNumber, setImageNumber] = useState(
-    parseInt(activeUser.profileUrl) ?? 0
-  );
-
-  const handleUpdate = async () => {
-    await useUpdateProfilePicture(db, activeUser.email, imageNumber);
-  };
-
-  const handleImageChange = (idx: number) => {
-    setImageNumber(idx);
-  };
-
-  useEffect(() => {
-    handleUpdate();
-  }, [imageNumber]);
-
+const ImageModalContent = ({
+  onClose,
+  imageNumber,
+  handleImageChange,
+}: ImageModalContentProps) => {
   return (
     <>
       <DialogTitle className="profile-picture-modal-title">
@@ -84,7 +70,7 @@ const ImageModalContent = ({ onClose }: ImageModalContentProps) => {
           {mappedAvatarImages.map((image, idx) => (
             <Avatar
               key={idx}
-              index={idx + 1}
+              index={JSON.stringify(idx)}
               image={image}
               imageNumber={imageNumber}
               handleImageChange={handleImageChange}
@@ -128,10 +114,10 @@ const ImageModalContent = ({ onClose }: ImageModalContentProps) => {
 };
 
 type AvatarProps = {
-  index: number;
+  index: string;
   image: string;
-  imageNumber: number;
-  handleImageChange: (idx: number) => void;
+  imageNumber: string;
+  handleImageChange: (idx: string) => void;
 };
 
 const Avatar = ({

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   Avatar,
   Box,
@@ -13,7 +13,7 @@ import { Divider, Flex, Typography } from 'src/shared/components';
 import { handleSignOut } from 'src/shared/components/RedirectButton';
 import { useCookies } from 'react-cookie';
 import { useChattieContext } from 'src/ChattieContext';
-import { useModal } from 'src/hooks';
+import { useModal, useUpdateProfilePicture } from 'src/hooks';
 import ImageModal, {
   ImageModalProps,
 } from 'src/components/ImageModal/ImageModal';
@@ -56,8 +56,23 @@ const ProfileDetails: FC = () => {
   const { onOpen: onImageModalOpen, modalProps: imageModalProps } =
     useModal<Omit<ImageModalProps, 'isOpen' | 'onClose'>>();
   const {
+    db,
     activeUser: { displayName, email, profileUrl },
   } = useChattieContext();
+
+  const [imageNumber, setImageNumber] = useState(profileUrl);
+
+  const handleUpdate = async () => {
+    await useUpdateProfilePicture(db, email, imageNumber);
+  };
+
+  const handleImageChange = (idx: string) => {
+    setImageNumber(idx);
+  };
+
+  useEffect(() => {
+    handleUpdate();
+  }, [imageNumber]);
 
   return (
     <>
@@ -66,7 +81,7 @@ const ProfileDetails: FC = () => {
           <Stack gap={2}>
             <Flex justifyContent="center">
               <Avatar
-                src={getUserImage(profileUrl)}
+                src={getUserImage(imageNumber)}
                 alt="profile-picture"
                 sx={{
                   height: 100,
@@ -77,7 +92,9 @@ const ProfileDetails: FC = () => {
                     opacity: '0.6',
                   },
                 }}
-                onClick={() => onImageModalOpen({})}
+                onClick={() =>
+                  onImageModalOpen({ handleImageChange, imageNumber })
+                }
               />
             </Flex>
             <Stack textAlign="center" gap={0.5}>
@@ -100,7 +117,11 @@ const ProfileDetails: FC = () => {
           </Tooltip>
         </Stack>
       </Stack>
-      <ImageModal {...imageModalProps} />
+      <ImageModal
+        {...imageModalProps}
+        handleImageChange={handleImageChange}
+        imageNumber={imageNumber}
+      />
     </>
   );
 };
