@@ -6,10 +6,10 @@
 ### Table of Contents
 
 - [Chattie - API](#chattie---api)
-  - [Table of Contents](#table-of-contents)
+    - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Router](#router)
-    - [OpenAI](#openai)
+    - [Dialogflow](#dialogflow)
       - [Possible requests](#possible-requests)
     - [Authentication](#authentication)
       - [Possible requests](#possible-requests-1)
@@ -19,7 +19,7 @@
 
 The API provides two kind of requests that are supposed to help the authentication and communication with the client that is also available in the repository.
 
-First kind of request is simpler, that contains the Artificial Intelligence (AI) system of communicating. It uses the provided by [OpenAI](https://openai.com/) API key to one of their ChatGPT model of chatbot.
+First kind of request is simpler, that contains the Artificial Intelligence (AI) system of communicating. It uses the provided by [Dialogflow](https://cloud.google.com/dialogflow/docs) API key to one of their data gathering system.
 
 The second and last kind of requests contains the authentication system using the [firebase-admin](https://github.com/firebase/firebase-admin-node) package. There are multiple requests for authentication the registration and logging in is mostly handled by the backend (API), but the frontend part also contains logic for signing out and changing password via email link.
 
@@ -27,17 +27,30 @@ The second and last kind of requests contains the authentication system using th
 
 The model of the backend is divided into smaller parts that are build and supported. The parts are actually folders that parts away logic of the code with the actual requests handling. As you may have seen by the paths in `api/src/`, the `controllers` and `routes` folders are the most valuable to the repository.
 
-### OpenAI
+### Dialogflow
 
-As mentioned above, the chatbot is provided by the creators of revolutionary ChatGPT the OpenAI group. The AI used in the system is `text-davinci-003` which is one of the most popular models by far (not counting the 4.0 options). This model:
 
-> Can do any language task with better quality, longer output, and consistent instruction-following than the curie, babbage, or ada models. Also supports inserting completions within text.
+Dialogflow is a natural language understanding (NLU) platform developed by Google. It enables developers to build conversational interfaces such as chatbots and virtual assistants that can understand and respond to user inputs in a natural and human-like manner.
 
-And the idea behind `text-davinci-003` is perfectly suited for our needs.
+Key features of Dialogflow include:
+
+1. **Intent Recognition**: Dialogflow uses machine learning algorithms to analyze user input and determine the intent or purpose behind it. It allows you to define a set of intents and map them to corresponding actions or responses.
+
+2. **Entity Extraction**: Dialogflow can identify and extract specific information or entities from user input. Entities represent important pieces of information such as names, dates, locations, and more.
+
+3. **Context Management**: Dialogflow supports context management, allowing you to maintain conversational context across multiple user interactions. Context helps the system understand user inputs within the appropriate context and provide relevant responses.
+
+4. **Multi-platform Support**: Dialogflow provides support for various messaging platforms such as Facebook Messenger, Slack, Telegram, and more. It also offers integration with voice platforms like Google Assistant, allowing you to deploy your conversational agents across different channels.
+
+5. **Rich Responses**: Dialogflow enables you to generate dynamic and interactive responses to users. You can provide text responses, as well as more complex responses such as cards, buttons, images, and custom payloads.
+
+6. **Training and Analytics**: Dialogflow provides tools for training and improving your conversational agents. You can analyze user interactions, review performance metrics, and use feedback to enhance the effectiveness and accuracy of your chatbot or virtual assistant.
+
+Dialogflow offers both a graphical interface for building conversational agents and a robust API that allows programmatic access for integration into your applications. It supports multiple programming languages and platforms, making it flexible and accessible for developers.
 
 #### Possible requests
 
-URL: **`POST /openai/`**
+URL: **`POST /ai/`**
 
 Description: _Boop Boop, robot replies!_
 
@@ -50,7 +63,7 @@ Request body:
 Response:
 
 ```json
-{ "message": "sample `text-davinci-003 resposne`" }
+{ "message": "sample dialogflow agent response" }
 ```
 
 ### Authentication
@@ -115,15 +128,15 @@ Response - none
 
 ## Installation
 
-In order to run this API locally you need to firstly be added to both github repo and firebase admin. Once that completed you may ask one of the collaborators to provide you with the credentials to database and the OpenAI key.
+In order to run this API locally you need to firstly be added to both github repo and firebase admin. Once that completed you may ask one of the collaborators to provide you with the credentials to database and the Dialogflow GCP config.
 
 Once completed make sure that you have created the `.env` file with the content below:
 
 ```env
 PORT=8090
-OPEN_API_KEY=...
 FIREBASE_KEY_ID=...
-FIREBASE_KEY="..."
+FIREBASE_KEY=...
+DIALOGFLOW_CREDENTIALS={...}
 ```
 
 The blank fields must be filled with the data provided from one of the collaborators.
