@@ -1,7 +1,7 @@
 import { Firestore, addDoc, collection } from 'firebase/firestore';
 import { Chatter, RobotMessage } from 'src/types';
 
-const useAddNewUsersMessage = async (
+const useAddNewRobotMessage = async (
   db: Firestore,
   message: string,
   activeUser: Chatter
@@ -32,4 +32,4 @@ const useAddNewUsersMessage = async (
   };
 };
 
-export default useAddNewUsersMessage;
+export default useAddNewRobotMessage;

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Avatar, Stack } from '@mui/material';
 import { CHARADE } from '@chattie/colors';
 import {
@@ -47,6 +47,11 @@ const ChatterSummary: FC<ChatterSummaryProps> = ({
   const { displayName, email, profileUrl }: Chatter = isRobotChat
     ? chattieChatter
     : activeChatter;
+  const [userImage, setUserImage] = useState(getUserImage(profileUrl));
+
+  useEffect(() => {
+    setUserImage(getUserImage(profileUrl));
+  }, [activeChatter]);
 
   return (
     <MessagePanelWrapper
@@ -56,7 +61,7 @@ const ChatterSummary: FC<ChatterSummaryProps> = ({
     >
       <Avatar
         alt="chatter-profile"
-        src={getUserImage(profileUrl)}
+        src={userImage}
         sx={{ height: 56, width: 56 }}
       />
       <Stack>

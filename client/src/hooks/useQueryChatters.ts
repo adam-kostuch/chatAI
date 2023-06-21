@@ -55,7 +55,13 @@ const useQueryChatters = async (
             profileUrl: mappedUsers.filter(
               (user) => user.email === mergedChat.chatterEmail
             )[0]?.profileUrl,
-            hasUnreadMessages: !mergedChatsSnap.at(-1)?.data(),
+            hasUnreadMessages: mergedChatsSnap
+              .filter((chat) => chat.data().chatterEmail === userEmail)
+              .some(
+                (chat) =>
+                  !chat.data().isRead &&
+                  chat.data().userEmail === mergedChat.chatterEmail
+              ),
           });
         }
       });

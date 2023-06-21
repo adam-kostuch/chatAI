@@ -98,8 +98,8 @@ const ProfileDetails: FC = () => {
               />
             </Flex>
             <Stack textAlign="center" gap={0.5}>
-              <Typography fontSize="1.5rem">{displayName}</Typography>
-              <Typography fontSize="1rem">{email}</Typography>
+              <Typography fontSize="1.5rem">{displayName ?? ''}</Typography>
+              <Typography fontSize="1rem">{email ?? ''}</Typography>
             </Stack>
           </Stack>
         </Flex>

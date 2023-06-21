@@ -226,7 +226,7 @@ const LoginPage: FC = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <CustomBorderTextField
-                id="standard-basic"
+                id="standard-basic-email"
                 variant="standard"
                 autoComplete="email"
                 name="email"
@@ -246,7 +246,7 @@ const LoginPage: FC = () => {
             </Grid>
             <Grid item xs={12}>
               <CustomBorderTextField
-                id="standard-basic"
+                id="standard-basic-password"
                 variant="standard"
                 required
                 fullWidth

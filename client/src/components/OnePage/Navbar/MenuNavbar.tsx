@@ -1,12 +1,17 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { AppBar, Box, Button, Stack, Toolbar, Typography } from '@mui/material';
 import NavbarData from './NavbarData';
 import { RedirectButton } from '../../../shared/components';
 import { WOODSMOKE, APPROX_BLUE, LIGHT_GRAYISH_BLUE } from '@chattie/colors';
-import { useChattieContext } from 'src/ChattieContext';
+import { useCookies } from 'react-cookie';
+import { COOKIE_TOKEN } from 'src/types';
 
 const MenuNavbar: FC = () => {
-  const { activeUser } = useChattieContext();
+  const [{ token }, , removeCookie] = useCookies([COOKIE_TOKEN]);
+
+  useEffect(() => {
+    removeCookie(COOKIE_TOKEN);
+  }, [token]);
 
   return (
     <AppBar
@@ -41,7 +46,7 @@ const MenuNavbar: FC = () => {
             ))}
           </Box>
           <Stack direction="row" gap={2}>
-            {activeUser.displayName !== '' || activeUser.email !== '' ? (
+            {token !== undefined ? (
               <RedirectButton buttonLabel="Log Out" />
             ) : (
               <>

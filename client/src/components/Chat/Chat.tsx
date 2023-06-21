@@ -75,14 +75,11 @@ const Chat: FC<ChatProps> = ({ partner }) => {
     queryChatters();
   }, [activeChatter, activeUser]);
 
-  console.log({ chatters });
-
   useEffect(() => {
-    if (
-      !activeChatter.email ||
-      !activeChatter.displayName ||
-      activeChatter.email === activeUser.email
-    ) {
+    const isChatterEmpty = !activeChatter.email || !activeChatter.displayName;
+    const isChatterSameAsUser = activeChatter.email === activeUser.email;
+
+    if (isChatterSameAsUser || (isChatterEmpty && !isChatterSameAsUser)) {
       setActiveChatter(chatters.length > 0 ? chatters[0] : emptyChatter);
     }
   }, []);
